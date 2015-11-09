@@ -114,6 +114,7 @@
                                           <td>
                                              <input type="text" name="email1" size="20" maxlength="80" style='ime-mode: disabled' tabindex='5'>@<select name="email2">
                                                 <option selected>naver.com</option>
+                                                <option>${sessionScope.userLoginInfo.email.split('@')[1]}</option>
                                                 <option>daum.net</option>
                                                 <option>nate.com</option>
                                                 <option>gmail.com</option>
@@ -180,13 +181,13 @@
                                              <select name="pwdQ" size="1"
                                                 tabindex='31'>
                                                    <option selected>선택</option>
-                                                   <option>사는 곳이 어디입니까?</option>
-                                                   <option></option>
-                                                   <option></option>
-                                                   <option></option>
-                                                   <option></option>
-                                                   <option></option>
-                                             </select>
+																	<option>사는 곳이 어디입니까?</option>
+																	<option>어머니의 성함은?</option>
+																	<option>아버지의 성함은?</option>
+																	<option>내가 태어난 곳은?</option>
+																	<option>내가 다닌 초등학교는?</option>
+																	<option>나의 좌우명은?</option>
+											</select>
                                           </td>
                                        </tr>
                                        <tr>

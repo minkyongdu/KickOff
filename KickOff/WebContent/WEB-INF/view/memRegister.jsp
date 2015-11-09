@@ -11,12 +11,9 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 </head>
-<script type="text/javascript" src = "js/RegisterCheck.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type="text/javascript" src="js/RegisterCheck.js"></script>
 <script type="text/javascript">
-var childWin = null;
-function winOpen(){
-    childWin = window.open('memIDCheck?id='+document.register.id.value,'child','width=300,height=200');
-}
 function test() {
    win_post = window.open('/KickOff/post', "post",
          "toolbar=no ,width=370 ,height=300 ,directories=no,"
@@ -64,7 +61,7 @@ function test() {
 </TR>
 </TABLE>
 <div class="indiv"><!-- Start indiv -->
-<form name = "register" method = "post" action = "resultRegister" onSubmit="checkfield();return false">
+<form name = "register" method = "post" action = "resultRegister">
 <div style="border:1px solid #DEDEDE;">
 <table width="956px" cellpadding=0 cellspacing=0 border=0 style="font-family: arial; font-style: bold;">
 <tr>
@@ -78,22 +75,23 @@ function test() {
 <tr>
 	<td>아이디</td>
 	<td>
-	<input type="text" name="id" maxlength=16  option=regId label="아이디">
-	<a href = "javascript:winOpen();"><img src="img/overchk.png"  border="0" align="absmiddle"></a>
+	<input type="text" name="id" id="id"  maxlength=16  option=regId label="아이디">
+	<button type="button" class="ml-button"  style="font-weight: bold;" id="idCheck">중복체크</button>
 	</td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor="#DEDEDE" style="padding:0px;"></td></tr>
 <tr>
 	<td class=memberCols1>비밀번호</td>
 	<td class=memberCols2>
-	<input type="password" name="password"  option=regPass label="비밀번호" maxlength="16">
+	<input type="password" name="password" id="password" option=regPass label="비밀번호" maxlength="12">
+	<span>영문, 숫자로 7~12자 이내</span></td>
 	</td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor="#DEDEDE" style="padding:0px;"></td></tr>
 <tr>
 	<td class=memberCols1>비밀번호확인</td>
 	<td class=memberCols2>
-	<input type="password" name="password2"  label="비밀번호" maxlength="16">
+	<input type="password" name="password2"  label="비밀번호" maxlength="12">
 	</td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor="#DEDEDE" style="padding:0px;"></td></tr>
@@ -235,7 +233,7 @@ function test() {
 
 <Br>
 <center>
-	<input type = "image" src="img/register.png">&nbsp;&nbsp;
+	<img src="img/register.png" id="register">&nbsp;&nbsp;
 	<a href="selectRegister"><img src="img/back.png"></a>
 </center>
 </form>

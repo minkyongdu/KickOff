@@ -22,15 +22,14 @@ drop sequence replyNum_seq;
 drop sequence replyQnANum_seq;
 drop sequence buyepliNum_seq;
 
+select * from member
 
-  select * from replynotice
-  insert into member values (memberNum_seq.nextval, 'minkyongdu', '1234', '민경두', 
+  insert into member values (memberNum_seq.nextval, 'master', 'master', '민경두', 
   '19930101', '113-234', '서울시 강동구','010-0000-0000', 'Hongju@naver.com', 6, SYSDATE, '당신이 사는곳은?', '우리집');
-  insert into company values (companyNum_seq.nextval, #{comid}, #{compassword}, #{comCEO},	#{comname}, 
-		#{comemail}, #{addr1}, #{addr2}, #{combusinnum},#{comphonenum}, 6)
-		
+
   insert into company values (companyNum_seq.nextval, 'ruden55', '4995791', '���罻', '���ȸ��', 'ruden55@naver.com',
-  '132-343', '����� ������', '134-34-32142', '010-3211-3232', 6);
+  '132-343', '����� ������', '134-34-32142', '010-3211-3232', 5);
+  
   select * from member
 
 create table member -- member 테이블
@@ -170,14 +169,11 @@ create table epilogue -- epilogue(제품 후기) 테이블
   id varchar2(20) not null, content varchar2(100) not null, ArticleNum number not null,
   star number not null);
   
-
-  
 -- member :: grade (회원등급)
 alter table "JAVAUSER"."MEMBER" add constraint mem_grade foreign key("MEMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
 -- company :: grade (회원등급)
 alter table "JAVAUSER"."COMPANY" add constraint com_grade foreign key("COMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
--- article :: company(제품 회사번호)
-alter table "JAVAUSER"."ARTICLE" add constraint article_com foreign key("COMPANYNUM") references "COMPANY"("COMPANYNUM") ON DELETE CASCADE;
+
 -- article :: articlegroup(제품 그룹번호)
 alter table "JAVAUSER"."ARTICLE" add constraint article_group foreign key("GROUPNUM") references "ARTICLEGROUP"("GROUPNUM") ON DELETE CASCADE;
 -- article :: epilouge (제품 후기:제품번호) 

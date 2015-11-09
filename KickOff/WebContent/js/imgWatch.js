@@ -230,46 +230,41 @@ $(document).ready(function (){
 	    	  $('#amount8').val("");
 	    	  $('#amount8').focus();
 	    	  return false;   
-	      }
-	      else if(document.getElementById('files[0]').value != null){
-	    	  var img = document.getElementById('files[0]').value; //파일을 추가한 input 박스의 값
-		       img = img.slice(img.indexOf(".") + 1).toLowerCase();
-		       if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){ //확장자를 확인합니다.
-		             alert('이미지 파일만 등록 가능합니다.');
+	      }else if(document.getElementById('files[0]').value != null){
+	        	 var img = document.getElementById('files[0]').value;
+	        	 img = img.slice(img.indexOf(".") + 1).toLowerCase();
+		         if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){
+		        	 alert('이미지 파일만 등록 가능합니다.');
+			         return false;
+		         }//확장자를 확인합니다.
+	       }else if(document.getElementById('files[1]').value != null){
+	        	 var img1 = document.getElementById('files[1]').value;
+	        	 img1 = img1.slice(img.indexOf(".") + 1).toLowerCase();
+	        	 if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){
+	        		 alert('이미지 파일만 등록 가능합니다.');
 		             return false;
-		        }
-	      }
-	      else if(document.getElementById('files[1]').value != null){
-	    	  var img1 = document.getElementById('files[1]').value; //파일을 추가한 input 박스의 값
-		       img1 = img1.slice(img1.indexOf(".") + 1).toLowerCase();
-		       if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){ //확장자를 확인합니다.
-		             alert('이미지 파일만 등록 가능합니다.');
+	        	 }//확장자를 확인합니다.
+	       }else if(document.getElementById('files[2]').value != null){
+	        	 var img2 = document.getElementById('files[2]').value;
+	        	 img2 = img2.slice(img.indexOf(".") + 1).toLowerCase();
+	             if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
+	            	 alert('이미지 파일만 등록 가능합니다.');
 		             return false;
-		        }
-	      }
-	      /*else if($('#files[2]').val() != null){
-	    	  var img2 = document.getElementById('files[2]').value; //파일을 추가한 input 박스의 값
-		       img2 = img2.slice(img2.indexOf(".") + 1).toLowerCase();
-		       if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){ //확장자를 확인합니다.
-		             alert('이미지 파일만 등록 가능합니다.');
+	             }//확장자를 확인합니다.	  
+	         }else if(document.getElementById('files[3]').value != null){
+	        	 var img3 = document.getElementById('files[3]').value;
+	        	 img2 = img3.slice(img.indexOf(".") + 1).toLowerCase();
+	             if(img3 != "jpg" && img3 != "png" &&  img3 != "gif" &&  img3 != "bmp"){
+	            	 alert('이미지 파일만 등록 가능합니다.');
 		             return false;
-		        }
-	      }
-	      else if($('#files[3]').val() != null){
-	    	  var img3 = document.getElementById('files[3]').value; //파일을 추가한 input 박스의 값
-		       img3 = img3.slice(img3.indexOf(".") + 1).toLowerCase();
-		       if(img3 != "jpg" && img3 != "png" &&  img3 != "gif" &&  img3 != "bmp"){ //확장자를 확인합니다.
-		             alert('이미지 파일만 등록 가능합니다.');
+	             }//확장자를 확인합니다.	  
+	         }else if(document.getElementById('files[4]').value != null){
+	        	 var img4 = document.getElementById('files[4]').value;
+	        	 img4 = img4.slice(img.indexOf(".") + 1).toLowerCase();
+	             if(img4 != "jpg" && img4 != "png" &&  img4 != "gif" &&  img4 != "bmp"){
+	            	 alert('이미지 파일만 등록 가능합니다.');
 		             return false;
-		        }
-	      }
-	      else if($('#files[4]').val() != null){1
-	    	  var img4 = document.getElementById('files[4]').value; //파일을 추가한 input 박스의 값
-		       img1 = img4.slice(img4.indexOf(".") + 1).toLowerCase();
-		       if(img4 != "jpg" && img4 != "png" &&  img4 != "gif" &&  img4 != "bmp"){ //확장자를 확인합니다.
-		             alert('이미지 파일만 등록 가능합니다.');
-		             return false;
-		        }
-	      }*/
+	             }//확장자를 확인합니다.	  
+	         }
 	   })
 });

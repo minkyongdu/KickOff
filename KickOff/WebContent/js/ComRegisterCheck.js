@@ -9,16 +9,27 @@ function checkfield(){
 		alert("아이디를 입력하세요");         //메세지 경고창을 띄운 후
 		document.comRegister.id.focus();     // id 텍스트박스에 커서를 위치
 		return false;
-	}else if(idtext.test(document.comRegister.id.value=="")==false){ //id값이 없을 경우
+	}else if(idtext.test(document.comRegister.id.value)==false){ //id값이 없을 경우
 		alert("아이디는 영어, 숫자로만 입력해 주세요.");         //메세지 경고창을 띄운 후
+		document.comRegister.id.value="";
 		document.comRegister.id.focus();     // id 텍스트박스에 커서를 위치
 		return false;
 	}else if(document.comRegister.password.value==""){
 		alert("비밀번호를 입력하세요");
 		document.comRegister.password.focus();
 		return false;
+	}else if(document.comRegister.password.value.length<7 || document.comRegister.password.value.length>12){
+		alert("비밀번호를 7~12자 이내로 입력해주세요.");
+		document.comRegister.password.value="";
+		document.comRegister.password.focus();
+		return false;
 	}else if(document.comRegister.password2.value==""){
 		alert("비밀번호 확인을 입력하세요");
+		document.comRegister.password2.focus();
+		return false;
+	}else if(document.comRegister.password2.value.length<7 || document.comRegister.password2.value.length>12){
+		alert("비밀번호를 7~12자 이내로 입력해주세요.");
+		document.comRegister.password2.value="";
 		document.comRegister.password2.focus();
 		return false;
 	}else if (document.comRegister.password.value!= document.comRegister.password2.value)
@@ -35,6 +46,7 @@ function checkfield(){
 		}else if(exptext.test(document.comRegister.comemail1.value)==false){
 			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
 			alert("이메일형식이 올바르지 않습니다.");
+			document.comRegister.comemail1.value="";
 			document.comRegister.comemail1.focus();
 			return false;
 		}else if(document.comRegister.comname.value==""){
@@ -47,6 +59,7 @@ function checkfield(){
 			return false;
 	}else if(nametext.test(document.comRegister.comceo.value)==false){
 			alert("한글만 입력해주세요.");
+			document.comRegister.comceo.value="";
 			document.comRegister.comceo.focus();
 			return false;
 	}else if(document.comRegister.combusinnum1.value==""){
@@ -55,6 +68,7 @@ function checkfield(){
 		return false;
 	}else if(numtext.test(document.comRegister.combusinnum1.value)==false){
 		alert("숫자만 입력해 주세요.");
+		document.comRegister.combusinnum1.value="";
 		document.comRegister.combusinnum1.focus();
 		return false;
 	}else if(document.comRegister.combusinnum2.value==""){
@@ -63,14 +77,16 @@ function checkfield(){
 		return false;
 	}else if(numtext.test(document.comRegister.combusinnum2.value)==false){
 		alert("숫자만 입력해 주세요.");
+		document.comRegister.combusinnum2.value="";
 		document.comRegister.combusinnum2.focus();
-		return false;
-	}else if(numtext.test(document.comRegister.combusinnum3.value)==false){
-		alert("숫자만 입력해 주세요.");
-		document.comRegister.combusinnum3.focus();
 		return false;
 	}else if(document.comRegister.combusinnum3.value==""){
 		alert("사업자 등록번호를 입력해주세요.");
+		document.comRegister.combusinnum3.focus();
+		return false;
+	}else if(numtext.test(document.comRegister.combusinnum3.value)==false){
+		alert("숫자만 입력해 주세요.");
+		document.comRegister.combusinnum3.value="";
 		document.comRegister.combusinnum3.focus();
 		return false;
 	}else if(document.comRegister.addr1.value==""){
@@ -91,15 +107,18 @@ function checkfield(){
 		return false;
 	}else if(numtext.test(document.comRegister.comphonenum1.value)==false){
 		alert("숫자만 입력해 주세요.");
-		document.comRegister.combusinnum1.focus();
+		document.comRegister.comphonenum1.value="";
+		document.comRegister.comphonenum1.focus();
 		return false;
 	}else if(numtext.test(document.comRegister.comphonenum2.value)==false){
 		alert("숫자만 입력해 주세요.");
-		document.comRegister.combusinnum2.focus();
+		document.comRegister.comphonenum2.value="";
+		document.comRegister.comphonenum2.focus();
 		return false;
 	}else if(numtext.test(document.comRegister.comphonenum3.value)==false){
 		alert("숫자만 입력해 주세요.");
-		document.comRegister.combusinnum3.focus();
+		document.comRegister.comphonenum3.value="";
+		document.comRegister.comphonenum3.focus();
 		return false;
 	}
 	alert("회원가입에 성공하였습니다. 로그인을 해주세요.");

@@ -3,10 +3,12 @@ package kickoff.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kickoff.model.DAO.CompanyDAO;
@@ -73,7 +76,7 @@ public class MemController {
 		if (dao.meminsert(member)) {
 			model.addAttribute("success", member);
 		}
-		return "main";
+		return "loginForm";
 	}
 
 	// 로그인 폼 처리
@@ -168,27 +171,6 @@ public class MemController {
 			return "redirect:upRegisterForm";
 		}
 	}
-	// ID 체크 결과 폼 띄우기
-	@RequestMapping("memIDCheck")
-	public String idResult(Model model, HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String resultMessage = "";
-		if (id.equals("")) {
-			resultMessage = "아이디를 입력하지 않으셨습니다.";
-		} else if (id.length() < 7) {
-			resultMessage = "아이디를 7글자 이상 작성해 주세요.";
-		} else {
-			boolean check = dao.idSearch(id);
-			if (check) {
-				resultMessage = "아이디가 존재합니다.";
-			} else {
-				resultMessage = "사용할 수 있는 ID입니다.";
-			}
-		}
-		model.addAttribute("resultChecks", resultMessage);
-		return "memIDCheck";
-	}
-
 	// 우편번호 검색폼
 	@RequestMapping(value = "post", method = RequestMethod.GET)
 	public String postForm() {
@@ -234,6 +216,7 @@ public class MemController {
 		
 		member.setPhonenum(phone);
 		member.setEmail(email);
+		
 		dao.updateMember(member);
 		session.removeAttribute("userLoginInfo");
 		return "redirect:loginForm";
@@ -271,7 +254,18 @@ public class MemController {
 				return "redirect:loginForm";
 			}
 	}
-
+	// id 중복체크
+	@RequestMapping("memIDCheck")
+	public String idResult(Model model, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		boolean check = dao.idSearch(id);
+		   if (check==false) { 
+			   model.addAttribute("checkId", ""); 
+	       } else { 
+	    	   model.addAttribute("checkId", check);
+	      } 
+		return "memIDCheck";
+	}
 	// 비밀번호 찾기 처리
 	@RequestMapping("passwordfindhandel")
 	public String findPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {

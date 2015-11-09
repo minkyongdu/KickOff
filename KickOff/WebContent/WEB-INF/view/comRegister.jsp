@@ -217,7 +217,5 @@
 		<jsp:include page="main/bottom.jsp" /></td>
 	</tr>
 	<!-- wrap end -->
-	<a style="display:scroll; position:fixed; bottom:10px; right:100px;" href="#top" title="위로가기">
-	<img src="img/top.png" align="right"></a>
 </body>
 </html>

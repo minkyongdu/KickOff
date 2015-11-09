@@ -24,13 +24,13 @@ public class ComController {
 	@Autowired
 	private CompanyDAO companyDAO;
 	
-	// íšŒì‚¬ íšŒì›ê°€ì… í¼
+	// È¸»ç È¸¿ø°¡ÀÔ Æû
 	@RequestMapping("comRegister")
 	public String comRegiForm()
 	{
 		return "comRegister";
 	}
-	// íšŒì‚¬ íšŒì›ê°€ì… ì²˜ë¦¬
+	// È¸»ç È¸¿ø°¡ÀÔ Ã³¸®
 	@RequestMapping("comResultregister")
 	public String successcomReigster(CompanyVO company, HttpServletRequest request, Model model)
 	{
@@ -55,13 +55,13 @@ public class ComController {
 		}
 		return "main";
 	}
-	// íšŒì‚¬ ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬ í¼
+	// È¸»ç ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å© Æû
 		@RequestMapping("comPasswordCheckForm")
 		public String pwdResultForm()
 		{
 			return "comPwdCheckForm";
 		}
-		// íšŒì› ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬
+		// È¸¿ø ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å©
 		@RequestMapping("comPasswordCheck")
 		public String pwdResult(Model model, HttpServletRequest request, HttpServletResponse response, CompanyVO company) throws IOException
 		{
@@ -76,21 +76,21 @@ public class ComController {
 			map.put("password", password);
 			if(companyDAO.certifyComID(map) == null)
 				{
-					writer.println("<script>alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
+					writer.println("<script>alert('ºñ¹Ğ¹øÈ£°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.');");
 					writer.println("location.href='comPasswordCheckForm'; </script>");
 					writer.flush();
 					return "redirect:comPasswordCheckForm";
 				}
 			else
 			{
-				writer.println("<script>alert('ì¸ì¦ë˜ì—ˆìŠµë‹ˆë‹¤.');");
+				writer.println("<script>alert('ÀÎÁõµÇ¾ú½À´Ï´Ù.');");
 				writer.println("location.href='comupRegisterForm'; </script>");
 				writer.flush();
 				return "redirect:comupRegisterForm";
 			}
 		}
 	
-	// íšŒì‚¬ ID ì²´í¬ ê²°ê³¼ í¼ ë„ìš°ê¸°
+	// È¸»ç ID Ã¼Å© °á°ú Æû ¶ç¿ì±â
 			@RequestMapping("comidCheck")
 			public String comidResult(Model model, HttpServletRequest request)
 			{
@@ -98,34 +98,34 @@ public class ComController {
 				String resultMessage = "";
 				if(id.equals(""))
 				{
-					resultMessage = "ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì§€ ì•Šìœ¼ì…¨ìŠµë‹ˆë‹¤.";
+					resultMessage = "¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.";
 				}
 				else if (id.length() < 7)
 				{
-					resultMessage = "ì•„ì´ë””ë¥¼ 7ê¸€ì ì´ìƒ ì‘ì„±í•´ ì£¼ì„¸ìš”.";
+					resultMessage = "¾ÆÀÌµğ¸¦ 7±ÛÀÚ ÀÌ»ó ÀÛ¼ºÇØ ÁÖ¼¼¿ä.";
 				}
 				else
 				{
 					boolean check = companyDAO.comidSearch(id);
 					if(check)
 					{
-						resultMessage = "ì•„ì´ë””ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.";
+						resultMessage = "¾ÆÀÌµğ°¡ Á¸ÀçÇÕ´Ï´Ù.";
 					}
 					else
 					{
-						resultMessage = "ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” IDì…ë‹ˆë‹¤.";
+						resultMessage = "»ç¿ëÇÒ ¼ö ÀÖ´Â IDÀÔ´Ï´Ù.";
 					}
 				}
 				model.addAttribute("comresultCheck", resultMessage);
 				return "comidCheck";
 			}
-		// ê¸°ì—… íšŒì› íšŒì›ìˆ˜ì • í¼
+		// ±â¾÷ È¸¿ø È¸¿ø¼öÁ¤ Æû
 		@RequestMapping("comupRegisterForm")
 		public String updateComRegiForm()
 		{
 			return "comUpRegister";
 		}
-		// ê¸°ì—… íšŒì› íšŒì›ìˆ˜ì • ì²˜ë¦¬
+		// ±â¾÷ È¸¿ø È¸¿ø¼öÁ¤ Ã³¸®
 		@RequestMapping("comUpRegi")
 		public String updateComRegi(HttpSession session, CompanyVO company, HttpServletRequest request)
 		{

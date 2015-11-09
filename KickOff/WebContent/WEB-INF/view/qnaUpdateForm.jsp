@@ -14,79 +14,149 @@
 </head>
 <script>
 <!-- 공지사항 글 수정 유효성 검사 -->
+$(document)
+		.ready(
+				function() {
+					$('#update')
+							.click(
+									function() {
+										if ($('#title').val() == ""
+												&& $('#contents').val() == "") {
+											alert('제목 및 내용을 입력해주세요.');
+											$('#title').focus();
+											return false
+										} else if ($('#title').val() == "") {
+											alert('제목을 입력해주세요.');
+											$('#title').focus();
+											return false;
+										} else if ($('#contents').val() == "") {
+											alert('내용을 입력해주세요.');
+											$('#contents').focus();
+											return false;
+										} else if (document
+												.getElementById('files[0]').value != null) {
+											var img = document
+													.getElementById('files[0]').value;
+											img = img.slice(
+													img.indexOf(".") + 1)
+													.toLowerCase();
+											if (img != "jpg"
+													&& img != "png"
+													&& img != "gif"
+													&& img != "bmp") {
+												alert('이미지 파일만 등록 가능합니다.');
+												return false;
+											}//확장자를 확인합니다.
+										} else if (document
+												.getElementById('files[1]').value != null) {
+											var img1 = document
+													.getElementById('files[1]').value;
+											img1 = img1.slice(
+													img.indexOf(".") + 1)
+													.toLowerCase();
+											if (img1 != "jpg"
+													&& img1 != "png"
+													&& img1 != "gif"
+													&& img1 != "bmp") {
+												alert('이미지 파일만 등록 가능합니다.');
+												return false;
+											}//확장자를 확인합니다.
+										} else if (document
+												.getElementById('files[2]').value != null) {
+											var img2 = document
+													.getElementById('files[2]').value;
+											img2 = img2.slice(
+													img.indexOf(".") + 1)
+													.toLowerCase();
+											if (img2 != "jpg"
+													&& img2 != "png"
+													&& img2 != "gif"
+													&& img2 != "bmp") {
+												alert('이미지 파일만 등록 가능합니다.');
+												return false;
+											}//확장자를 확인합니다.	  
+										} else {
+											$("#noticeupdate").submit();
+										}
+									});
+				});
+</script>
+<script>
+<!--파일추가 버튼 클릭시 append를 이용하여 <input type="file" 이 생성됨 -->
 $(document).ready(function() {
-      $('#update').click(function() {
-         if ($('#title').val() == ""&& $('#contents').val() == "") {
-            alert('제목 및 내용을 입력해주세요.');
-            $('#title').focus();
-         }else if ($('#title').val() == "") {
-            alert('제목을 입력해주세요.');
-            $('#title').focus();
-         }else if ($('#contents').val() == "") {
-            alert('내용을 입력해주세요.');
-            $('#contents').focus();
-         }else {
-            $("#qnaUpdate").submit();
-         }
-      });
+	$('#addFile').click(function() { 
+		var fileIndex = $('#fileview tr').length; //<table id="fileview"> 밑에 tr 갯수을 fileIndex에 담음
+		if (Number(fileIndex) >= '3') { //file Upload 갯수를 3개로 제한
+			alert('FILE UPLOAD는 3개만 가능 합니다.');
+			return;
+		}
+		var i = $('#fileview tr').length;
+		if(Number(i) >= '3'){
+			return;
+		}
+		$('#fileview').append(
+				'<tr><td>'
+					+ '   <input type="file" id="files['+ fileIndex +']" name="files['+ fileIndex +']" onchange="imageURL'+(i+1)+'(this)" />'
+					+ '</td></tr>');
+		});
+		
 });
 </script>
 <script type="text/javascript">
 function imageURL1(input) {
-	
+
 	//이미지 확장자 유효성 검사 
 	var img = document.getElementById('files[0]').value; //파일을 추가한 input 박스의 값
 	img = img.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){ //확장자를 확인합니다.
+	if (img != "jpg" && img != "png" && img != "gif" && img != "bmp") { //확장자를 확인합니다.
 		alert('이미지 파일만 등록 가능합니다.');
 		return;
 	}
-	
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#img1').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
+
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#img1').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 function imageURL2(input) {
-	
+
 	//이미지 확장자 유효성 검사 
 	var img = document.getElementById('files[1]').value; //파일을 추가한 input 박스의 값
 	img = img.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){ //확장자를 확인합니다.
+	if (img != "jpg" && img != "png" && img != "gif" && img != "bmp") { //확장자를 확인합니다.
 		alert('이미지 파일만 등록 가능합니다.');
 		return;
 	}
-	
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#img2').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
+
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#img2').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 function imageURL3(input) {
 	//이미지 확장자 유효성 검사 
 	var img = document.getElementById('files[2]').value; //파일을 추가한 input 박스의 값
 	img = img.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){ //확장자를 확인합니다.
+	if (img != "jpg" && img != "png" && img != "gif" && img != "bmp") { //확장자를 확인합니다.
 		alert('이미지 파일만 등록 가능합니다.');
 		return;
 	}
-	
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#img3').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#img3').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 </script>
 </head>
 
@@ -179,11 +249,14 @@ function imageURL3(input) {
        </tr>
        <tr>
        	<th width = "50" align = "cetner">이미지첨부</th>
-       	<td><input type="file" id="files[0]" name="files[0]" onchange="imageURL1(this)"><br>
-       		<input type="file" id="files[1]" name="files[1]" onchange="imageURL2(this)"><br>
-       		<input type="file" id="files[2]" name="files[2]" onchange="imageURL3(this)"><br>
-       	</td>
-       </tr>
+       <tr>
+							<td align="center"><img src="img/ImageAdd.png" id="addFile"></td>
+							<td>
+								<table id="fileview">
+
+								</table>
+							</td>
+						</tr>
        <tr></tr><tr></tr>
       </table>
       <img src = "img/gomodifybtn.png" id = "update">

@@ -13,16 +13,17 @@
     <!-- @responseBody에서 가상경로에서 간단한 문자열 전달할때 UTF-8로 처리 -->
      
    <mvc:annotation-driven>
-   	<!-- <mvc:message-converters>
-   		<bean class = "org.springframework.http.converter.StringHttpMessageConverter">
-   			<property name="supportedMediaTypes">
-   				<list>
-   					<value>charset=UTF-8</value>
-   				</list>
-   			</property>
-   		</bean>
-   	</mvc:message-converters> -->
-   </mvc:annotation-driven> <!-- mvc를 하면서 어노테이션을 사용하겠습니다. -->
+    <mvc:message-converters>
+        <!-- @ResponseBody로 String 처리할때 한글처리 -->
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+            <property name="supportedMediaTypes">
+                <list>
+                    <value>text/html;charset=UTF-8</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:message-converters>
+</mvc:annotation-driven> <!-- mvc를 하면서 어노테이션을 사용하겠습니다. -->
    <mvc:default-servlet-handler/>   <!-- JSP 요청이 들어왔을때 톰캣이 처리해라. : 라는 뜻 -->
    <!-- 뷰 리졸버 정의-->
    <mvc:view-resolvers>
