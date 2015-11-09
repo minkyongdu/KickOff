@@ -8,14 +8,12 @@
 </head>
 <body>
 <img src="img/space.png" width="10px" height="20px">
-			  		<a href="loginForm"><img src="img/loginH.png" width="40px" height="15px"></a> <!-- 로그인 -->
+			  		<a href="loginForm"><img src="img/logint.png" width="40px" height="15px"></a> <!-- 로그인 -->
 			  		
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="selectRegister"><img src="img/registerH.png" width="40px" height="15px"></a> <!-- 회원가입 -->
+			  		<a href="selectRegister"><img src="img/registert.png" width="40px" height="15px"></a> <!-- 회원가입 -->
 			  		
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="view/user/order.jsp"><img src="img/orderH.png" width="40px" height="15px"></a>
-			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="noticeListForm"><img src="img/customerH.png" width="40px" height="15px"></a>
+			  		<a href="noticeListForm"><img src="img/customert.png" width="40px" height="15px"></a>
 </body>
 </html>

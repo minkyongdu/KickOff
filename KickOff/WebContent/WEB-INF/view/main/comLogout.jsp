@@ -8,12 +8,12 @@
 </head>
 <body>
 <img src="img/space.png" width="10px" height="20px">
-		  			<a href = "logout"><img src = "img/logoutH.png" width="40px" height="15px"></a> <!-- 로그아웃 -->
+		  			<a href = "logout"><img src = "img/logoutt.png" width="40px" height="15px"></a> <!-- 로그아웃 -->
 		  			<img src="img/space.png" width="10px" height="20px">
-			  		<a href="comPasswordCheckForm"><img src="img/mypage.png" width="40px" height="15px"></a> <!-- 마이페이지 -->			  		
+			  		<a href="comPasswordCheckForm"><img src="img/mypaget.png" width="40px" height="15px"></a> <!-- 마이페이지 -->			  		
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="view/user/order.jsp"><img src="img/orderH.png" width="40px" height="15px"></a>
+			  		<a href="view/user/order.jsp"><img src="img/ordert.png" width="40px" height="15px"></a>
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="noticeListForm"><img src="img/customerH.png" width="40px" height="15px"></a>
+			  		<a href="noticeListForm"><img src="img/customert.png" width="40px" height="15px"></a>
 </body>
 </html>

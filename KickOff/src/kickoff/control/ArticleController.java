@@ -195,7 +195,7 @@ public class ArticleController {
 
 		return "articleGroup";
 	}
-	//주문하는 폼
+		//주문하는 폼
 		@RequestMapping("articleOrderForm")
 		public String aritcleOrder(@RequestParam int articleNum, @RequestParam String Asize,
 									@RequestParam int amount, Model model, 

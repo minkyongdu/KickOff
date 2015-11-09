@@ -49,7 +49,7 @@
 	        	 var img2 = document.getElementById('files[2]').value;
 	        	 img2 = img2.slice(img.indexOf(".") + 1).toLowerCase();
 	             if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
-	            	 alert('이미지 파일만 등록 가능합니다.');
+	            	 alert('이미지 파일만 등록 가능합니다.');	 
 		             return false;
 	             }//확장자를 확인합니다.	  
 	         }else{
@@ -58,6 +58,7 @@
 	      });
 	   });
 </script>
+
 <script type="text/javascript">
 //첫번째 이미지 
 function imageURL1(input) {

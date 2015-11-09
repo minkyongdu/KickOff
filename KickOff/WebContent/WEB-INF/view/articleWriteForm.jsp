@@ -1,100 +1,153 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head> 
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>  
+</head>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src = "js/imgWatch.js"></script>
 <script type="text/javascript" src = "js/sizeamount.js"></script>
-<script type="text/javascript"> 
- 
-/*  $('#productinsert').click(function(){
-	  if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp")
-		  {
-		  	alert('해당 파일은 업로드 할 수 없습니다.');
-		  	$('#files[0]').focus();
-		  	return false;
-		  }
-  }); */
-//파일을 선택시 이미지 미리보기
-	function groupNum() { 
-		var wind = null;
-		 wind =  window.open('/KickOff/articleGroup', "articleGroup",
-		         "toolbar=no ,width=300 ,height=500 ,directories=no,"
-		               + "status=yes,scrollbars=yes,menubar=no");
-		}
+<script type="text/javascript">
+function groupNum() { 
+	var wind = null;
+	 wind =  window.open('/KickOff/articleGroup', "articleGroup",
+	         "toolbar=no ,width=300 ,height=500 ,directories=no,"
+	               + "status=yes,scrollbars=yes,menubar=no");
+	}
 </script>
 <body>
-	<form method="post" name= "productForm" id="productForm" action="articleInsert" name="productForm"
+<div class="wrap">
+  <div class="header" align="center">
+	  	<div class="toparea" align="right">
+	  	<c:choose>
+	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 6}">
+		  			<jsp:include page="main/memLogout.jsp" />
+	  			</c:when>
+		  		<c:when test="${sessionScope.comLoginInfo.comGrade == 5}">
+		  			<jsp:include page="main/comLogout.jsp" />
+		  		</c:when>
+		  		<c:when test="${(sessionScope.userLoginInfo == null) || (sessionScope.comLoginInfo == null)}">
+		  			<jsp:include page="main/selectLogin.jsp" /> 
+				</c:when>
+	  		</c:choose>
+		</div>
+ 	<a href="main"><img src="img/mlogo.png" width="360px" height="160px"></a>
+  </div>
+  <jsp:include page="main/menubar.jsp" />
+  </div>
+  <center>
+  <img src = "img/writeformbanner.png">
+  <img src = "img/direction.png">
+  </center> 
+<form method="post" name= "productForm" id="productForm" action="articleInsert" name="productForm"
        enctype="multipart/form-data">
-      <c:if test="${sessionScope.userLoginInfo.id == null}">
+<c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">
       	location.href='loginForm';
       	</script>
       	</c:when>
 	</c:choose>
-	</c:if>
-	<table border = "1">
-		<tr>
-			<td>제품이름 : </td><td><input type = "text" id="Aname" name = "Aname"></td>
-		</tr>
-		<tr>
-			<td>가격 : </td><td><input type = "text" id="price" name = "price"></td>
-		</tr>
-		<tr>
-			<td width = "400">분류 번호 : 
-			<input type = "text" id = "groupNum" name = "groupNum" size = "2" readonly>
-			<a href = "javascript:groupNum();" id="groupImg">
-				<img src = "임시사진">
-			</a>
-			<input type = "button" id = "selectbutton" value = "사이즈 선택하기">
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "6"><center>사이즈/갯수</center></td>
-		</tr> 
-		<tr>
-			<td colspan="6"><center>미리보기</center></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><img src = "" id= "img1" width="150" height="150"></td>
-			<td><img src = "" id= "img2" width="150" height="150"></td>
-			<td><img src = "" id= "img3" width="150" height="150"></td>
-			<td><img src = "" id= "img4" width="150" height="150"></td>
-			<td><img src = "" id= "img5" width="150" height="150"></td>
-		</tr>
-		<tr>
-			<td> 
-				 <table id = "fileview">
-
-				 </table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<table id = "sizeamountview">
+	</c:if>       
+<center>
+<table width="700" height="100%" border="0">
+  <tr>
+    <td width="200" align="right"><table width="150" height="100%" border="0">
+      <tr>
+        <td height="150px" align="center" valign="middle"><img src="" alt="" width="150" height="150" id="img1" /></td>
+      </tr>
+      <tr>
+        <td height="150px" align="center" valign="middle"><img src="" alt="" width="150" height="150" id="img2" /></td>
+      </tr>
+      <tr>
+        <td height="150px" align="center" valign="middle"><img src="" alt="" width="150" height="150" id="img3" /></td>
+      </tr>
+      <tr>
+        <td height="150px" align="center" valign="middle"><img src="" alt="" width="150" height="150" id="img4" /></td>
+      </tr>
+      <tr>
+        <td height="150px" align="center" valign="middle"><img src="" alt="" width="150" height="150" id="img5" /></td>
+      </tr>
+    </table></td>
+    <td width="500"><table width="400" height="700" border="0">
+      <tr>
+        <td height="35" align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">분류번호 :          
+          <input type="text" id="groupNum"
+					name="groupNum" size="2" readonly="readonly" />
+          <a href="javascript:groupNum();" id="groupImg">
+          <img src="img/numsearch.png" style="vertical-align:top;"/></a></td>
+        </tr>
+      <tr>
+        <td align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">제품명 :          
+          <input type="text" id="Aname" name="Aname" size = "30"/></td>
+        </tr>
+      <tr>
+        <td align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">가격 :          
+          <input type="text" id="price" name="price" size = "30"/></td>
+        </tr>
+      <tr>
+        <td height="310" align="right" valign="top" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">
+        <p>사이즈 & 수량 </p>
+          <p>
+          	<input type ="button" id = "selectbutton" value = "사이즈 선택하기">
+            <input type="hidden" name="companyNum" id="companyNum"
+			value="${sessionScope.comLoginInfo.companyNum}" />
+          </p>
+          <p>
+          <table id = "sizeamountview">
 				 
-				</table> 
-			</td> 
-		</tr> 
-	</table>
-	<input type = "hidden" name= "companyNum" id = "companyNum" value = "${sessionScope.comLoginInfo.companyNum}">
-	<input type ="submit" id="productinsert" value = "작성하기">
-	<input type="button" id="addFile"  value="이미지추가">
-	<input type = "button" id = "restartSizeamount" onclick="location.href='articleWriteForm'" value = "다시 작성하기">
-	<input type="button" id="addEngamount" value = "영어사이즈&수량">
-	<input type="button" id="addNumamount" value = "숫자사이즈&수량">
-	<input type="button" id="addNoneamount" value = "기본사이즈&수량">
-	<input type="button" id = "addSocksamount" value = "양말사이즈&수량">
-	<input type= "button" id = "addGlovesamount" value = "장갑사이즈&수량">
-	</form>
+		  </table>
+          </p>
+          <p>
+          <input type="button" id="addEngamount" value="영어사이즈&수량" />
+          </p>
+          <p>
+            <input
+			type="button" id="addNumamount" value="숫자사이즈&수량" />
+          </p>
+          <p>
+            <input
+			type="button" id="addNoneamount" value="기본사이즈&수량" />
+          </p>
+          <p>
+            <input
+			type="button" id="addSocksamount" value="양말사이즈&수량" />
+            </p>
+          <p>
+            <input
+			type="button" id="addGlovesamount" value="장갑사이즈&수량" />
+          </p></td>
+      </tr>
+      <tr>
+        <td height="196" align="right" valign="top" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;"><p>이미지 업로드 
+          <input
+			type="button" id="addFile" value="이미지추가" />
+        </p>
+          <p>
+         	<table id = "fileview">
+
+			</table> 
+          </p>
+         </td>
+      </tr>
+      <tr>
+        <td align="center" valign="bottom" border="0">
+        <a href = "articleWriteForm" id="restartSizeamount"><img src="img/initialize.png" width="70" height="30" align="right"/></a></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="middle"><input type="image" src="img/produpload.png" id = "productinsert"/>
+      <a href = "javascript:history.back(-1);"><img src="img/back.png" /></a></td>
+    </tr>
+</table>
+</center>
+</form>
+<center>
+<jsp:include page="main/bottom.jsp" />
+</center>
 </body>
 </html>
