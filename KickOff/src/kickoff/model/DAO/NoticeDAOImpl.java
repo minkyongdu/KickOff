@@ -13,7 +13,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Autowired
 	private SqlSession sqlSession;
 
-	//ê³µì§€ì‚¬í•­ ê¸€ ì…ë ¥
+	//°øÁö»çÇ× ±Û ÀÔ·Â
 		@Override
 		public boolean noticeinsert(NoticeVO noticeVO) {
 			int result = sqlSession.insert("notice.noticeinsert", noticeVO);
@@ -21,20 +21,20 @@ public class NoticeDAOImpl implements NoticeDAO{
 			return false;
 		}
 		
-		//ê³µì§€ì‚¬í•­ ê¸€ ìƒì„¸ë³´ê¸°
+		//°øÁö»çÇ× ±Û »ó¼¼º¸±â
 		@Override
 		public NoticeVO noticeDetail(int noticeno) {
 			return sqlSession.selectOne("notice.noticeDetail", noticeno);
 		}
 		
-		//ê³µì§€ì‚¬í•­ ê¸€ ë¦¬ìŠ¤íŠ¸
+		//°øÁö»çÇ× ±Û ¸®½ºÆ®
 		@Override
 		public List<NoticeVO> noticelistAll(RowNumVO rowNumVO) {
 			// TODO Auto-generated method stub
 			return sqlSession.selectList("notice.noticeselectAll",rowNumVO);
 		}
 		
-		//ê³µì§€ì‚¬í•­ ê¸€ ê°¯ìˆ˜ ì¡°íšŒ
+		//°øÁö»çÇ× ±Û °¹¼ö Á¶È¸
 		@Override
 		public int noticeCount() {
 			int count = 0;
@@ -42,7 +42,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 			return count;
 		}
 		
-		//ê³µì§€ì‚¬í•­ ê¸€ ìˆ˜ì •
+		//°øÁö»çÇ× ±Û ¼öÁ¤
 		@Override
 		public int noticeUpdate(NoticeVO noticeVO) {
 			int update = 0;
@@ -50,7 +50,7 @@ public class NoticeDAOImpl implements NoticeDAO{
 			return update;
 		}
 		
-		//ê³µì§€ì‚¬í•­ ê¸€ ì‚­ì œ
+		//°øÁö»çÇ× ±Û »èÁ¦
 		@Override
 		public int deleteNotice(NoticeVO noticeVO) {
 			// TODO Auto-generated method stub

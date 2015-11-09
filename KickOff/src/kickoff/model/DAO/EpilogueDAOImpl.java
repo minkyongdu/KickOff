@@ -13,13 +13,13 @@ public class EpilogueDAOImpl implements EpilogueDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//ì—í•„ë¡œê·¸(í›„ê¸°)ë¦¬ìŠ¤íŠ¸
+	//¿¡ÇÊ·Î±×(ÈÄ±â)¸®½ºÆ®
 	@Override
 	public List<EpilogueVO> EpilogueSelect(Map map) {
 		return sqlSession.selectList("epilogue.epilogueSelect",map);
 	}
 
-	//ì—í•„ë¡œê·¸(í›„ê¸°)ë„£ê¸°
+	//¿¡ÇÊ·Î±×(ÈÄ±â)³Ö±â
 	@Override
 	public boolean EpilogueReply(EpilogueVO epilogueVO) {
 		int result = sqlSession.insert("epilogue.epilogueInsert", epilogueVO);
@@ -27,7 +27,7 @@ public class EpilogueDAOImpl implements EpilogueDAO{
 		return false;
 	}
 
-	//ì—í•„ë¡œê·¸(í›„ê¸°)í˜ì´ì§€ë³„ ì¹´ìš´íŠ¸
+	//¿¡ÇÊ·Î±×(ÈÄ±â)ÆäÀÌÁöº° Ä«¿îÆ®
 	@Override
 	public int EpilogueReplyCount(int articleNum) {
 		int count = 0;
@@ -35,7 +35,7 @@ public class EpilogueDAOImpl implements EpilogueDAO{
 		return count;
 	}
 
-	//ì—í•„ë¡œê·¸(í›„ê¸°)í…Œì´ë¸”ë³„ ëŒ“ê¸€ ì‚­ì œ
+	//¿¡ÇÊ·Î±×(ÈÄ±â)Å×ÀÌºíº° ´ñ±Û »èÁ¦
 	@Override
 	public boolean deleteEpilogueReply(EpilogueVO epilogueVO) {
 		int result = sqlSession.delete("epilogue.epilogueDelete", epilogueVO);

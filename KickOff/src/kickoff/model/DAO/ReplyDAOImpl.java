@@ -14,14 +14,14 @@ public class ReplyDAOImpl implements ReplyDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ë³´ê¸°
+	//°øÁö»çÇ× ´ñ±Û º¸±â
 	@Override
 	public List<ReplyVO> NoticeSelect(Map map) {
 	
 		return sqlSession.selectList("notice.ReplySelect",map);
 	}
 
-	//ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ì…ë ¥
+	//°øÁö»çÇ× ´ñ±Û ÀÔ·Â
 	@Override
 	public boolean NoticeReply(ReplyVO replyVO) {
 		int result = sqlSession.insert("notice.ReplyInsert", replyVO);
@@ -29,7 +29,7 @@ public class ReplyDAOImpl implements ReplyDAO{
 		return false;
 	}
 	
-	//ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ê°¯ìˆ˜ì¡°íšŒ
+	//°øÁö»çÇ× ´ñ±Û °¹¼öÁ¶È¸
 	@Override
 	public int NoticeReplyCount(int writeNum) {
 		// TODO Auto-generated method stub
@@ -38,7 +38,7 @@ public class ReplyDAOImpl implements ReplyDAO{
 		return count;
 	}
 
-	//ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ì‚­ì œ
+	//°øÁö»çÇ× ´ñ±Û »èÁ¦
 	@Override
 	public boolean deleteReply(ReplyVO replyVO) {
 		int result = sqlSession.delete("notice.ReplyDelete", replyVO);
@@ -46,7 +46,7 @@ public class ReplyDAOImpl implements ReplyDAO{
 		return false;
 	}
 
-	//ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ì‚­ì œ(1ë²ˆ ê¸€ ì‚­ì œì‹œ 1ë²ˆì— í•´ë‹¹í•˜ëŠ” ëŒ“ê¸€ ì‚­ì œ)
+	//°øÁö»çÇ× ´ñ±Û »èÁ¦(1¹ø ±Û »èÁ¦½Ã 1¹ø¿¡ ÇØ´çÇÏ´Â ´ñ±Û »èÁ¦)
 	@Override
 	public int deleteNoticeReply(int writeNum) {
 		int num = 0;

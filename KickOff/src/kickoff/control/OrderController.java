@@ -46,7 +46,7 @@ public class OrderController {
 			orderDAO.updateorder(sizeVO);
 			return "articleOrderSuccess";
 		}else{
-			writer.println("<script>alert('" + count + "ì´í•˜ë¡œë§Œ ì£¼ë¬¸ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');</script>");
+			writer.println("<script>alert('" + count + "ÀÌÇÏ·Î¸¸ ÁÖ¹®ÀÌ °¡´ÉÇÕ´Ï´Ù.');</script>");
             writer.flush();
 			return "articleOrderForm?articleNum="+articleNum;
 		}

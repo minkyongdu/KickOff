@@ -15,7 +15,7 @@ public class DesignController {
 	@Autowired
 	private ArticleDAO articleDAO;
 	
-	//ë©”ì¸
+	//¸ŞÀÎ
 	@RequestMapping("main")
 	public String mainHome(Model model)
 	{
@@ -23,25 +23,25 @@ public class DesignController {
 		model.addAttribute("NewArticleList", list);
 		return "main";
 	}
-	//ë©”ì¸ í—¤ë”
+	//¸ŞÀÎ Çì´õ
 	@RequestMapping("header")
 	public String header()
 	{
 		return "main/header";
 	}
-	//íšŒì›ê°€ì… ì„ íƒ í¼
+	//È¸¿ø°¡ÀÔ ¼±ÅÃ Æû
 	@RequestMapping("selectRegister")
 	public String selectRegister()
 	{
 		return "selectRegister";
 	}
-	// ì¼ë°˜íšŒì› ì•½ê´€
+	// ÀÏ¹İÈ¸¿ø ¾à°ü
 	@RequestMapping("regterm")
 	public String regterm()
 	{
 		return "regterm";
 	}
-	// ê¸°ì—…íšŒì› ì•½ê´€
+	// ±â¾÷È¸¿ø ¾à°ü
 	@RequestMapping("comregterm")
 	public String comregterm()
 	{

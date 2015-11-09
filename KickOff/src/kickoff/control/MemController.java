@@ -290,7 +290,7 @@ public class MemController {
 				writer.println("<script>alert('아이디가 없거나 비밀번호 질문과 답변을 올바르게 입력해주세요.');</script>");
 				writer.flush();
 				return "findIdPwd";
-			} else { 
+			} else {
 				writer.println("<script>alert('" + "회원님의 비밀번호는 " + dao.accountsPwd(map) + " 입니다." + "');");
 				writer.println("location.href='loginForm'" + "</script>");
 				writer.flush();

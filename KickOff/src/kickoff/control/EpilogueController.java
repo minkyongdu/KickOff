@@ -17,7 +17,7 @@ public class EpilogueController {
 	@Autowired
 	private EpilogueDAO epilogueDAO;
 	
-	//ì—í•„ë¡œê·¸(í›„ê¸°)ì…ë ¥ì²˜ë¦¬
+	//¿¡ÇÊ·Î±×(ÈÄ±â)ÀÔ·ÂÃ³¸®
 	@RequestMapping(value = "epilogueReply", method = RequestMethod.POST)
 	public String epilogueReplyinsert(EpilogueVO epilogueVO, HttpServletRequest req) {
 		epilogueDAO.EpilogueReply(epilogueVO);

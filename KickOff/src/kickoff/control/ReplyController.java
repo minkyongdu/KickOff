@@ -28,7 +28,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyQnADAO replyqnaDAO;
 
-	// ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ìž…ë ¥ì²˜ë¦¬
+	// °øÁö»çÇ× ´ñ±Û ÀÔ·ÂÃ³¸®
 	@RequestMapping(value = "noticeReply", method = RequestMethod.POST)
 	public String noticeReplyinsert(ReplyVO replyVO, HttpServletRequest req) {
 
@@ -39,7 +39,7 @@ public class ReplyController {
 
 	}
 
-	// ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ê°œë³„ ì‚­ì œ
+	// °øÁö»çÇ× ´ñ±Û °³º° »èÁ¦
 	@RequestMapping(value = "noticeReplyDelete", method = RequestMethod.GET)
 	public String noticeReplydelete(ReplyVO replyVO, @RequestParam(value = "noticeno") int noticeno,
 			HttpServletRequest req) {
@@ -47,7 +47,7 @@ public class ReplyController {
 		return "redirect:noticeDetail?noticeno=" + noticeno;
 	}
 	
-		// QnA ëŒ“ê¸€ ìž…ë ¥ì²˜ë¦¬
+		// QnA ´ñ±Û ÀÔ·ÂÃ³¸®
 		@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
 		public String qnaReplyinsert(ReplyVO replyVO, HttpServletRequest req) {
 
@@ -58,7 +58,7 @@ public class ReplyController {
 
 		}
 
-		// QnA ëŒ“ê¸€ ê°œë³„ ì‚­ì œ
+		// QnA ´ñ±Û °³º° »èÁ¦
 		@RequestMapping(value = "qnaReplyDelete", method = RequestMethod.GET)
 		public String qnaReplydelete(ReplyVO replyVO, @RequestParam(value = "qnano") int qnano,
 				HttpServletRequest req) {

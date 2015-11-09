@@ -15,7 +15,7 @@ public class OrderDAOImpl implements OrderDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// ì£¼ë¬¸íƒœì´ë¸”ì— ë„£ê¸°
+	// ÁÖ¹®ÅÂÀÌºí¿¡ ³Ö±â
 	@Override
 	public boolean orderinsert(OrderVO order) {
 		int result = sqlSession.insert("order.insertOrder", order);
@@ -24,7 +24,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return false;
 	}
 
-	// ì£¼ë¬¸ì‹œì— ìˆ˜ëŸ‰ ê°ì†Œ
+	// ÁÖ¹®½Ã¿¡ ¼ö·® °¨¼Ò
 	@Override
 	public int updateorder(ArticleSizeAmountVO articleSizeAmountVO) {
 		int update = 0;
@@ -32,7 +32,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return update;
 	}
 
-	// ì£¼ë¬¸ì‹œ ìˆ˜ëŸ‰ í™•ì¸
+	// ÁÖ¹®½Ã ¼ö·® È®ÀÎ
 	@Override
 	public int orderProductCount(Map map) {
 		int count = 0;
@@ -40,13 +40,13 @@ public class OrderDAOImpl implements OrderDAO {
 		return count;
 	}
 
-	// ì£¼ë¬¸ ê´€ë¦¬ ë¦¬ìŠ¤íŠ¸
+	// ÁÖ¹® °ü¸® ¸®½ºÆ®
 	@Override
 	public List<OrderVO> orderlist(RowNumVO rownumVO) {
 		return sqlSession.selectList("order.selectOrderList", rownumVO);
 	}
 
-	// ì£¼ë¬¸ë¦¬ìŠ¤íŠ¸ ì¹´ìš´íŠ¸
+	// ÁÖ¹®¸®½ºÆ® Ä«¿îÆ®
 	@Override
 	public int orderlistcount() {
 		int count = 0;

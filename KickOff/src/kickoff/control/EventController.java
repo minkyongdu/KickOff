@@ -32,7 +32,7 @@ public class EventController {
 	@Autowired
 	private EventBoardDAO eventboardDAO;
 	
-	//ì´ë²¤íŠ¸ ê²Œì‹œíŒ ê¸€ì“°ê¸° í¼
+	//ÀÌº¥Æ® °Ô½ÃÆÇ ±Û¾²±â Æû
 	@RequestMapping(value = "eventWriteForm", method = RequestMethod.GET)
 	public String boardWrite(Model model) 
 	{
@@ -42,7 +42,7 @@ public class EventController {
 		return "eventBoardWrite";
 	}
 	
-	// ì´ë²¤íŠ¸ ê²Œì‹œíŒ ê¸€ì“°ê¸° ì²˜ë¦¬
+	// ÀÌº¥Æ® °Ô½ÃÆÇ ±Û¾²±â Ã³¸®
 	@RequestMapping(value = "eventinsert", method = RequestMethod.POST)
 	public String Notice(EventBoardVO eventVO, HttpServletRequest req) throws Exception {
 
@@ -52,9 +52,9 @@ public class EventController {
 			int i = 0;
 			for (MultipartFile multipartFile : files) {
 				i++;
-				String fileName = multipartFile.getOriginalFilename(); //ì‹¤ì œíŒŒì¼ì´ë¦„ì„ fileNameì— ë‹´ìŒ
+				String fileName = multipartFile.getOriginalFilename(); //½ÇÁ¦ÆÄÀÏÀÌ¸§À» fileName¿¡ ´ãÀ½
 				if (!"".equals(fileName)) {
-					fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¼
+					fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸²
 					String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
 					File f = new File(path);
 					multipartFile.transferTo(f);
@@ -71,24 +71,24 @@ public class EventController {
 		eventboardDAO.eventinsert(eventVO);
 		return "redirect:eventListForm";
 	}
-		// í˜ì´ì§€ ì‚¬ì´ì¦ˆ, í˜ì´ì§€ ê·¸ë£¹
+		// ÆäÀÌÁö »çÀÌÁî, ÆäÀÌÁö ±×·ì
 		private final int PAGESIZE = 10;
 		private final int PAGEGROUP = 10;
-		// ì´ë²¤íŠ¸ ê²Œì‹œíŒ Listí¼
+		// ÀÌº¥Æ® °Ô½ÃÆÇ ListÆû
 		@RequestMapping("eventListForm")
 		public String eventListForm(Model model, String pageNumber) {
-			// í˜„ì¬ í´ë¦­ í˜ì´ì§€
+			// ÇöÀç Å¬¸¯ ÆäÀÌÁö
 			int pageNum = 1;
 			if (pageNumber != null)
 				pageNum = Integer.parseInt(pageNumber);
 
-			// ê²Œì‹œê¸€ ì „ì²´ìˆ˜ ë³€ìˆ˜ ì´ˆê¸°í™”
+			// °Ô½Ã±Û ÀüÃ¼¼ö º¯¼ö ÃÊ±âÈ­
 			int totalCount = eventboardDAO.eventCount();
 
-			// í˜ì´ì§€ ê°¯ìˆ˜
+			// ÆäÀÌÁö °¹¼ö
 			int totalPageCount = totalCount / PAGESIZE;
 
-			// 0ìœ¼ë¡œ ë‚˜ëˆ  ë–¨ì–´ì§€ì§€ ì•Šì„ê²½ìš° í˜ì´ì§€ ê°¯ìˆ˜ë¥¼ +1í•œë‹¤.
+			// 0À¸·Î ³ª´² ¶³¾îÁöÁö ¾ÊÀ»°æ¿ì ÆäÀÌÁö °¹¼ö¸¦ +1ÇÑ´Ù.
 			if (totalCount % PAGESIZE != 0) {
 				totalPageCount++;
 			}
@@ -100,7 +100,7 @@ public class EventController {
 				endPage = totalPageCount;
 			}
 
-			// ë§ˆì§€ë§‰, ì²˜ìŒ rowNumber ì„ ì–¸ ë° ì´ˆê¸°í™”
+			// ¸¶Áö¸·, Ã³À½ rowNumber ¼±¾ğ ¹× ÃÊ±âÈ­
 			int endRow = PAGESIZE * pageNum;
 			int startRow = endRow - PAGESIZE + 1;
 
@@ -116,13 +116,13 @@ public class EventController {
 			model.addAttribute("eventList", list);
 			return "eventBoardList";
 		}
-		// ì´ë²¤íŠ¸ ê²Œì‹œíŒ ìƒì„¸ë³´ê¸° ì²˜ë¦¬
+		// ÀÌº¥Æ® °Ô½ÃÆÇ »ó¼¼º¸±â Ã³¸®
 		@RequestMapping("eventDetail")
 		public String noticeDetail(@RequestParam int eventno, Model model) {
-			model.addAttribute("eventDetail", eventboardDAO.eventDetail(eventno)); // ê³µì§€ì‚¬í•­
+			model.addAttribute("eventDetail", eventboardDAO.eventDetail(eventno)); // °øÁö»çÇ×
 			return "eventBoardDetail";
 		}
-		// ì´ë²¤íŠ¸ ê²Œì‹œíŒ ìˆ˜ì • í¼
+		// ÀÌº¥Æ® °Ô½ÃÆÇ ¼öÁ¤ Æû
 		@RequestMapping("eventUpdateForm")
 		public String noticeUpdateForm(@RequestParam int eventno, Model model) {
 
@@ -130,7 +130,7 @@ public class EventController {
 
 			return "eventUpdateForm";
 		}
-		// ì´ë²¤íŠ¸ ê²Œì‹œíŒ ìˆ˜ì • ì²˜ë¦¬
+		// ÀÌº¥Æ® °Ô½ÃÆÇ ¼öÁ¤ Ã³¸®
 		@RequestMapping(value = "eventUpdate", method = RequestMethod.POST)
 		public String noticeUpdateForm(EventBoardVO eventboardVo, HttpServletRequest req) throws Exception {
 
@@ -142,7 +142,7 @@ public class EventController {
 					i++;
 					String fileName = multipartFile.getOriginalFilename();
 					if (!"".equals(fileName)) {
-						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¬ê¸°
+						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸®±â
 						String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
 						File f = new File(path);
 						multipartFile.transferTo(f);
@@ -159,7 +159,7 @@ public class EventController {
 			eventboardDAO.eventUpdate(eventboardVo);
 			return "redirect:eventDetail?eventno=" + eventboardVo.getEventno();
 		}
-		// ê²Œì‹œê¸€ ì‚­ì œ
+		// °Ô½Ã±Û »èÁ¦
 		@RequestMapping("eventDelete")
 		public ModelAndView delete(@ModelAttribute EventBoardVO eventboardVO, @RequestParam String filename,
 				@RequestParam String filename2, @RequestParam String filename3, HttpServletResponse res,HttpServletRequest req) throws Exception {
@@ -171,7 +171,7 @@ public class EventController {
 			File file2 = new File(path2);
 			File file3 = new File(path3);
 			
-			//ì´ë¯¸ì§€ê°€ ìˆë‹¤ë©´ ì‚­ì œ
+			//ÀÌ¹ÌÁö°¡ ÀÖ´Ù¸é »èÁ¦
 			if (file.exists() == true) {
 				file.delete();
 			}
