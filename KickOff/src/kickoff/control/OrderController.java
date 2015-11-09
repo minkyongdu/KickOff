@@ -46,22 +46,28 @@ public class OrderController {
 			orderDAO.updateorder(sizeVO);
 			return "articleOrderSuccess";
 		}else{
-			writer.println("<script>alert('" + count + "���Ϸθ� �ֹ��� �����մϴ�.');</script>");
+			writer.println("<script>alert('" + count + "���Ϸθ� �ֹ��� �����մϴ�.');</script>");
             writer.flush();
 			return "articleOrderForm?articleNum="+articleNum;
 		}
 			
 	}
-	@RequestMapping("myOrderList")
-	public String myorderlist()
+	
+	//마이페이지 주문내역 (추가)
+	@RequestMapping("memOrderList")
+	public String myorderlist(@RequestParam int memberNum, Model model)
 	{
-		return null;
+		List<OrderVO> list = orderDAO.buylist(memberNum);
+		model.addAttribute("buyMemberlist", list);
+		return "memOrderList";
 	}
 	
 	
 	private final int PAGESIZE = 10;
 	private final int PAGEGROUP = 10;
 	
+	
+	//주문한 관리자용 총 리스트 (추가)
 	@RequestMapping("orderList")
 	public String orderlist(Model model, String pageNumber)
 	{
@@ -101,5 +107,36 @@ public class OrderController {
 		List<OrderVO> list = orderDAO.orderlist(rowNumVO);
 		model.addAttribute("orderlist", list);
 		return "orderList";
+	}
+	
+	//회사 관리 리스트 (추가)
+	@RequestMapping("comOrderList")
+	public String companylist(Model model, @RequestParam int companyNum)
+	{
+		List<OrderVO> list = orderDAO.companylist(companyNum);
+		model.addAttribute("companylist", list);
+		return "comOrderList";
+	}
+	
+	//관리자용 리스트 배송상태 업데이트 (추가)
+	@RequestMapping(value="orderListUpdate", method = RequestMethod.POST)
+	public String orderListUpdate(OrderVO orderVO, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException
+	{
+		orderDAO.updateBuyStatus(orderVO);
+		response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
+        writer.println("<script>alert('�ش� �ֹ��� ���°� ������Ʈ �Ǿ����ϴ�.');");
+        writer.println("location.href='orderList';</script>");
+        writer.flush();
+		return "redirect:orderList";
+	}
+	
+	//회사용 리스트 배송상태 업데이트 (추가)
+	@RequestMapping(value="orderCompanyUpdate", method = RequestMethod.POST)
+	public String orderCompanyUpdate(OrderVO orderVO, Model model)
+	{
+		orderDAO.updateBuyStatus(orderVO);
+		return "redirect:companyList?companyNum="+orderVO.getCompanyNum();
 	}
 }

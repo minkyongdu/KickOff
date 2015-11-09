@@ -54,13 +54,14 @@
 	<result property="imgFile5" column = "imgFile5"/>
 </resultMap>
 <resultMap type="kickoff.model.beans.ArticleVO" id="articleDetail" extends="articleFileDetail" >
+	<result property = "companyNum" column = "companyNum" />
 	<result property = "groupNum" column = "groupNum" />
 	<result property = "price" column = "price" />
 	<result property = "articleNum" column = "articleNum" />
 	<result property = "Aname" column = "Aname" />
 </resultMap>
 <select id="articleDetailList" resultMap="articleDetail" parameterType="int">
-	select a.groupNum, a.Aname, a.price, a.articleNum,
+	select a.groupNum, a.Aname, a.price, a.articleNum, a.companyNum,
 	b.imgFile1, b.imgFile2, b.imgFile3, b.imgFile4, b.imgFile5
 	from article a, articleFile b
 	where a.articleNum = b.articleNum

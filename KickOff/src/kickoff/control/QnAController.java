@@ -35,7 +35,7 @@ public class QnAController {
 	@Autowired
 	private ReplyQnADAO replyqnaDAO;
 	
-		// QnA ±Û¾²±â Æû
+		// QnA ê¸€ì“°ê¸° í¼
 		@RequestMapping(value = "qnaWriteForm", method = RequestMethod.GET)
 		public String NoticeWriteForm(Model model) {
 			if (!model.containsAttribute("uploadForm")) {
@@ -43,7 +43,7 @@ public class QnAController {
 			}
 			return "qnaWriteForm";
 		}
-		// QnA ±Û¾²±â Ã³¸®
+		// QnA ê¸€ì“°ê¸° ì²˜ë¦¬
 		@RequestMapping(value = "qnainsert", method = RequestMethod.POST)
 		public String Notice(QnAVO qnaVo, HttpServletRequest req) throws Exception {
 
@@ -53,9 +53,9 @@ public class QnAController {
 				int i = 0;
 				for (MultipartFile multipartFile : files) {
 					i++;
-					String fileName = multipartFile.getOriginalFilename(); //½ÇÁ¦ÆÄÀÏÀÌ¸§À» fileName¿¡ ´ãÀ½
+					String fileName = multipartFile.getOriginalFilename(); //ì‹¤ì œíŒŒì¼ì´ë¦„ì„ fileNameì— ë‹´ìŒ
 					if (!"".equals(fileName)) {
-						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸²
+						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¼
 						String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
 						File f = new File(path);
 						multipartFile.transferTo(f);
@@ -72,25 +72,25 @@ public class QnAController {
 			qnaDAO.qnainsert(qnaVo);
 			return "redirect:qnaListForm";
 		}
-		// ÆäÀÌÁö »çÀÌÁî, ÆäÀÌÁö ±×·ì
+		// í˜ì´ì§€ ì‚¬ì´ì¦ˆ, í˜ì´ì§€ ê·¸ë£¹
 		private final int PAGESIZE = 10;
 		private final int PAGEGROUP = 10;
 		
-		// QnA°Ô½ÃÆÇ  ListÆû
+		// QnAê²Œì‹œíŒ  Listí¼
 		@RequestMapping("qnaListForm")
 		public String NoticeListForm(Model model, String pageNumber) {
-			// ÇöÀç Å¬¸¯ ÆäÀÌÁö
+			// í˜„ì¬ í´ë¦­ í˜ì´ì§€
 			int pageNum = 1;
 			if (pageNumber != null)
 				pageNum = Integer.parseInt(pageNumber);
 
-			// °Ô½Ã±Û ÀüÃ¼¼ö º¯¼ö ÃÊ±âÈ­
+			// ê²Œì‹œê¸€ ì „ì²´ìˆ˜ ë³€ìˆ˜ ì´ˆê¸°í™”
 			int totalCount = qnaDAO.qnaCount();
 
-			// ÆäÀÌÁö °¹¼ö
+			// í˜ì´ì§€ ê°¯ìˆ˜
 			int totalPageCount = totalCount / PAGESIZE;
 
-			// 0À¸·Î ³ª´² ¶³¾îÁöÁö ¾ÊÀ»°æ¿ì ÆäÀÌÁö °¹¼ö¸¦ +1ÇÑ´Ù.
+			// 0ìœ¼ë¡œ ë‚˜ëˆ  ë–¨ì–´ì§€ì§€ ì•Šì„ê²½ìš° í˜ì´ì§€ ê°¯ìˆ˜ë¥¼ +1í•œë‹¤.
 			if (totalCount % PAGESIZE != 0) {
 				totalPageCount++;
 			}
@@ -102,7 +102,7 @@ public class QnAController {
 				endPage = totalPageCount;
 			}
 
-			// ¸¶Áö¸·, Ã³À½ rowNumber ¼±¾ğ ¹× ÃÊ±âÈ­
+			// ë§ˆì§€ë§‰, ì²˜ìŒ rowNumber ì„ ì–¸ ë° ì´ˆê¸°í™”
 			int endRow = PAGESIZE * pageNum;
 			int startRow = endRow - PAGESIZE + 1;
 
@@ -118,19 +118,19 @@ public class QnAController {
 			model.addAttribute("QnAList", list);
 			return "qnaListForm";
 		}
-		// QnA°Ô½ÃÆÇ »ó¼¼º¸±â Ã³¸®
+		// QnAê²Œì‹œíŒ ìƒì„¸ë³´ê¸° ì²˜ë¦¬
 		@RequestMapping("qnaDetail")
 		public String qnaDetail(@RequestParam int qnano, Model model, String pageNumber, HttpServletRequest req) {
-			// ÇöÀç Å¬¸¯ ÆäÀÌÁö
+			// í˜„ì¬ í´ë¦­ í˜ì´ì§€
 			int pageNum = 1;
 			if (pageNumber != null)
 				pageNum = Integer.parseInt(pageNumber);
-			// °Ô½Ã±Û ÀüÃ¼¼ö º¯¼ö ÃÊ±âÈ­
+			// ê²Œì‹œê¸€ ì „ì²´ìˆ˜ ë³€ìˆ˜ ì´ˆê¸°í™”
 			int totalCount = replyqnaDAO.QnAReplyCount(qnano); ///////////////////////////////////
-			// ÆäÀÌÁö °¹¼ö
+			// í˜ì´ì§€ ê°¯ìˆ˜
 			int totalPageCount = totalCount / PAGESIZE;
 
-			// 0À¸·Î ³ª´² ¶³¾îÁöÁö ¾ÊÀ»°æ¿ì ÆäÀÌÁö °¹¼ö¸¦ +1ÇÑ´Ù.
+			// 0ìœ¼ë¡œ ë‚˜ëˆ  ë–¨ì–´ì§€ì§€ ì•Šì„ê²½ìš° í˜ì´ì§€ ê°¯ìˆ˜ë¥¼ +1í•œë‹¤.
 			if (totalCount % PAGESIZE != 0) {
 				totalPageCount++;
 			}
@@ -142,7 +142,7 @@ public class QnAController {
 				endPage = totalPageCount;
 			}
 
-			// ¸¶Áö¸·, Ã³À½ rowNumber ¼±¾ğ ¹× ÃÊ±âÈ­
+			// ë§ˆì§€ë§‰, ì²˜ìŒ rowNumber ì„ ì–¸ ë° ì´ˆê¸°í™”
 			int endRow = PAGESIZE * pageNum;
 			int startRow = endRow - PAGESIZE + 1;
 
@@ -157,9 +157,9 @@ public class QnAController {
 			
 			qnaDAO.plusHit(qnano);
 			model.addAttribute("QnADetail", qnaDAO.qnaDetail(qnano)); // 
-																					// »ó¼¼º¸±â
-																					// Ã³¸®
-			List<ReplyQnAVO> list = replyqnaDAO.QnASelect(map); //  ´ñ±Û º¸±âÃ³¸®
+																					// ìƒì„¸ë³´ê¸°
+																					// ì²˜ë¦¬
+			List<ReplyQnAVO> list = replyqnaDAO.QnASelect(map); //  ëŒ“ê¸€ ë³´ê¸°ì²˜ë¦¬
 
 			model.addAttribute("QnAReply", list);
 			model.addAttribute("totalPageCount", totalPageCount);
@@ -167,7 +167,7 @@ public class QnAController {
 			model.addAttribute("endPage", endPage);
 			return "qnaDetail";
 		}
-		// QnA ¾÷µ¥ÀÌÆ® Æû
+		// QnA ì—…ë°ì´íŠ¸ í¼
 		@RequestMapping("qnaUpdateForm")
 		public String noticeUpdateForm(@RequestParam int qnano, Model model) {
 
@@ -175,7 +175,7 @@ public class QnAController {
 
 			return "qnaUpdateForm";
 		}
-		// QnA ¾÷µ¥ÀÌÆ® Ã³¸®
+		// QnA ì—…ë°ì´íŠ¸ ì²˜ë¦¬
 		@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
 		public String noticeUpdateForm(QnAVO qnaVO, HttpServletRequest req) throws Exception {
 
@@ -187,7 +187,7 @@ public class QnAController {
 					i++;
 					String fileName = multipartFile.getOriginalFilename();
 					if (!"".equals(fileName)) {
-						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸®±â
+						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¬ê¸°
 						String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
 						// C:\java_maven\mywork_ee\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\KickOff\img\filename
 						File f = new File(path);
@@ -208,7 +208,7 @@ public class QnAController {
 			return "redirect:qnaDetail?qnano=" + qnaVO.getQnano();
 		}
 
-		// QnA »èÁ¦
+		// QnA ì‚­ì œ
 		@RequestMapping("qnaDelete")
 		public ModelAndView delete(@ModelAttribute QnAVO qnaVO, @RequestParam String filename,
 				@RequestParam String filename2, @RequestParam String filename3, HttpServletResponse res,HttpServletRequest req) throws Exception {
@@ -220,7 +220,7 @@ public class QnAController {
 			File file2 = new File(path2);
 			File file3 = new File(path3);
 			
-			//ÀÌ¹ÌÁö°¡ ÀÖ´Ù¸é »èÁ¦
+			//ì´ë¯¸ì§€ê°€ ìˆë‹¤ë©´ ì‚­ì œ
 			if (file.exists() == true) {
 				file.delete();
 			}
@@ -231,7 +231,7 @@ public class QnAController {
 				file3.delete();
 			}
 			int result = qnaDAO.qnaDelete(qnaVO);
-			replyqnaDAO.QnAdeleteNoticeReply(qnaVO.getQnano());// °Ô½Ã±Û ³»ºÎÀÇ ÄÚ¸ÇÆ® »èÁ¦
+			replyqnaDAO.QnAdeleteNoticeReply(qnaVO.getQnano());// ê²Œì‹œê¸€ ë‚´ë¶€ì˜ ì½”ë§¨íŠ¸ ì‚­ì œ
 			if (result != 1) {
 				PrintWriter out = res.getWriter();
 				out.println("<script>history.go(-1);</script>");

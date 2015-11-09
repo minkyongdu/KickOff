@@ -14,19 +14,19 @@ public class ReplyQnADAOImpl implements ReplyQnADAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//QnA ´ñ±Û º¸±â
+	//QnA ëŒ“ê¸€ ë³´ê¸°
 	@Override
 	public List<ReplyQnAVO> QnASelect(Map map) {
 		return sqlSession.selectList("qna.ReplySelect",map);
 	}
-	//QnA ´ñ±Û ÀÔ·Â
+	//QnA ëŒ“ê¸€ ì…ë ¥
 	@Override
 	public boolean QnAReply(ReplyVO replyVO) {
 		int result = sqlSession.insert("qna.ReplyInsert", replyVO);
 		if(result > 0) return true;
 		return false;
 	}
-	//QnA ´ñ±Û °¹¼öÁ¶È¸
+	//QnA ëŒ“ê¸€ ê°¯ìˆ˜ì¡°íšŒ
 	@Override
 	public int QnAReplyCount(int writeNum) {
 		// TODO Auto-generated method stub
@@ -34,14 +34,14 @@ public class ReplyQnADAOImpl implements ReplyQnADAO{
 				count = sqlSession.selectOne("qna.ReplyCount",writeNum);
 				return count;
 	}
-	//QnA ´ñ±Û »èÁ¦
+	//QnA ëŒ“ê¸€ ì‚­ì œ
 	@Override
 	public boolean QnAdeleteReply(ReplyVO replyVO) {
 		int result = sqlSession.delete("qna.ReplyDelete", replyVO);
 		if(result > 0) return true;
 		return false;
 	}
-	//QnA ´ñ±Û »èÁ¦(1¹ø ±Û »èÁ¦½Ã 1¹ø¿¡ ÇØ´çÇÏ´Â ´ñ±Û »èÁ¦)
+	//QnA ëŒ“ê¸€ ì‚­ì œ(1ë²ˆ ê¸€ ì‚­ì œì‹œ 1ë²ˆì— í•´ë‹¹í•˜ëŠ” ëŒ“ê¸€ ì‚­ì œ)
 	@Override
 	public int QnAdeleteNoticeReply(int writeNum) {
 		int num = 0;

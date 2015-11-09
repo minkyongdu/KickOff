@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 컴퍼니리스트 -->
 	<center>
-		<h3>제품주문 전체리스트</h3>
+		<h3>회사제품 주문리스트</h3>
 		<hr>
 		<table border="1" cellpadding="5">
 			<tr bgcolor="yellow">
@@ -25,7 +26,7 @@
 				<th>주문날자</th>
 				<th>주문상태</th>
 			</tr>
-			<c:forEach var="buy" items="${orderlist}">
+			<c:forEach var="buy" items="${companylist}">
 				<tr>
 					<td>${buy.buyNum}</td>
 					<td>${buy.subname}</td>
@@ -38,16 +39,18 @@
 					<td>${buy.asize}</td>
 					<td>${buy.buydate}</td>
 					<td>
-					<form method="post" action="orderListUpdate">
+					<form method="post" action="orderCompanyUpdate">
 						<select name="buyStatus" id="buyStatus">
 							<option>${buy.buyStatus}</option>
 							<option>---------------</option>
-							<option value="주문취소">주문취소</option>
-							<option value="반품/환불요청">반품/환불요청</option>							
-							<option value="교환요청">교환요청</option>																					
+							<option value="주문완료">주문완료</option>
+							<option value="배송준비">배송준비</option>
+							<option value="배송중">배송중</option>
+							<option value="배송완료">배송완료</option>																					
 						</select>
 							<input type="submit" value="상태수정">
-							<input type="hidden" name="buyNum" value="${buy.buyNum}">		
+							<input type="hidden" name="buyNum" value="${buy.buyNum}">
+							<input type="hidden" name="companyNum" value="${buy.companyNum}">		
 					</form>
 					</td>
 				</tr>

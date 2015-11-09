@@ -131,6 +131,7 @@ $(document).ready(function(){
 	<input type="hidden" name="Asize" value="${Asize}">
 	<input type="hidden" name="Aname" value="${article.aname}">
 	<input type="hidden" name="articleNum" value="${article.articleNum}">
+	<input type="hidden" name="companyNum" value="${article.companyNum}">
 </form>
 </center>
 </body>

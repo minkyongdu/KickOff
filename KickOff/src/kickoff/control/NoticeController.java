@@ -38,215 +38,215 @@ public class NoticeController {
 	@Autowired
 	private ReplyDAO replyDAO;
 
-	// °øÁö»çÇ× ±Û¾²±â Æû
-	@RequestMapping(value = "noticeWriteForm", method = RequestMethod.GET)
-	public String NoticeWriteForm(Model model) {
-		if (!model.containsAttribute("uploadForm")) {
-			model.addAttribute("uploadForm", new NoticeVO());
+	// ê³µì§€ì‚¬í•­ ê¸€ì“°ê¸° í¼
+		@RequestMapping(value = "noticeWriteForm", method = RequestMethod.GET)
+		public String NoticeWriteForm(Model model) {
+			if (!model.containsAttribute("uploadForm")) {
+				model.addAttribute("uploadForm", new NoticeVO());
+			}
+			return "noticeWrite";
 		}
-		return "noticeWrite";
-	}
 
-	// °øÁö»çÇ× ±Û¾²±â Ã³¸®(ÀÌ¹ÌÁöÃ·ºÎ Ã³¸®)
-	@RequestMapping(value = "noticeinsert", method = RequestMethod.POST)
-	public String Notice(NoticeVO noticeVo, HttpServletRequest req) throws Exception {
+		// ê³µì§€ì‚¬í•­ ê¸€ì“°ê¸° ì²˜ë¦¬(ì´ë¯¸ì§€ì²¨ë¶€ ì²˜ë¦¬)
+		@RequestMapping(value = "noticeinsert", method = RequestMethod.POST)
+		public String Notice(NoticeVO noticeVo, HttpServletRequest req) throws Exception {
 
-		List<MultipartFile> files = noticeVo.getFiles();
+			List<MultipartFile> files = noticeVo.getFiles();
 
-		if (null != files && files.size() > 0) {
-			int i = 0;
-			for (MultipartFile multipartFile : files) {
-				i++;
-				String fileName = multipartFile.getOriginalFilename(); //½ÇÁ¦ÆÄÀÏÀÌ¸§À» fileName¿¡ ´ãÀ½
-				if (!"".equals(fileName)) {
-					fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸²
-					String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
-					File f = new File(path);
-					multipartFile.transferTo(f);
-					if (i == 1) {
-						noticeVo.setFileName(fileName);
-					} else if (i == 2) {
-						noticeVo.setFileName2(fileName);
-					} else if (i == 3) {
-						noticeVo.setFileName3(fileName);
+			if (null != files && files.size() > 0) {
+				int i = 0;
+				for (MultipartFile multipartFile : files) {
+					i++;
+					String fileName = multipartFile.getOriginalFilename(); //ì‹¤ì œíŒŒì¼ì´ë¦„ì„ fileNameì— ë‹´ìŒ
+					if (!"".equals(fileName)) {
+						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¼
+						String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
+						File f = new File(path);
+						multipartFile.transferTo(f);
+						if (i == 1) {
+							noticeVo.setFileName(fileName);
+						} else if (i == 2) {
+							noticeVo.setFileName2(fileName);
+						} else if (i == 3) {
+							noticeVo.setFileName3(fileName);
+						}
 					}
 				}
 			}
-		}
-		noticeDAO.noticeinsert(noticeVo);
-		return "redirect:noticeListForm";
+			noticeDAO.noticeinsert(noticeVo);
+			return "redirect:noticeListForm";
 
-	}
-
-	// ÆäÀÌÁö »çÀÌÁî, ÆäÀÌÁö ±×·ì
-	private final int PAGESIZE = 10;
-	private final int PAGEGROUP = 10;
-
-	// °øÁö»çÇ× ListÆû
-	@RequestMapping("noticeListForm")
-	public String NoticeListForm(Model model, String pageNumber) {
-		// ÇöÀç Å¬¸¯ ÆäÀÌÁö
-		int pageNum = 1;
-		if (pageNumber != null)
-			pageNum = Integer.parseInt(pageNumber);
-
-		// °Ô½Ã±Û ÀüÃ¼¼ö º¯¼ö ÃÊ±âÈ­
-		int totalCount = noticeDAO.noticeCount();
-
-		// ÆäÀÌÁö °¹¼ö
-		int totalPageCount = totalCount / PAGESIZE;
-
-		// 0À¸·Î ³ª´² ¶³¾îÁöÁö ¾ÊÀ»°æ¿ì ÆäÀÌÁö °¹¼ö¸¦ +1ÇÑ´Ù.
-		if (totalCount % PAGESIZE != 0) {
-			totalPageCount++;
 		}
 
-		// startPage or endPage
-		int startPage = (pageNum - 1) / PAGEGROUP * PAGEGROUP + 1;
-		int endPage = startPage + (PAGEGROUP - 1);
-		if (endPage > totalPageCount) {
-			endPage = totalPageCount;
+		// í˜ì´ì§€ ì‚¬ì´ì¦ˆ, í˜ì´ì§€ ê·¸ë£¹
+		private final int PAGESIZE = 10;
+		private final int PAGEGROUP = 10;
+
+		// ê³µì§€ì‚¬í•­ Listí¼
+		@RequestMapping("noticeListForm")
+		public String NoticeListForm(Model model, String pageNumber) {
+			// í˜„ì¬ í´ë¦­ í˜ì´ì§€
+			int pageNum = 1;
+			if (pageNumber != null)
+				pageNum = Integer.parseInt(pageNumber);
+
+			// ê²Œì‹œê¸€ ì „ì²´ìˆ˜ ë³€ìˆ˜ ì´ˆê¸°í™”
+			int totalCount = noticeDAO.noticeCount();
+
+			// í˜ì´ì§€ ê°¯ìˆ˜
+			int totalPageCount = totalCount / PAGESIZE;
+
+			// 0ìœ¼ë¡œ ë‚˜ëˆ  ë–¨ì–´ì§€ì§€ ì•Šì„ê²½ìš° í˜ì´ì§€ ê°¯ìˆ˜ë¥¼ +1í•œë‹¤.
+			if (totalCount % PAGESIZE != 0) {
+				totalPageCount++;
+			}
+
+			// startPage or endPage
+			int startPage = (pageNum - 1) / PAGEGROUP * PAGEGROUP + 1;
+			int endPage = startPage + (PAGEGROUP - 1);
+			if (endPage > totalPageCount) {
+				endPage = totalPageCount;
+			}
+
+			// ë§ˆì§€ë§‰, ì²˜ìŒ rowNumber ì„ ì–¸ ë° ì´ˆê¸°í™”
+			int endRow = PAGESIZE * pageNum;
+			int startRow = endRow - PAGESIZE + 1;
+
+			RowNumVO rowNumVO = new RowNumVO();
+			rowNumVO.setStartRow(startRow);
+			rowNumVO.setEndRow(endRow);
+
+			List<NoticeVO> list = noticeDAO.noticelistAll(rowNumVO);
+
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("NoticeList", list);
+			return "noticeList";
 		}
 
-		// ¸¶Áö¸·, Ã³À½ rowNumber ¼±¾ğ ¹× ÃÊ±âÈ­
-		int endRow = PAGESIZE * pageNum;
-		int startRow = endRow - PAGESIZE + 1;
+		// ê³µì§€ì‚¬í•­ ìƒì„¸ë³´ê¸° ì²˜ë¦¬
+		@RequestMapping("noticeDetail")
+		public String noticeDetail(@RequestParam int noticeno, Model model, String pageNumber, HttpServletRequest req) {
+			// í˜„ì¬ í´ë¦­ í˜ì´ì§€
+			int pageNum = 1;
+			if (pageNumber != null)
+				pageNum = Integer.parseInt(pageNumber);
+			// ê²Œì‹œê¸€ ì „ì²´ìˆ˜ ë³€ìˆ˜ ì´ˆê¸°í™”
+			int totalCount = replyDAO.NoticeReplyCount(noticeno); ///////////////////////////////////
+			// í˜ì´ì§€ ê°¯ìˆ˜
+			int totalPageCount = totalCount / PAGESIZE;
 
-		RowNumVO rowNumVO = new RowNumVO();
-		rowNumVO.setStartRow(startRow);
-		rowNumVO.setEndRow(endRow);
+			// 0ìœ¼ë¡œ ë‚˜ëˆ  ë–¨ì–´ì§€ì§€ ì•Šì„ê²½ìš° í˜ì´ì§€ ê°¯ìˆ˜ë¥¼ +1í•œë‹¤.
+			if (totalCount % PAGESIZE != 0) {
+				totalPageCount++;
+			}
 
-		List<NoticeVO> list = noticeDAO.noticelistAll(rowNumVO);
+			// startPage or endPage
+			int startPage = (pageNum - 1) / PAGEGROUP * PAGEGROUP + 1;
+			int endPage = startPage + (PAGEGROUP - 1);
+			if (endPage > totalPageCount) {
+				endPage = totalPageCount;
+			}
 
-		model.addAttribute("totalPageCount", totalPageCount);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("NoticeList", list);
-		return "noticeList";
-	}
+			// ë§ˆì§€ë§‰, ì²˜ìŒ rowNumber ì„ ì–¸ ë° ì´ˆê¸°í™”
+			int endRow = PAGESIZE * pageNum;
+			int startRow = endRow - PAGESIZE + 1;
 
-	// °øÁö»çÇ× »ó¼¼º¸±â Ã³¸®
-	@RequestMapping("noticeDetail")
-	public String noticeDetail(@RequestParam int noticeno, Model model, String pageNumber, HttpServletRequest req) {
-		// ÇöÀç Å¬¸¯ ÆäÀÌÁö
-		int pageNum = 1;
-		if (pageNumber != null)
-			pageNum = Integer.parseInt(pageNumber);
-		// °Ô½Ã±Û ÀüÃ¼¼ö º¯¼ö ÃÊ±âÈ­
-		int totalCount = replyDAO.NoticeReplyCount(noticeno); ///////////////////////////////////
-		// ÆäÀÌÁö °¹¼ö
-		int totalPageCount = totalCount / PAGESIZE;
+			Map map = new HashMap();
+			RowNumVO rowNumVO = new RowNumVO();
+			rowNumVO.setStartRow(startRow);
+			rowNumVO.setEndRow(endRow);
+			
+			map.put("writeNum", noticeno);
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			
+			noticeDAO.plusHit(noticeno);
+			
+			model.addAttribute("NoticeDetail", noticeDAO.noticeDetail(noticeno)); // ê³µì§€ì‚¬í•­
+																					// ìƒì„¸ë³´ê¸°
+																					// ì²˜ë¦¬
+			List<ReplyVO> list = replyDAO.NoticeSelect(map); // ê³µì§€ì‚¬í•­ ëŒ“ê¸€ ë³´ê¸°ì²˜ë¦¬
 
-		// 0À¸·Î ³ª´² ¶³¾îÁöÁö ¾ÊÀ»°æ¿ì ÆäÀÌÁö °¹¼ö¸¦ +1ÇÑ´Ù.
-		if (totalCount % PAGESIZE != 0) {
-			totalPageCount++;
+			model.addAttribute("NoticeReply", list);
+			model.addAttribute("totalPageCount", totalPageCount);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			return "noticeDetail";
 		}
-
-		// startPage or endPage
-		int startPage = (pageNum - 1) / PAGEGROUP * PAGEGROUP + 1;
-		int endPage = startPage + (PAGEGROUP - 1);
-		if (endPage > totalPageCount) {
-			endPage = totalPageCount;
-		}
-
-		// ¸¶Áö¸·, Ã³À½ rowNumber ¼±¾ğ ¹× ÃÊ±âÈ­
-		int endRow = PAGESIZE * pageNum;
-		int startRow = endRow - PAGESIZE + 1;
-
-		Map map = new HashMap();
-		RowNumVO rowNumVO = new RowNumVO();
-		rowNumVO.setStartRow(startRow);
-		rowNumVO.setEndRow(endRow);
-		
-		map.put("writeNum", noticeno);
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		
-		noticeDAO.plusHit(noticeno);
-		
-		model.addAttribute("NoticeDetail", noticeDAO.noticeDetail(noticeno)); // °øÁö»çÇ×
-																				// »ó¼¼º¸±â
-																				// Ã³¸®
-		List<ReplyVO> list = replyDAO.NoticeSelect(map); // °øÁö»çÇ× ´ñ±Û º¸±âÃ³¸®
-
-		model.addAttribute("NoticeReply", list);
-		model.addAttribute("totalPageCount", totalPageCount);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		return "noticeDetail";
-	}
 	
-	// °øÁö»çÇ× ¾÷µ¥ÀÌÆ® Æû
-	@RequestMapping("noticeUpdateForm")
-	public String noticeUpdateForm(@RequestParam int noticeno, Model model) {
+		// ê³µì§€ì‚¬í•­ ì—…ë°ì´íŠ¸ í¼
+		@RequestMapping("noticeUpdateForm")
+		public String noticeUpdateForm(@RequestParam int noticeno, Model model) {
 
-		model.addAttribute("NoticeUpdate", noticeDAO.noticeDetail(noticeno));
+			model.addAttribute("NoticeUpdate", noticeDAO.noticeDetail(noticeno));
 
-		return "noticeUpdate"; 
-	}
-	// °øÁö»çÇ× ¾÷µ¥ÀÌÆ® Ã³¸®
-	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String noticeUpdateForm(NoticeVO noticeVo, HttpServletRequest req) throws Exception {
+			return "noticeUpdate"; 
+		}
+		// ê³µì§€ì‚¬í•­ ì—…ë°ì´íŠ¸ ì²˜ë¦¬
+		@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
+		public String noticeUpdateForm(NoticeVO noticeVo, HttpServletRequest req) throws Exception {
 
-		List<MultipartFile> files = noticeVo.getFiles();
+			List<MultipartFile> files = noticeVo.getFiles();
 
-		if (null != files && files.size() > 0) {
-			int i = 0;
-			for (MultipartFile multipartFile : files) {
-				i++;
-				String fileName = multipartFile.getOriginalFilename();
-				if (!"".equals(fileName)) {
-					fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸®±â
-					String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
-					// C:\java_maven\mywork_ee\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\KickOff\img\filename
-					File f = new File(path);
-					multipartFile.transferTo(f);
-					if (i == 1) {
-						noticeVo.setFileName(fileName);
-					} else if (i == 2) {
-						noticeVo.setFileName2(fileName);
-					} else if (i == 3) {
-						noticeVo.setFileName3(fileName);
+			if (null != files && files.size() > 0) {
+				int i = 0;
+				for (MultipartFile multipartFile : files) {
+					i++;
+					String fileName = multipartFile.getOriginalFilename();
+					if (!"".equals(fileName)) {
+						fileName = UUID.randomUUID().toString().replaceAll("-", "") + fileName;// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¬ê¸°
+						String path = req.getSession().getServletContext().getRealPath("/img/" + fileName);
+						// C:\java_maven\mywork_ee\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\KickOff\img\filename
+						File f = new File(path);
+						multipartFile.transferTo(f);
+						if (i == 1) {
+							noticeVo.setFileName(fileName);
+						} else if (i == 2) {
+							noticeVo.setFileName2(fileName);
+						} else if (i == 3) {
+							noticeVo.setFileName3(fileName);
+						}
 					}
 				}
 			}
+			int noticeno = Integer.parseInt(req.getParameter("noticeno"));
+			noticeDAO.minusHit(noticeno);
+			noticeDAO.noticeUpdate(noticeVo);
+			return "redirect:noticeDetail?noticeno=" + noticeVo.getNoticeno();
 		}
-		int noticeno = Integer.parseInt(req.getParameter("noticeno"));
-		noticeDAO.minusHit(noticeno);
-		noticeDAO.noticeUpdate(noticeVo);
-		return "redirect:noticeDetail?noticeno=" + noticeVo.getNoticeno();
-	}
 
-	// °Ô½Ã±Û »èÁ¦
-	@RequestMapping("noticeDelete")
-	public ModelAndView delete(@ModelAttribute NoticeVO noticeVo, @RequestParam String filename,
-			@RequestParam String filename2, @RequestParam String filename3, HttpServletResponse res,HttpServletRequest req) throws Exception {
-		
-		String path = req.getSession().getServletContext().getRealPath("/img/" + filename);
-		String path2 = req.getSession().getServletContext().getRealPath("/img/" + filename2);
-		String path3 = req.getSession().getServletContext().getRealPath("/img/" + filename3);
-		File file = new File(path);
-		File file2 = new File(path2);
-		File file3 = new File(path3);
-		
-		//ÀÌ¹ÌÁö°¡ ÀÖ´Ù¸é »èÁ¦
-		if (file.exists() == true) {
-			file.delete();
-		}
-		if (file2.exists() == true) {
-			file2.delete();
-		}
-		if (file3.exists() == true) {
-			file3.delete();
-		}
-		int result = noticeDAO.deleteNotice(noticeVo);
-		replyDAO.deleteNoticeReply(noticeVo.getNoticeno());// °Ô½Ã±Û ³»ºÎÀÇ ÄÚ¸ÇÆ® »èÁ¦
-		if (result != 1) {
-			PrintWriter out = res.getWriter();
-			out.println("<script>history.go(-1);</script>");
-			return null;
-		} else {
-			return new ModelAndView("redirect:noticeListForm");
+		// ê²Œì‹œê¸€ ì‚­ì œ
+		@RequestMapping("noticeDelete")
+		public ModelAndView delete(@ModelAttribute NoticeVO noticeVo, @RequestParam String filename,
+				@RequestParam String filename2, @RequestParam String filename3, HttpServletResponse res,HttpServletRequest req) throws Exception {
+			
+			String path = req.getSession().getServletContext().getRealPath("/img/" + filename);
+			String path2 = req.getSession().getServletContext().getRealPath("/img/" + filename2);
+			String path3 = req.getSession().getServletContext().getRealPath("/img/" + filename3);
+			File file = new File(path);
+			File file2 = new File(path2);
+			File file3 = new File(path3);
+			
+			//ì´ë¯¸ì§€ê°€ ìˆë‹¤ë©´ ì‚­ì œ
+			if (file.exists() == true) {
+				file.delete();
+			}
+			if (file2.exists() == true) {
+				file2.delete();
+			}
+			if (file3.exists() == true) {
+				file3.delete();
+			}
+			int result = noticeDAO.deleteNotice(noticeVo);
+			replyDAO.deleteNoticeReply(noticeVo.getNoticeno());// ê²Œì‹œê¸€ ë‚´ë¶€ì˜ ì½”ë§¨íŠ¸ ì‚­ì œ
+			if (result != 1) {
+				PrintWriter out = res.getWriter();
+				out.println("<script>history.go(-1);</script>");
+				return null;
+			} else {
+				return new ModelAndView("redirect:noticeListForm");
+			}
 		}
 	}
-}

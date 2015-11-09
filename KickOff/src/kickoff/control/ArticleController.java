@@ -52,7 +52,7 @@ public class ArticleController {
 	@Autowired
 	private EpilogueDAO epilogueDAO;
 	
-	// »óÇ° ±Û¾²±â Æû
+	// ìƒí’ˆ ê¸€ì“°ê¸° í¼
 	@RequestMapping("articleWriteForm")
 	public String articleWriteForm(Model model) {
 		if (!model.containsAttribute("uploadForm")) {
@@ -61,7 +61,7 @@ public class ArticleController {
 		return "articleWriteForm";
 	}
 
-	// »óÇ° ±Û¾²±â Ã³¸®
+	// ìƒí’ˆ ê¸€ì“°ê¸° ì²˜ë¦¬
 	@RequestMapping(value = "articleInsert", method = RequestMethod.POST)
 	public String articleInsert(ArticlefileVO articlefile, ArticleVO article, ArticleSizeAmountVO articleSizeAmountVO,
 			HttpServletRequest request) throws Exception, IOException {
@@ -71,7 +71,7 @@ public class ArticleController {
 			for (MultipartFile multipartFile : files) {
 				i++;
 				String imgFile = multipartFile.getOriginalFilename();
-				// ÆÄÀÏÀÌ¸§À» ·£´ıÀ¸·Î µ¹¸®±â
+				// íŒŒì¼ì´ë¦„ì„ ëœë¤ìœ¼ë¡œ ëŒë¦¬ê¸°
 				if (!"".equals(imgFile)) {
 					imgFile = UUID.randomUUID().toString().replaceAll("-", "") + imgFile;
 					String path = request.getSession().getServletContext().getRealPath("/img/" + imgFile);
@@ -93,14 +93,14 @@ public class ArticleController {
 		}
 		int companyNum = Integer.parseInt(request.getParameter("companyNum"));
 		article.setCompanyNum(companyNum);
-		articleDAO.insertArticle(article); // Á¦Ç°
+		articleDAO.insertArticle(article); // ì œí’ˆ
 		
 		int articleNum = articleDAO.selectArticleMax();
 		articlefile.setArticleNum(articleNum);
 
 		for (int i = 0; i < 10; i++) {
-			String asize = request.getParameter("asize" + i);  // »çÀÌÁî+Ãß°¡ ¹öÆ° Å¬¸¯½Ã °ª ¹Ş¾Æ¿À±â
-			if (asize != null) { // »çÀÌÁî ÀÌ¸§ÀÌ nullÀÌ ¾Æ´Ï¸é
+			String asize = request.getParameter("asize" + i);  // ì‚¬ì´ì¦ˆ+ì¶”ê°€ ë²„íŠ¼ í´ë¦­ì‹œ ê°’ ë°›ì•„ì˜¤ê¸°
+			if (asize != null) { // ì‚¬ì´ì¦ˆ ì´ë¦„ì´ nullì´ ì•„ë‹ˆë©´
 				articleSizeAmountVO.setArticleNum(articleNum);
 				articleSizeAmountVO.setAsize(asize);
 				int amount = Integer.parseInt(request.getParameter("amount" + i));
@@ -109,12 +109,12 @@ public class ArticleController {
 			}
 		}
 		
-		articlefileDAO.insertArticlefile(articlefile); // ÆÄÀÏ
+		articlefileDAO.insertArticlefile(articlefile); // íŒŒì¼
 
 		return "redirect:articleListFormLow?groupNum=1";
 	}
 
-	// ¿µ¾î »çÀÌÁî : ÃÖ½Åµî·Ï¼ø(½Å»óÇ°¼ø)
+	// ì˜ì–´ ì‚¬ì´ì¦ˆ : ìµœì‹ ë“±ë¡ìˆœ(ì‹ ìƒí’ˆìˆœ)
 	@RequestMapping("articleListFormDate")
 	public String articleListDate(@RequestParam int groupNum, HttpServletRequest request) {
 		List<ArticleVO> list = articleDAO.selectArtielc(groupNum);
@@ -122,7 +122,7 @@ public class ArticleController {
 		return "articleListForm";
 	}
 
-	// ¿µ¾î »çÀÌÁî : ³ôÀº °¡°İ¼ø Á¤·Ä
+	// ì˜ì–´ ì‚¬ì´ì¦ˆ : ë†’ì€ ê°€ê²©ìˆœ ì •ë ¬
 	@RequestMapping("articleListFormHigh")
 	public String articleListHigh(@RequestParam int groupNum, HttpServletRequest request) {
 		List<ArticleVO> list = articleDAO.selectArticleListHigh(groupNum);
@@ -131,7 +131,7 @@ public class ArticleController {
 		return "articleListForm";
 	}
 	
-	// ¿µ¾î »çÀÌÁî : ³·Àº °¡°İ¼ø Á¤·Ä
+	// ì˜ì–´ ì‚¬ì´ì¦ˆ : ë‚®ì€ ê°€ê²©ìˆœ ì •ë ¬
 	@RequestMapping("articleListFormLow")
 	public String articleListLow(@RequestParam int groupNum, HttpServletRequest request) {
 		List<ArticleVO> list = articleDAO.selectArticleListLow(groupNum);
@@ -141,7 +141,7 @@ public class ArticleController {
 	private final int PAGESIZE = 5;
 	private final int PAGEGROUP = 10;
 	
-	// »óÇ° »ó¼¼º¸±â
+	// ìƒí’ˆ ìƒì„¸ë³´ê¸°
 	@RequestMapping("articleDetail")
 	public String articleEngDetalis(@RequestParam int articleNum, Model model, String pageNumber) {
 	      int pageNum = 1;
@@ -187,7 +187,7 @@ public class ArticleController {
 	      return "articleDetail";
 	}
 
-	// »óÇ° ºĞ·ù ¹øÈ£ »Ñ¸®±â
+	// ìƒí’ˆ ë¶„ë¥˜ ë²ˆí˜¸ ë¿Œë¦¬ê¸°
 	@RequestMapping("articleGroup")
 	public String articleGroupList(HttpServletRequest request) {
 		List<ArticlegroupVO> list = articlegroupDAO.selectListgroup();
@@ -195,7 +195,7 @@ public class ArticleController {
 
 		return "articleGroup";
 	}
-		//ÁÖ¹®ÇÏ´Â Æû
+		//ì£¼ë¬¸í•˜ëŠ” í¼
 		@RequestMapping("articleOrderForm")
 		public String aritcleOrder(@RequestParam int articleNum, @RequestParam String Asize,
 									@RequestParam int amount, Model model, 
@@ -204,7 +204,7 @@ public class ArticleController {
 	        req.setCharacterEncoding("UTF-8");
 	        
 	        PrintWriter writer = response.getWriter();
-	        String[] result = Asize.split(" : "); //¼ö·®À» °¡Á®¿À¸é 230 : 23 ÀÌ¹Ç·Î splitÀ¸·Î Â¥¸§
+	        String[] result = Asize.split(" : "); //ìˆ˜ëŸ‰ì„ ê°€ì ¸ì˜¤ë©´ 230 : 23 ì´ë¯€ë¡œ splitìœ¼ë¡œ ì§œë¦„
 	        String sr= result[1];
 			Map map = new HashMap();
 			map.put("articleNum", articleNum);
@@ -218,13 +218,13 @@ public class ArticleController {
 			}
 			else if (count < amount)
 			{
-				writer.println("<script>alert('Àç°í°¡ ºÎÁ·ÇÕ´Ï´Ù.');");
+				writer.println("<script>alert('ì¬ê³ ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.');");
 				writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
 	            writer.flush();
 				return "articleDetail?articleNum="+articleNum;
 			}
 			else{
-				writer.println("<script>alert( '" + count + "ÀÌÇÏ·Î¸¸ ÁÖ¹®ÀÌ °¡´ÉÇÕ´Ï´Ù.');");
+				writer.println("<script>alert( '" + count + "ì´í•˜ë¡œë§Œ ì£¼ë¬¸ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.');");
 				writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
 	            writer.flush();
 				return "articleDetail?articleNum="+articleNum;

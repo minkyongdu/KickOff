@@ -16,8 +16,11 @@ public class OrderVO {
 	private String buydate;
 	private String buyStatus;
 	private String sendContent;
-	private int sendNum; //택배 no
-	private int sendpackage;  //운송장 번호
+	private int sendNum; 
+	private int sendpackage;
+	private String imgFile1;
+	private int companyNum;
+	
 	
 	public OrderVO(){
 	}
@@ -149,6 +152,20 @@ public class OrderVO {
 	public void setSendpackage(int sendpackage) {
 		this.sendpackage = sendpackage;
 	}
-	
-	
+
+	public String getImgFile1() {
+		return imgFile1;
+	}
+
+	public void setImgFile1(String imgFile1) {
+		this.imgFile1 = imgFile1;
+	}
+
+	public int getCompanyNum() {
+		return companyNum;
+	}
+
+	public void setCompanyNum(int companyNum) {
+		this.companyNum = companyNum;
+	}
 }

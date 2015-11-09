@@ -15,7 +15,7 @@ public class OrderDAOImpl implements OrderDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// ÁÖ¹®ÅÂÀÌºí¿¡ ³Ö±â
+	// ì£¼ë¬¸ í…Œì´ë¸”ì— ë„£ê¸°
 	@Override
 	public boolean orderinsert(OrderVO order) {
 		int result = sqlSession.insert("order.insertOrder", order);
@@ -24,7 +24,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return false;
 	}
 
-	// ÁÖ¹®½Ã¿¡ ¼ö·® °¨¼Ò
+	// ì£¼ë¬¸ì‹œì— ìˆ˜ëŸ‰ ê°ì†Œ
 	@Override
 	public int updateorder(ArticleSizeAmountVO articleSizeAmountVO) {
 		int update = 0;
@@ -32,7 +32,7 @@ public class OrderDAOImpl implements OrderDAO {
 		return update;
 	}
 
-	// ÁÖ¹®½Ã ¼ö·® È®ÀÎ
+	// ì£¼ë¬¸ì‹œ ìˆ˜ëŸ‰ í™•ì¸
 	@Override
 	public int orderProductCount(Map map) {
 		int count = 0;
@@ -40,17 +40,39 @@ public class OrderDAOImpl implements OrderDAO {
 		return count;
 	}
 
-	// ÁÖ¹® °ü¸® ¸®½ºÆ®
+	
+	
+	// ì£¼ë¬¸ ê´€ë¦¬ ë¦¬ìŠ¤íŠ¸(ì¶”ê°€)
 	@Override
 	public List<OrderVO> orderlist(RowNumVO rownumVO) {
 		return sqlSession.selectList("order.selectOrderList", rownumVO);
 	}
 
-	// ÁÖ¹®¸®½ºÆ® Ä«¿îÆ®
+	// ì£¼ë¬¸ë¦¬ìŠ¤íŠ¸ ì¹´ìš´íŠ¸(ì¶”ê°€)
 	@Override
 	public int orderlistcount() {
 		int count = 0;
 		count = sqlSession.selectOne("order.OrderCount");
 		return count;
+	}
+
+	//ê°œì¸ì£¼ë¬¸ ë¦¬ìŠ¤íŠ¸(ì¶”ê°€)
+	@Override
+	public List<OrderVO> buylist(int memberNum) {
+		return sqlSession.selectList("order.selectOrderMember", memberNum);
+	}
+
+	//ì£¼ë¬¸ìƒíƒœ ì—…ë°ì´íŠ¸(ì¶”ê°€)
+	@Override
+	public int updateBuyStatus(OrderVO orderVO) {
+		int update = 0;
+		update = sqlSession.update("order.StatusOrderUpdate",orderVO);
+		return update;
+	}
+	
+	//ì»´í¼ë‹ˆë³„ ë¦¬ìŠ¤íŠ¸(ì¶”ê°€)
+	@Override
+	public List<OrderVO> companylist(int companyNum) {
+		return sqlSession.selectList("order.selectOrderCompany", companyNum);
 	}
 }

@@ -4,6 +4,40 @@ function checkfield(){
 	var exptext = /^[A-Za-z0-9]/; //이메일 
 	var regexp = /d{3,4}$/;
 	var numtext = /^[0-9]*$/; // 사업자등록번호
+
+$(document).ready(function(){
+	$(document).ready(function() { 
+	    //아이디 중복검사 
+	    $("#idCheck").click(function() { 
+	       var checkId = "id=" + $("#id").val(); 
+	       if ($("#id").val() == "") { 
+	         alert("아이디를 입력해주세요."); 
+	          $("#id").focus(); 
+	       } else if(!regId.test($("#id").val())) { 
+	          alert("아이디는 7자~12자 사이의 영문과 숫자로만 가능하며 첫 글자는 반드시 문자여야 합니다."); 
+	          $("#id").val(""); 
+	          $("#id").focus(); 
+	       } else { 
+	          $.ajax({ 
+	             type : "GET",  	
+	             url : "memIDCheck", 
+	             data : checkId, 
+	             success : function(data) { 
+	            	 if ($.trim(data) != "") { 
+	                   alert("이미 존재하는 회원입니다."); 
+	                   $("#id").val(""); 
+	                   $("#id").focus(); 
+	                } else { 
+	                   chkid = true; 
+	                   alert("사용 가능한 아이디입니다."); 
+	                  $("#password").focus(); 
+	                } 
+	             } 
+	         }); 
+	       } 
+	    });
+	
+});	
 	
 	if(document.comRegister.id.value==""){ //id값이 없을 경우
 		alert("아이디를 입력하세요");         //메세지 경고창을 띄운 후

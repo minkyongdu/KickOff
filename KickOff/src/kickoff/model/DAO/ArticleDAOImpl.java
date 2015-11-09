@@ -21,19 +21,19 @@ public class ArticleDAOImpl implements ArticleDAO{
 	}
 
 	
-	//³ôÀº°¡°İ¼øÀ¸·Î Á¤·Ä
+		// ê°€ê²© ë†’ì€ ìˆœìœ¼ë¡œ ì •ë ¬
 		@Override
 		public List<ArticleVO> selectArticleListHigh(int groupNum) {
 			return sqlSession.selectList("article.articleHigh", groupNum);
 		}
 
-		//³·Àº °¡°İ¼øÀ¸·Î Á¤·Ä
+		// ê°€ê²© ë‚®ì€ ìˆœìœ¼ë¡œ ì •ë ¬
 		@Override
 		public List<ArticleVO> selectArticleListLow(int groupNum) {
 			return sqlSession.selectList("article.articleLow", groupNum);
 		}
 
-		//³¯Â¥ ÃÖ½Å ¼ø¼­·Î Á¤·Ä
+		// ë‚ ì§œ ìµœì‹  ìˆœì„œë¡œ ì •ë ¬
 		@Override
 		public List<ArticleVO> selectArtielc(int groupNum) {
 			return sqlSession.selectList("article.articleDate", groupNum);
@@ -48,7 +48,7 @@ public class ArticleDAOImpl implements ArticleDAO{
 		
 		@Override
 		public ArticleVO articleDetail(int articleNum) {
-			return sqlSession.selectOne("article.articleDetailList",articleNum);
+			return sqlSession.selectOne("article.articleDetailList", articleNum);
 		}
 
 

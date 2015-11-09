@@ -3,9 +3,8 @@
 <mapper namespace="order">
 <!-- 주문 테이블에 넣기 -->
 <insert id="insertOrder">
-   insert into buy values (buyNum_seq.nextval, #{memberNum}, #{subname}, #{subaddr1}, #{subaddr2}, #{subphonenum}, #{price}, #{Aname},
-   #{buyamount}, #{asize}, #{articleNum}, SYSDATE, '주문완료', #{sendContent}, 0, 0)
-</insert>
+   insert into buy values (buyNum_seq.nextval, #{memberNum}, #{subname}, #{subaddr1}, #{subaddr2}, #{subphonenum}, #{price}, #{Aname}, #{buyamount}, #{Asize}, #{articleNum}, SYSDATE, '주문완료', #{sendContent}, 0, 0, #{companyNum})
+</insert> 
 <!-- 주문시 수량 마이너스 시키기 -->
 <update id="updateOrder" parameterType="kickoff.model.beans.ArticleSizeAmountVO">
 	update articleSizeAmount set amount =amount-#{amount} where articleNum=#{articleNum} and asize = #{asize}
@@ -25,4 +24,16 @@
 <select id="OrderCount" resultType="int"> 
 	select count(*) from buy 
 </select>
+<!--  주문 개인확인 리스트 (추가) -->
+<select id="selectOrderMember" parameterType="int" resultType="kickoff.model.beans.OrderVO">
+select a.imgFile1, b.buyNum, b.aname, b.price, b.buyamount, b.asize, b.buydate, b.buyStatus from articleFile a, buy b where a.articleNum = b.articleNum and b.memberNum = #{memberNum} order by b.buydate desc
+</select>
+<!--  주문한 리스트(회사용)(추가) -->
+<select id="selectOrderCompany" parameterType="int" resultType="kickoff.model.beans.OrderVO">
+select buyNum, subname, subaddr1, subaddr2, subphonenum, aname, price, buyamount, asize, buydate, buyStatus, companyNum from buy where companyNum = #{companyNum} order by buydate desc
+</select>
+<!--  관리자 주문상태 업데이트 (추가) -->
+<update id="StatusOrderUpdate" parameterType="kickoff.model.beans.OrderVO">
+update buy set buyStatus = #{buyStatus} where buyNum = #{buyNum}
+</update>
 </mapper> 

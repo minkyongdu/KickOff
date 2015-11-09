@@ -49,212 +49,212 @@ public class MemController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemController.class);
 
-	// È¸¿ø°¡ÀÔ Æû ¶ç¿ì±â
-	@RequestMapping("register")
-	public String openRgister() {
-		return "memRegister";
-	}
-
-	// È¸¿ø°¡ÀÔ Æû : »ı³â¿ùÀÏ + ¿¬¶ôÃ³ Ã³¸® + È¸¿ø°¡ÀÔ Ã³¸®
-	@RequestMapping("resultRegister")
-	public String successReigster(MemberVO member, HttpServletRequest request, Model model) {
-		String phone = request.getParameter("phonenum1") + "-" + request.getParameter("phonenum2") + "-"
-				+ request.getParameter("phonenum3");
-
-		String birth = request.getParameter("year") + "-" + request.getParameter("month") + "-"
-				+ request.getParameter("day");
-
-		String email = request.getParameter("email1") + request.getParameter("email2");
-
-		String addr2 = request.getParameter("addr2") + " " + request.getParameter("addr3");
-
-		member.setPhonenum(phone);
-		member.setBirthday(birth);
-		member.setEmail(email);
-		member.setAddr2(addr2);
-
-		if (dao.meminsert(member)) {
-			model.addAttribute("success", member);
+	// íšŒì›ê°€ì… í¼ ë„ìš°ê¸°
+		@RequestMapping("register")
+		public String openRgister() {
+			return "memRegister";
 		}
-		return "loginForm";
-	}
 
-	// ·Î±×ÀÎ Æû Ã³¸®
-	@RequestMapping("loginForm")
-	public String loginForm() {
-		return "Login";
-	}
+		// íšŒì›ê°€ì… í¼ : ìƒë…„ì›”ì¼ + ì—°ë½ì²˜ ì²˜ë¦¬ + íšŒì›ê°€ì… ì²˜ë¦¬
+		@RequestMapping("resultRegister")
+		public String successReigster(MemberVO member, HttpServletRequest request, Model model) {
+			String phone = request.getParameter("phonenum1") + "-" + request.getParameter("phonenum2") + "-"
+					+ request.getParameter("phonenum3");
 
-	// ·Î±×ÀÎ Ã³¸®
-	@RequestMapping(value = "loginProcess", method = RequestMethod.POST)
-	public String loginProcess(MemberVO member, CompanyVO company, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		String[] selectmember = request.getParameterValues("selectDIV");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
-		if (selectmember[0].equals("member")) {
-			MemberVO loginUser = loginDAO.findByUserIdAndPassword(member.getId(), member.getPassword());
-			// selectÇÑÈÄ memberÀÇ ¸ğµç °ªÀ» loginUser¿¡ ÀúÀåÇÔ
-			if (loginUser != null) {
-				// ¼¼¼ÇÀúÀå
-				session.setAttribute("userLoginInfo", loginUser);
-				return "redirect:main";
-			} else {
-				writer.println("<script>alert('" + "¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê°Å³ª, ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù." + "');");
-				writer.println("location.href='loginForm'" + "</script>");
-				writer.flush();
-				return "redirect:loginForm";
+			String birth = request.getParameter("year") + "-" + request.getParameter("month") + "-"
+					+ request.getParameter("day");
+
+			String email = request.getParameter("email1") + request.getParameter("email2");
+
+			String addr2 = request.getParameter("addr2") + " " + request.getParameter("addr3");
+
+			member.setPhonenum(phone);
+			member.setBirthday(birth);
+			member.setEmail(email);
+			member.setAddr2(addr2);
+
+			if (dao.meminsert(member)) {
+				model.addAttribute("success", member);
 			}
-		} else if (selectmember[0].equals("company")) {
-			CompanyVO comloginUser = loginDAO.findByComUserIdAndPassword(company.getId(), company.getPassword());
-			// selectÇÑÈÄ memberÀÇ ¸ğµç °ªÀ» loginUser¿¡ ÀúÀåÇÔ
-			if (comloginUser != null) {
-				// ¼¼¼ÇÀúÀå
-				session.setAttribute("comLoginInfo", comloginUser);
-				return "redirect:main";
-			}
-
-			else {
-				writer.println("<script>alert('" + "¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê°Å³ª, ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù." + "');");
-				writer.println("location.href='loginForm'" + "</script>");
-				writer.flush();
-				return "redirect:loginForm";
-			}
-		} else {
-			return "redirect:loginForm";
+			return "loginForm";
+		}
+		// ë¡œê·¸ì¸ í¼ ì²˜ë¦¬
+		@RequestMapping("loginForm")
+		public String loginForm() {
+			return "Login";
 		}
 
-	}
-
-	// ·Î±×¾Æ¿ô Ã³¸®
-	@RequestMapping("logout")
-	public String logout(HttpSession session) {
-		if (session.getAttribute("userLoginInfo") != null) {
-			session.removeAttribute("userLoginInfo");
-		} else if (session.getAttribute("comLoginInfo") != null) {
-			session.removeAttribute("comLoginInfo");
-		}
-		return "redirect:loginForm";
-	}
-	// È¸¿ø ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å© Æû
-	@RequestMapping("memPasswordCheckForm")
-	public String pwdResultForm()
-	{
-		return "memPwdCheckForm";
-	}
-	// È¸¿ø ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å©
-	@RequestMapping("memPasswordCheck")
-	public String pwdResult(Model model, HttpServletRequest request, HttpServletResponse response, MemberVO member) throws IOException
-	{
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
-		
-		String id =  request.getParameter("id");
-		String password = request.getParameter("password");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("password", password);
-		if(dao.certifyID(map) == null)
-			{
-				writer.println("<script>alert('ºñ¹Ğ¹øÈ£°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.');");
-				writer.println("location.href='memPasswordCheckForm'; </script>");
-				writer.flush();
-				return "redirect:memPasswordCheckForm";
-			}
-		else
-		{
-			writer.println("<script>alert('ÀÎÁõµÇ¾ú½À´Ï´Ù.');");
-			writer.println("location.href='upRegisterForm'; </script>");
-			writer.flush();
-			return "redirect:upRegisterForm";
-		}
-	}
-	// ¿ìÆí¹øÈ£ °Ë»öÆû
-	@RequestMapping(value = "post", method = RequestMethod.GET)
-	public String postForm() {
-		return "post";
-	}
-
-	// ¿ìÆí¹øÈ£ Ã³¸®Æû
-	@RequestMapping(value = "post", method = RequestMethod.POST)
-	public ModelAndView post(Locale locale, HttpServletRequest request,
-			@RequestParam(value = "address", required = false) String address) {
-
-		logger.info("Post page", locale);
-		logger.info("post page value :" + address, locale);
-
-		ModelAndView result = new ModelAndView();
-		if (address != "") {
-			List<PostVO> postList = postDAO.getPost(address);
-
-			result.addObject("result", postList);
-			result.setViewName("post");
-			logger.info("search success", locale);
-			return result;
-
-		} else {
-			result.addObject("nullResult", "°Ë»öÇØÁÖ¼¼¿ä.");
-			result.setViewName("post");
-			return result;
-		}
-	}
-
-	// È¸¿øÁ¤º¸ ¼öÁ¤Æû Ã³¸®
-	@RequestMapping("upRegisterForm")
-	public String updateResult() {
-		return "memUpRegister";
-	}
-
-	// È¸¿øÁ¤º¸ ¼öÁ¤
-	@RequestMapping("upRegister")
-	public String updateRegister(MemberVO member, HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		String phone = request.getParameter("phonenum1") + "-" + request.getParameter("phonenum2") + "-"
-				+ request.getParameter("phonenum3");
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
-		
-		member.setPhonenum(phone);
-		member.setEmail(email);
-		
-		dao.updateMember(member);
-		session.removeAttribute("userLoginInfo");
-		return "redirect:loginForm";
-	}
-
-	// ¾ÆÀÌµğ & ºñ¹Ğ¹øÈ£ Ã£±â Æû
-	@RequestMapping("findIdPwd")
-	public String idAccounts() {
-		return "findIdPwd";
-	}
-
-	// ¾ÆÀÌµğ Ã£±â Ã³¸®
-	@RequestMapping("IDfindhandel")
-	public String findID(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		
+		// ë¡œê·¸ì¸ ì²˜ë¦¬
+		@RequestMapping(value = "loginProcess", method = RequestMethod.POST)
+		public String loginProcess(MemberVO member, CompanyVO company, HttpSession session, HttpServletRequest request,
+				HttpServletResponse response) throws IOException {
+			String[] selectmember = request.getParameterValues("selectDIV");
 			response.setContentType("text/html; charset=UTF-8");
 			request.setCharacterEncoding("UTF-8");
 			PrintWriter writer = response.getWriter();
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			if (selectmember[0].equals("member")) {
+				MemberVO loginUser = loginDAO.findByUserIdAndPassword(member.getId(), member.getPassword());
+				// selectí•œí›„ memberì˜ ëª¨ë“  ê°’ì„ loginUserì— ì €ì¥í•¨
+				if (loginUser != null) {
+					// ì„¸ì…˜ì €ì¥
+					session.setAttribute("userLoginInfo", loginUser);
+					return "redirect:main";
+				} else {
+					writer.println("<script>alert('" + "ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•Šê±°ë‚˜, ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤." + "');");
+					writer.println("location.href='loginForm'" + "</script>");
+					writer.flush();
+					return "redirect:loginForm";
+				}
+			} else if (selectmember[0].equals("company")) {
+				CompanyVO comloginUser = loginDAO.findByComUserIdAndPassword(company.getId(), company.getPassword());
+				// selectí•œí›„ memberì˜ ëª¨ë“  ê°’ì„ loginUserì— ì €ì¥í•¨
+				if (comloginUser != null) {
+					// ì„¸ì…˜ì €ì¥
+					session.setAttribute("comLoginInfo", comloginUser);
+					return "redirect:main";
+				}
 
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("name", name);
-			map.put("email", email);
-			if (dao.accountsId(map) == null) {
-				writer.println("<script>alert('È¸¿øÁ¤º¸°¡ ¾ø°Å³ª ¾ÆÀÌµğ¿Í ÀÌ¸ŞÀÏÀ» ¿Ã¹Ù¸£°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
-				writer.flush();
-				return "findIdPwd";
-			} 
-			else {
-				writer.println("<script>alert('" + "È¸¿ø´ÔÀÇ ¾ÆÀÌµğ´Â " + dao.accountsId(map) + " ÀÔ´Ï´Ù." + "');");
-				writer.println("location.href='loginForm'" + "</script>");
-				writer.flush();
+				else {
+					writer.println("<script>alert('" + "ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•Šê±°ë‚˜, ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤." + "');");
+					writer.println("location.href='loginForm'" + "</script>");
+					writer.flush();
+					return "redirect:loginForm";
+				}
+			} else {
 				return "redirect:loginForm";
 			}
-	}
-	// id Áßº¹Ã¼Å©
+
+		}
+
+
+		// ë¡œê·¸ì•„ì›ƒ ì²˜ë¦¬
+		@RequestMapping("logout")
+		public String logout(HttpSession session) {
+			if (session.getAttribute("userLoginInfo") != null) {
+				session.removeAttribute("userLoginInfo");
+			} else if (session.getAttribute("comLoginInfo") != null) {
+				session.removeAttribute("comLoginInfo");
+			}
+			return "redirect:loginForm";
+		}
+		// íšŒì› ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬ í¼
+		@RequestMapping("memPasswordCheckForm")
+		public String pwdResultForm()
+		{
+			return "memPwdCheckForm";
+		}
+		// íšŒì› ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬
+		@RequestMapping("memPasswordCheck")
+		public String pwdResult(Model model, HttpServletRequest request, HttpServletResponse response, MemberVO member) throws IOException
+		{
+			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			PrintWriter writer = response.getWriter();
+			
+			String id =  request.getParameter("id");
+			String password = request.getParameter("password");
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", id);
+			map.put("password", password);
+			if(dao.certifyID(map) == null)
+				{
+					writer.println("<script>alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
+					writer.println("location.href='memPasswordCheckForm'; </script>");
+					writer.flush();
+					return "redirect:memPasswordCheckForm";
+				}
+			else
+			{
+				writer.println("<script>alert('ì¸ì¦ë˜ì—ˆìŠµë‹ˆë‹¤.');");
+				writer.println("location.href='upRegisterForm'; </script>");
+				writer.flush();
+				return "redirect:upRegisterForm";
+			}
+		}
+		// ìš°í¸ë²ˆí˜¸ ê²€ìƒ‰í¼
+		@RequestMapping(value = "post", method = RequestMethod.GET)
+		public String postForm() {
+			return "post";
+		}
+
+		// ìš°í¸ë²ˆí˜¸ ì²˜ë¦¬í¼
+		@RequestMapping(value = "post", method = RequestMethod.POST)
+		public ModelAndView post(Locale locale, HttpServletRequest request,
+				@RequestParam(value = "address", required = false) String address) {
+
+			logger.info("Post page", locale);
+			logger.info("post page value :" + address, locale);
+
+			ModelAndView result = new ModelAndView();
+			if (address != "") {
+				List<PostVO> postList = postDAO.getPost(address);
+
+				result.addObject("result", postList);
+				result.setViewName("post");
+				logger.info("search success", locale);
+				return result;
+
+			} else {
+				result.addObject("nullResult", "ê²€ìƒ‰í•´ì£¼ì„¸ìš”.");
+				result.setViewName("post");
+				return result;
+			}
+		}
+
+		// íšŒì›ì •ë³´ ìˆ˜ì •í¼ ì²˜ë¦¬
+		@RequestMapping("upRegisterForm")
+		public String updateResult() {
+			return "memUpRegister";
+		}
+
+		// íšŒì›ì •ë³´ ìˆ˜ì •
+		@RequestMapping("upRegister")
+		public String updateRegister(MemberVO member, HttpServletRequest request, Model model, HttpSession session, HttpServletResponse response) throws IOException {
+			String phone = request.getParameter("phonenum1") + "-" + request.getParameter("phonenum2") + "-"
+					+ request.getParameter("phonenum3");
+			String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+			
+			member.setPhonenum(phone);
+			member.setEmail(email);
+			
+			dao.updateMember(member);
+			session.removeAttribute("userLoginInfo");
+			return "redirect:loginForm";
+		}
+
+		// ì•„ì´ë”” & ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í¼
+		@RequestMapping("findIdPwd")
+		public String idAccounts() {
+			return "findIdPwd";
+		}
+
+		// ì•„ì´ë”” ì°¾ê¸° ì²˜ë¦¬
+		@RequestMapping("IDfindhandel")
+		public String findID(HttpServletRequest request, HttpServletResponse response)
+				throws IOException {
+			
+				response.setContentType("text/html; charset=UTF-8");
+				request.setCharacterEncoding("UTF-8");
+				PrintWriter writer = response.getWriter();
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("name", name);
+				map.put("email", email);
+				if (dao.accountsId(map) == null) {
+					writer.println("<script>alert('íšŒì›ì •ë³´ê°€ ì—†ê±°ë‚˜ ì•„ì´ë””ì™€ ì´ë©”ì¼ì„ ì˜¬ë°”ë¥´ê²Œ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
+					writer.flush();
+					return "findIdPwd";
+				} 
+				else {
+					writer.println("<script>alert('" + "íšŒì›ë‹˜ì˜ ì•„ì´ë””ëŠ” " + dao.accountsId(map) + " ì…ë‹ˆë‹¤." + "');");
+					writer.println("location.href='loginForm'" + "</script>");
+					writer.flush();
+					return "redirect:loginForm";
+				}
+		}
+	// id ì¤‘ë³µ ì²´í¬
 	@RequestMapping("memIDCheck")
 	public String idResult(Model model, HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -266,29 +266,29 @@ public class MemController {
 	      } 
 		return "memIDCheck";
 	}
-	// ºñ¹Ğ¹øÈ£ Ã£±â Ã³¸®
-	@RequestMapping("passwordfindhandel")
-	public String findPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter writer = response.getWriter();
-			String id = request.getParameter("id");
-			String pwdQ = request.getParameter("pwdQ");
-			String pwdA = request.getParameter("pwdA");
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì²˜ë¦¬
+		@RequestMapping("passwordfindhandel")
+		public String findPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			PrintWriter writer = response.getWriter();
+				String id = request.getParameter("id");
+				String pwdQ = request.getParameter("pwdQ");
+				String pwdA = request.getParameter("pwdA");
 
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", id);
-			map.put("pwdQ", pwdQ);
-			map.put("pwdA", pwdA);
-			if (dao.accountsPwd(map) == null) {
-				writer.println("<script>alert('¾ÆÀÌµğ°¡ ¾ø°Å³ª ºñ¹Ğ¹øÈ£ Áú¹®°ú ´äº¯À» ¿Ã¹Ù¸£°Ô ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
-				writer.flush();
-				return "findIdPwd";
-			} else {
-				writer.println("<script>alert('" + "È¸¿ø´ÔÀÇ ºñ¹Ğ¹øÈ£´Â " + dao.accountsPwd(map) + " ÀÔ´Ï´Ù." + "');");
-				writer.println("location.href='loginForm'" + "</script>");
-				writer.flush();
-				return "redirect:loginForm";
-			}
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", id);
+				map.put("pwdQ", pwdQ);
+				map.put("pwdA", pwdA);
+				if (dao.accountsPwd(map) == null) {
+					writer.println("<script>alert('ì•„ì´ë””ê°€ ì—†ê±°ë‚˜ ë¹„ë°€ë²ˆí˜¸ ì§ˆë¬¸ê³¼ ë‹µë³€ì„ ì˜¬ë°”ë¥´ê²Œ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
+					writer.flush();
+					return "findIdPwd";
+				} else {
+					writer.println("<script>alert('" + "íšŒì›ë‹˜ì˜ ë¹„ë°€ë²ˆí˜¸ëŠ” " + dao.accountsPwd(map) + " ì…ë‹ˆë‹¤." + "');");
+					writer.println("location.href='loginForm'" + "</script>");
+					writer.flush();
+					return "redirect:loginForm";
+				}
+		}
 	}
-}

@@ -17,7 +17,6 @@ public class EpilogueController {
 	@Autowired
 	private EpilogueDAO epilogueDAO;
 	
-	//에필로그(후기)입력처리
 	@RequestMapping(value = "epilogueReply", method = RequestMethod.POST)
 	public String epilogueReplyinsert(EpilogueVO epilogueVO, HttpServletRequest req) {
 		epilogueDAO.EpilogueReply(epilogueVO);

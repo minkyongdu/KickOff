@@ -11,7 +11,7 @@
       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 <!-- kr/ac/doowon/spring/config.xml (설정 등록, bean 등록 관리) -->
     <!-- @responseBody에서 가상경로에서 간단한 문자열 전달할때 UTF-8로 처리 -->
-     
+      
    <mvc:annotation-driven>
     <mvc:message-converters>
         <!-- @ResponseBody로 String 처리할때 한글처리 -->
@@ -26,7 +26,7 @@
 </mvc:annotation-driven> <!-- mvc를 하면서 어노테이션을 사용하겠습니다. -->
    <mvc:default-servlet-handler/>   <!-- JSP 요청이 들어왔을때 톰캣이 처리해라. : 라는 뜻 -->
    <!-- 뷰 리졸버 정의-->
-   <mvc:view-resolvers>
+   <mvc:view-resolvers> 
       <mvc:jsp prefix="/WEB-INF/view/" />
       <!-- SpringMVC/WEB-INF/view/ 전달될 뷰 이름 .jsp -->
    </mvc:view-resolvers>

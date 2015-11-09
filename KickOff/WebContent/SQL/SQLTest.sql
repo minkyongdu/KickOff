@@ -6,6 +6,7 @@ create sequence articleSizeAmount_seq start with 1 increment by 1; -- articleSiz
 create sequence buyNum_seq start with 1 increment by 1; -- buy 시퀀스
 create sequence noticeno_seq start with 1 increment by 1; -- notice 시퀀스
 create sequence eventboard_seq start with 1 increment by 1; -- eventboard 시퀀스
+create sequence QnAboard_seq start with 1 increment by 1; -- QnA 시퀀스
 create sequence replyNum_seq start with 1 increment by 1; -- notice reply 시퀀스
 create sequence replyQnANum_seq start with 1 increment by 1; -- QnA reply 시퀀스
 create sequence buyepliNum_seq start with 1 increment by 1; -- 후기 시퀀스
@@ -86,7 +87,7 @@ insert into articlegroup values (29,'기타','허들');
 	
  create table articleFile -- articleFile(제품 파일[사진]) 테이블
 (ArticleNum number not null, imgFile1 varchar2(100), imgFile2 varchar2(100), imgFile3 varchar2(100),
-imgFile4 varchar2(100), imgFile5 varchar2(100))
+imgFile4 varchar2(100), imgFile5 varchar2(100));
 
 create table articleSizeAmount -- articleSizeAmount(제품 사이즈&수량) 테이블
 (ArticleNum number not null, Asize varchar2(20) not null, amount number not null);
@@ -97,8 +98,10 @@ create table buy -- buy(구매) 테이블
   subphonenum varchar2(15) not null, price number not null, Aname varchar2(50) not null,
   buyamount number not null, Asize varchar2(5) not null, ArticleNum number not null,
   buydate date, buyStatus varchar2(100) not null, sendContent varchar2(100),
-  sendNum number, sendpackage number);
+  sendNum number, sendpackage number, companyNum number not null);
 
+  drop table buy cascade constraints;
+  
 create table sendpackage -- sendpackage(택배) 테이블
 ( buyNum number primary key, sendname varchar2(30) not null, 
 sendpay varchar2(5) not null, sendstatus varchar2(30) not null );
@@ -124,7 +127,7 @@ create table notice -- notice(공지사항) 테이블
    writer varchar2(20) not null,
    hit    number,
    noticeDate Date not null,
-   boardNum number not null)
+   boardNum number not null);
 
 create table eventboard -- eventboard(이벤트 게시판) 테이블
 (  eventno number primary key,
@@ -136,7 +139,7 @@ create table eventboard -- eventboard(이벤트 게시판) 테이블
    writer varchar2(20) not null,
    hit    number,
    eventDate Date not null,
-   boardNum number not null)
+   boardNum number not null);
 
 create table QnAboard -- QnAboard (질문&답변 게시판) 테이블
 (QnAno number primary key,
@@ -148,7 +151,7 @@ create table QnAboard -- QnAboard (질문&답변 게시판) 테이블
    writer varchar2(20) not null,
    hit    number,
    QnADate Date not null,
-   boardNum number not null) 
+   boardNum number not null);
 
 create table replyNotice -- replyNotice(공지사항 댓글) 테이블
 ( replyNum number primary key, 
@@ -174,14 +177,15 @@ alter table "JAVAUSER"."MEMBER" add constraint mem_grade foreign key("MEMGRADE")
 -- company :: grade (회원등급)
 alter table "JAVAUSER"."COMPANY" add constraint com_grade foreign key("COMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
 
+ALTER TABLE buy DROP CONSTRAINT buy_sendpack
+
+
 -- article :: articlegroup(제품 그룹번호)
 alter table "JAVAUSER"."ARTICLE" add constraint article_group foreign key("GROUPNUM") references "ARTICLEGROUP"("GROUPNUM") ON DELETE CASCADE;
--- article :: epilouge (제품 후기:제품번호) 
-alter table "JAVAUSER"."ARTICLE" add constraint article_company foreign key("ARTICLENUM") references "EPILOGUE"("BUYEPLINUM") ON DELETE CASCADE;
+
 -- buy :: article (구매 제품번호)
 alter table "JAVAUSER"."BUY" add constraint buy_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
--- buy :: sendpackage (택배 구매번호)
-alter table "JAVAUSER"."BUY" add constraint buy_sendpack foreign key("BUYNUM") references "SENDPACKAGE"("BUYNUM") ON DELETE CASCADE;
+
 -- buy :: member(구매 회원번호)
 alter table "JAVAUSER"."BUY" add constraint buy_memNum foreign key("MEMBERNUM") references "MEMBER"("MEMBERNUM") ON DELETE CASCADE;
 -- replynotice :: notice (공지사항 글번호)
@@ -203,6 +207,7 @@ drop table grade cascade constraints;
 drop table basket cascade constraints;
 drop table notice cascade constraints;
 drop table replyNotice cascade constraints;
+drop table replyQnA cascade constraints;
 drop table eventboard cascade constraints;
 drop table QnAboard cascade constraints;
 drop table epilogue cascade constraints;

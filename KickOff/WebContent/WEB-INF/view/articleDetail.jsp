@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript" src = "js/jquery.js"></script>
 <script type="text/javascript">
-	// ÀÌ¹ÌÁö À§¿¡ ¿Ã¸±½Ã ÀÌ¹ÌÁö º¯°æ
+	// ì´ë¯¸ì§€ ìœ„ì— ì˜¬ë¦´ì‹œ ì´ë¯¸ì§€ ë³€ê²½
 	$(document).ready(function(){
 		$('#img2').mouseover(function(){
 			var img = $('#img2').attr("src");
@@ -45,12 +45,12 @@
 		var amount = document.getElementById("amount").value;
 		var numtext = /^[0-9]*$/;
 		if(amount == ""){
-			alert('¼ö·®À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
+			alert('ìˆ˜ëŸ‰ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.');
 			return false;
 		}
 		else if (numtext.test(amount) == false)
 		{
-			alert('¼ıÀÚ¸¸ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
+			alert('ìˆ«ìë§Œ ì…ë ¥í•´ ì£¼ì„¸ìš”.');
 			return false;
 		}
 		document.articleOrder.submit();
@@ -62,12 +62,12 @@
 		var stars = document.getElementById("star").value;
 		if(insertEpli == "")
 		{ 
-			alert('ÈÄ±â¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.');
+			alert('í›„ê¸°ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.');
 			return false;
 		}
-		else if (stars == "ÆòÁ¡ÀÔ·Â")
+		else if (stars == "í‰ì ì…ë ¥")
 		{
-			alert('¸Å±â½Ç ÆòÁ¡À» ¼±ÅÃÇØ ÁÖ¼¼¿ä.');
+			alert('ë§¤ê¸°ì‹¤ í‰ì ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.');
 			return false;
 		}
 		document.epilogueReplyForm.submit();
@@ -130,7 +130,7 @@
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
        	 <td width = "50"></td>
-          <td align = "right"><b>»óÇ°¸í</b></td>
+          <td align = "right"><b>ìƒí’ˆëª…</b></td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
@@ -142,7 +142,7 @@
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right"><b>°¡°İ</b></td>
+          <td align = "right"><b>ê°€ê²©</b></td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
@@ -154,19 +154,19 @@
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right"><b>ºĞ·ù¹øÈ£</b></td>
+          <td align = "right"><b>ë¶„ë¥˜ë²ˆí˜¸</b></td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right">${article.groupNum}¹ø</td>
+          <td align = "right">${article.groupNum}ë²ˆ</td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right"><b>»çÀÌÁî & ¼ö·® </b></td> 
+          <td align = "right"><b>ì‚¬ì´ì¦ˆ & ìˆ˜ëŸ‰ </b></td> 
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
@@ -177,7 +177,7 @@
         <select name="Asize" size="1">
               <c:forEach var="item" items="${articleSize}">
               <option>
-                <c:out value="»çÀÌÁî : ${item.asize} : Àç°í : ${item.amount}" />
+                <c:out value="ì‚¬ì´ì¦ˆ : ${item.asize} : ì¬ê³  : ${item.amount}" />
                 </option>
               </c:forEach>
        </select> 
@@ -270,23 +270,23 @@
 <input type="hidden" name="articleNum" value="${article.articleNum}">
 <table cellpadding="5" align="center">   
     <tr bgcolor="black">  
-       <th width="150"><font color = "white">¾ÆÀÌµğ</font></th>
-       <th width="250"><font color = "white">³»¿ë</font></th>
-       <th width="200" colspan="2"><font color = "white">ÆòÁ¡</font></th>
+       <th width="150"><font color = "white">ì•„ì´ë””</font></th>
+       <th width="250"><font color = "white">ë‚´ìš©</font></th>
+       <th width="200" colspan="2"><font color = "white">í‰ì </font></th>
     </tr>
        <c:forEach var="epiloguereply" items="${EpilogueReply}">
          <tr>
             <td align = "center">${epiloguereply.id}</td>
             <td>${epiloguereply.content}</td>
             <td>
-            	<c:if test="${epiloguereply.star =='1'}">¡Ú</c:if>
-            	<c:if test="${epiloguereply.star =='2'}">¡Ú¡Ú</c:if>
-            	<c:if test="${epiloguereply.star =='3'}">¡Ú¡Ú¡Ú</c:if>
-            	<c:if test="${epiloguereply.star =='4'}">¡Ú¡Ú¡Ú¡Ú</c:if>
-            	<c:if test="${epiloguereply.star =='5'}">¡Ú¡Ú¡Ú¡Ú¡Ú</c:if>
+            	<c:if test="${epiloguereply.star =='1'}">â˜…</c:if>
+            	<c:if test="${epiloguereply.star =='2'}">â˜…â˜…</c:if>
+            	<c:if test="${epiloguereply.star =='3'}">â˜…â˜…â˜…</c:if>
+            	<c:if test="${epiloguereply.star =='4'}">â˜…â˜…â˜…â˜…</c:if>
+            	<c:if test="${epiloguereply.star =='5'}">â˜…â˜…â˜…â˜…â˜…</c:if>
             </td>
-            <td align ="center"><input type="button" value="»èÁ¦" 
-            onclick="location.href='/KickOff/EpilogueReplyDelete?articleNum=${article.articleNum}&buyepliNum=${epiloguereply.buyepliNum}'"></td>
+            <td align ="center"><input type="button" value="ì‚­ì œ" 
+            onclick="location.href='/KickOff/epilogueReplyDelete?articleNum=${article.articleNum}&buyepliNum=${epiloguereply.buyepliNum}'"></td>
          </tr>
        </c:forEach>
 </table>
@@ -295,7 +295,7 @@
 		<td colspan="5" align="center">
 			<c:if test="${startPage>1}">
 				<span> 
-					<a href="/KickOff/articleDetail?articleNum=${article.articleNum}&pageNumber=${startPage-1}">ÀÌÀü</a>
+					<a href="/KickOff/articleDetail?articleNum=${article.articleNum}&pageNumber=${startPage-1}">ì´ì „</a>
 				</span>
 			</c:if> 
 			<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -316,7 +316,7 @@
 			</c:forEach>
 				<c:if test="${endPage < totalPageCount}">
 					<span>
-						<a href="/KickOff/articleDetail?articleNum=${article.articleNum}&pageNumber=${endPage+1}">´ÙÀ½</a>
+						<a href="/KickOff/articleDetail?articleNum=${article.articleNum}&pageNumber=${endPage+1}">ë‹¤ìŒ</a>
 					</span>
 				</c:if>
 		</td>
@@ -328,19 +328,19 @@
 			id = "epilogueReplyForm" onsubmit="return insertEpliogue();">
 <table align="center" style="border: 1px solid #999;">
  	<tr>   
-    	<td>³»¿ë</td>  
-    	<td><input type="text" name="content" id = "contents" size="50" placeholder = "³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä."></td>
+    	<td>ë‚´ìš©</td>  
+    	<td><input type="text" name="content" id = "contents" size="50" placeholder = "ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”."></td>
     	<td>
-    	ÆòÁ¡ <select name="star" id = "star">
-    				<option selected>ÆòÁ¡ÀÔ·Â</option>
-    				<option value="1">¡Ú</option>
-    				<option value="2">¡Ú¡Ú</option>
-    				<option value="3">¡Ú¡Ú¡Ú</option>
-    				<option value="4">¡Ú¡Ú¡Ú¡Ú</option>
-    				<option value="5">¡Ú¡Ú¡Ú¡Ú¡Ú</option>
+    	í‰ì  <select name="star" id = "star">
+    				<option selected>í‰ì ì…ë ¥</option>
+    				<option value="1">â˜…</option>
+    				<option value="2">â˜…â˜…</option>
+    				<option value="3">â˜…â˜…â˜…</option>
+    				<option value="4">â˜…â˜…â˜…â˜…</option>
+    				<option value="5">â˜…â˜…â˜…â˜…â˜…</option>
     		  </select> 
     	</td>
-    	<td><input type="submit" value="ÀÔ·Â"></td>
+    	<td><input type="submit" value="ì…ë ¥"></td>
     </tr>
  </table>
  <input type="hidden" name="articleNum" value="${article.articleNum}">

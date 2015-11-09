@@ -24,127 +24,111 @@ public class ComController {
 	@Autowired
 	private CompanyDAO companyDAO;
 	
-	// È¸»ç È¸¿ø°¡ÀÔ Æû
-	@RequestMapping("comRegister")
-	public String comRegiForm()
-	{
-		return "comRegister";
-	}
-	// È¸»ç È¸¿ø°¡ÀÔ Ã³¸®
-	@RequestMapping("comResultregister")
-	public String successcomReigster(CompanyVO company, HttpServletRequest request, Model model)
-	{
-		String combusinnum = request.getParameter("combusinnum1") + "-"
-				+ request.getParameter("combusinnum2") + "-" + request.getParameter("combusinnum3");
-		
-		String comphonenum = request.getParameter("comphonenum1") + "-" 
-				+ request.getParameter("comphonenum2") + "-" + request.getParameter("comphonenum3");
-		
-		String addr2 = request.getParameter("addr2") + " " + request.getParameter("addr3");
-		
-		String comemail = request.getParameter("comemail1") + request.getParameter("comemail2");
-		
-		company.setCombusinnum(combusinnum);
-		company.setComphonenum(comphonenum);
-		company.setComemail(comemail);
-		company.setAddr2(addr2);
-		
-		if(companyDAO.insertCompany(company))
+	// íšŒì‚¬ íšŒì›ê°€ì… í¼
+		@RequestMapping("comRegister")
+		public String comRegiForm()
 		{
-			model.addAttribute("company" , company);
+			return "comRegister";
 		}
-		return "main";
-	}
-	// È¸»ç ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å© Æû
-		@RequestMapping("comPasswordCheckForm")
-		public String pwdResultForm()
+		// íšŒì‚¬ íšŒì›ê°€ì… ì²˜ë¦¬
+		@RequestMapping("comResultregister")
+		public String successcomReigster(CompanyVO company, HttpServletRequest request, Model model)
 		{
-			return "comPwdCheckForm";
-		}
-		// È¸¿ø ¼öÁ¤ Àü ¾ÆÀÌµğ Ã¼Å©
-		@RequestMapping("comPasswordCheck")
-		public String pwdResult(Model model, HttpServletRequest request, HttpServletResponse response, CompanyVO company) throws IOException
-		{
-			response.setContentType("text/html; charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
-			PrintWriter writer = response.getWriter();
+			String combusinnum = request.getParameter("combusinnum1") + "-"
+					+ request.getParameter("combusinnum2") + "-" + request.getParameter("combusinnum3");
 			
-			String id =  request.getParameter("id");
-			String password = request.getParameter("password");
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("id", id);
-			map.put("password", password);
-			if(companyDAO.certifyComID(map) == null)
-				{
-					writer.println("<script>alert('ºñ¹Ğ¹øÈ£°¡ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù.');");
-					writer.println("location.href='comPasswordCheckForm'; </script>");
-					writer.flush();
-					return "redirect:comPasswordCheckForm";
-				}
-			else
-			{
-				writer.println("<script>alert('ÀÎÁõµÇ¾ú½À´Ï´Ù.');");
-				writer.println("location.href='comupRegisterForm'; </script>");
-				writer.flush();
-				return "redirect:comupRegisterForm";
-			}
-		}
-	
-	// È¸»ç ID Ã¼Å© °á°ú Æû ¶ç¿ì±â
-			@RequestMapping("comidCheck")
-			public String comidResult(Model model, HttpServletRequest request)
-			{
-				String id = request.getParameter("id");
-				String resultMessage = "";
-				if(id.equals(""))
-				{
-					resultMessage = "¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¼Ì½À´Ï´Ù.";
-				}
-				else if (id.length() < 7)
-				{
-					resultMessage = "¾ÆÀÌµğ¸¦ 7±ÛÀÚ ÀÌ»ó ÀÛ¼ºÇØ ÁÖ¼¼¿ä.";
-				}
-				else
-				{
-					boolean check = companyDAO.comidSearch(id);
-					if(check)
-					{
-						resultMessage = "¾ÆÀÌµğ°¡ Á¸ÀçÇÕ´Ï´Ù.";
-					}
-					else
-					{
-						resultMessage = "»ç¿ëÇÒ ¼ö ÀÖ´Â IDÀÔ´Ï´Ù.";
-					}
-				}
-				model.addAttribute("comresultCheck", resultMessage);
-				return "comidCheck";
-			}
-		// ±â¾÷ È¸¿ø È¸¿ø¼öÁ¤ Æû
-		@RequestMapping("comupRegisterForm")
-		public String updateComRegiForm()
-		{
-			return "comUpRegister";
-		}
-		// ±â¾÷ È¸¿ø È¸¿ø¼öÁ¤ Ã³¸®
-		@RequestMapping("comUpRegi")
-		public String updateComRegi(HttpSession session, CompanyVO company, HttpServletRequest request)
-		{
-			String comphonenum = request.getParameter("comphonenum1") + "-"
-						+ request.getParameter("comphonenum2") + "-" + request.getParameter("comphonenum3");
+			String comphonenum = request.getParameter("comphonenum1") + "-" 
+					+ request.getParameter("comphonenum2") + "-" + request.getParameter("comphonenum3");
 			
-			String comemail = request.getParameter("comemail1") + "@"
-					+ request.getParameter("comemail2");
+			String addr2 = request.getParameter("addr2") + " " + request.getParameter("addr3");
 			
-			String addr2 = request.getParameter("addr2") + " " 
-					+ request.getParameter("addr3");
+			String comemail = request.getParameter("comemail1") + request.getParameter("comemail2");
 			
+			company.setCombusinnum(combusinnum);
 			company.setComphonenum(comphonenum);
 			company.setComemail(comemail);
 			company.setAddr2(addr2);
 			
-			companyDAO.comidUpdate(company);
-			session.removeAttribute("comLoginInfo");
-			
-			return "redirect:loginForm";
+			if(companyDAO.insertCompany(company))
+			{
+				model.addAttribute("company" , company);
+			}
+			return "main";
 		}
-}
+		// íšŒì‚¬ ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬ í¼
+			@RequestMapping("comPasswordCheckForm")
+			public String pwdResultForm()
+			{
+				return "comPwdCheckForm";
+			}
+			// íšŒì› ìˆ˜ì • ì „ ì•„ì´ë”” ì²´í¬
+			@RequestMapping("comPasswordCheck")
+			public String pwdResult(Model model, HttpServletRequest request, HttpServletResponse response, CompanyVO company) throws IOException
+			{
+				response.setContentType("text/html; charset=UTF-8");
+				request.setCharacterEncoding("UTF-8");
+				PrintWriter writer = response.getWriter();
+				
+				String id =  request.getParameter("id");
+				String password = request.getParameter("password");
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", id);
+				map.put("password", password);
+				if(companyDAO.certifyComID(map) == null)
+					{
+						writer.println("<script>alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
+						writer.println("location.href='comPasswordCheckForm'; </script>");
+						writer.flush();
+						return "redirect:comPasswordCheckForm";
+					}
+				else
+				{
+					writer.println("<script>alert('ì¸ì¦ë˜ì—ˆìŠµë‹ˆë‹¤.');");
+					writer.println("location.href='comupRegisterForm'; </script>");
+					writer.flush();
+					return "redirect:comupRegisterForm";
+				}
+			}
+	
+			// íšŒì‚¬ ì•„ì´ë”” ì¤‘ë³µ ì²´í¬
+			@RequestMapping("comidCheck")
+			public String comidResult(Model model, HttpServletRequest request)
+			{
+				String id = request.getParameter("id");
+				boolean check = companyDAO.comidSearch(id);
+				   if (check==false) { 
+					   model.addAttribute("checkId", ""); 
+			       } else { 
+			    	   model.addAttribute("checkId", check);
+			      } 
+				return "comidCheck";
+			}
+			// ê¸°ì—… íšŒì› íšŒì›ìˆ˜ì • í¼
+			@RequestMapping("comupRegisterForm")
+			public String updateComRegiForm()
+			{
+				return "comUpRegister";
+			}
+			// ê¸°ì—… íšŒì› íšŒì›ìˆ˜ì • ì²˜ë¦¬
+			@RequestMapping("comUpRegi")
+			public String updateComRegi(HttpSession session, CompanyVO company, HttpServletRequest request)
+			{
+				String comphonenum = request.getParameter("comphonenum1") + "-"
+							+ request.getParameter("comphonenum2") + "-" + request.getParameter("comphonenum3");
+				
+				String comemail = request.getParameter("comemail1") + "@"
+						+ request.getParameter("comemail2");
+				
+				String addr2 = request.getParameter("addr2") + " " 
+						+ request.getParameter("addr3");
+				
+				company.setComphonenum(comphonenum);
+				company.setComemail(comemail);
+				company.setAddr2(addr2);
+				
+				companyDAO.comidUpdate(company);
+				session.removeAttribute("comLoginInfo");
+				
+				return "redirect:loginForm";
+			}
+	}

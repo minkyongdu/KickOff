@@ -12,12 +12,12 @@
 </head>
 <script type="text/javascript" src="js/ComRegisterCheck.js"></script>
 <script type="text/javascript">
-	var childWin = null;
+	/* var childWin = null;
 	function winsOpen() {
 		childWin = window.open(
 				'comidCheck?id=' + document.comRegister.id.value, 'child',
 				'width=300,height=200');
-	}
+	} */
 	function test() {
 		win_post = window.open('/KickOff/post', "post",
 				"toolbar=no ,width=370 ,height=300 ,directories=no,"
