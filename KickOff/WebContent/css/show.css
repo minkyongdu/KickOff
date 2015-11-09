@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+.kortext{ /* 한글폰트 */
+	font-family: "넥슨 풋볼고딕" 
+}
+.engtext{ /* 영문폰트 */
+	font-family: "NEOTERIQUE"
+}
+
+.wrap{
+	width: 961px;
+	margin: 0  auto;
+	padding: 1px 1px 1px 1px;
+	background-color: #ccc;
+}
+
+.header{
+	width: 959px;
+	height: 190px;
+	margin: 1 1 1 1;
+	padding: 1px 1px 1px 1px;
+	background-image: url(/kick_off/WebContent/img/mlogo.png);
+	background: #ffffff;
+}
+
+.contents{
+	width: 959px;
+	float:left;
+	margin: 0  auto;
+	padding: 1px 1px 1px 1px;
+	background: #ffffff;
+}
+
+.footer{
+	clear: both;
+	width: 961px;
+	height: 150px;
+	background: #ffffff;
+}
+
+.toparea {
+	width: 940px;
+	height: 25px;
+	padding: 5px 5px 0 10px;
+	border: 1px solid #999;
+	border-left: none;
+	border-right: none;
+	background: #fbfbfb;
+}
+
+
+

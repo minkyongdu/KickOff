@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="article">
+<insert id="insertArticle" parameterType="kickoff.model.beans.ArticleVO">
+	insert into article values (articleNum_seq.nextval, #{Aname}, #{groupNum},
+		#{price}, #{companyNum}, SYSDATE)
+</insert>
+<insert id="insertArticleFile" parameterType="kickoff.model.beans.ArticlefileVO">
+   insert into articleFile values (#{ArticleNum}, #{imgFile1, jdbcType=VARCHAR}, #{imgFile2, jdbcType=VARCHAR}, #{imgFile3, jdbcType=VARCHAR}, #{imgFile4, jdbcType=VARCHAR}, #{imgFile5, jdbcType=VARCHAR})
+</insert>
+<!-- #{amount} -->
+<insert id="insertSizeAmount" parameterType="kickoff.model.beans.ArticleSizeAmountVO">
+	insert into articleSizeAmount values (#{articleNum}, #{asize}, #{amount}) 
+</insert>
+<select id="articleMax" resultType="int">
+		select max(ArticleNum) from article
+</select>
+<!-- inner join 작업 -->
+<!-- 영어 사이즈 리스트 뿌려주기 -->
+<resultMap type="kickoff.model.beans.ArticlefileVO" id="articleFile">
+	<result property="imgFile1" column = "imgFile1"/>
+</resultMap>
+
+<resultMap type="kickoff.model.beans.ArticleVO" id="article-file" extends="articleFile">
+	<result property = "groupNum" column = "groupNum" />
+	<result property = "price" column = "price" />
+	<result property = "articleNum" column = "articleNum" />
+	<result property = "Aname" column = "Aname" />
+</resultMap>
+<select id="articleDate" resultMap="article-file" parameterType="int">
+	select a.groupNum, a.Aname, a.price, b.imgFile1, a.articleNum
+	from article a, articleFile b where a.articleNum = b.articleNum 
+	and a.groupNum = #{groupNum}
+	order by a.articleDate desc
+</select>
+<select id="articleHigh" resultMap="article-file">
+	select a.groupNum, a.Aname, a.price, b.imgFile1, a.articleNum
+	from article a, articleFile b where a.articleNum = b.articleNum 
+	and a.groupNum = #{groupNum}
+	order by a.price desc	
+</select>
+<select id="articleLow" resultMap="article-file">
+	select a.groupNum, a.Aname, a.price, b.imgFile1, a.articleNum
+	from article a, articleFile b where a.articleNum = b.articleNum 
+	and a.groupNum = #{groupNum}
+	order by a.price asc
+</select>
+<!-- 영어 사이즈 상세보기 -->
+<resultMap type="kickoff.model.beans.ArticlefileVO" id="articleFileDetail">
+	<result property="imgFile1" column = "imgFile1"/>
+	<result property="imgFile2" column = "imgFile2"/>
+	<result property="imgFile3" column = "imgFile3"/>
+	<result property="imgFile4" column = "imgFile4"/>
+	<result property="imgFile5" column = "imgFile5"/>
+</resultMap>
+<resultMap type="kickoff.model.beans.ArticleVO" id="articleDetail" extends="articleFileDetail" >
+	<result property = "groupNum" column = "groupNum" />
+	<result property = "price" column = "price" />
+	<result property = "articleNum" column = "articleNum" />
+	<result property = "Aname" column = "Aname" />
+</resultMap>
+<select id="articleDetailList" resultMap="articleDetail" parameterType="int">
+	select a.groupNum, a.Aname, a.price, a.articleNum,
+	b.imgFile1, b.imgFile2, b.imgFile3, b.imgFile4, b.imgFile5
+	from article a, articleFile b
+	where a.articleNum = b.articleNum
+	and a.articleNum = #{articleNum}
+	order by a.articleDate desc
+</select>
+<select id="articleDetailList1" resultType="kickoff.model.beans.ArticleSizeAmountVO" parameterType="int">
+	select * from articleSizeAmount where articleNum = #{articleNum}
+</select>
+<!-- 분류번호 리스트 뿌리기 -->
+<select id="articleListGroup" resultType="kickoff.model.beans.ArticlegroupVO">
+	select * from articlegroup order by groupNum asc
+</select>
+
+<!-- 메인에서 최신순으로 뿌려주기 -->
+<resultMap type="kickoff.model.beans.ArticlefileVO" id="articleMainFile">
+	<result property="imgFile1" column = "imgFile1"/>
+</resultMap> 
+<resultMap type="kickoff.model.beans.ArticleVO" id="Main-article-file" extends="articleMainFile">
+	<result property = "price" column = "price" />
+	<result property = "articleNum" column = "articleNum" />
+	<result property = "Aname" column = "Aname" />
+</resultMap>
+<select id="articleMain" resultMap="Main-article-file">
+select a.articlenum, a.aname, a.price, b.imgfile1 
+	from (select articlenum, aname, price from article order by articledate desc) a,
+	(select articlenum, imgfile1 from articlefile) b
+	where a.articlenum = b.articlenum and rownum <![CDATA[<]]> 6
+</select>
+</mapper>

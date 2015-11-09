@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "notice">
+<insert id="noticeinsert">
+insert into notice values (noticeno_seq.nextval,#{title},#{contents},
+#{fileName, jdbcType=VARCHAR},#{fileName2, jdbcType=VARCHAR},
+#{fileName3, jdbcType=VARCHAR},#{writer},0,SYSDATE, #{boardNum}) 
+</insert>
+<update id="plusHit" parameterType="int">
+update notice set hit = hit+1 where noticeno = #{noticeno}
+</update>
+<update id="minusHit" parameterType="int">
+update notice set hit = hit-1 where noticeno = #{noticeno}
+</update>
+<select id="noticeselectAll" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.NoticeVO">
+select * from (select noticeno,title,writer,hit,noticedate, rownum r from (select * from notice order by noticeno desc ) ) where r between #{startRow} and #{endRow}
+</select>
+
+<select id="noticeCount" resultType="int">select count(*) from notice</select>
+<select id="noticeDetail" parameterType="int" resultType="kickoff.model.beans.NoticeVO">
+select * from notice where noticeno = #{noticeno}</select>
+<!--  댓글 리스트  -->
+
+<select id="ReplySelect" resultType="kickoff.model.beans.ReplyVO" parameterType="map">
+select * from (select replynum,replyid,replycontent,writenum, boardnum, rownum r from 
+(select * from replyNotice where boardNum = 1 and writeNum=#{writeNum} order by replynum desc ) ) 
+where r between #{startRow} and #{endRow}
+</select>
+
+<select id="ReplyCount" resultType="int">
+select count(*) from replyNotice where writeNum=#{writeNum}
+</select>
+
+<!--  댓글 입력  -->
+<insert id="ReplyInsert">
+insert into replyNotice values (replyNum_seq.nextval, #{replyid}, #{replycontent}, #{writeNum}, 1)
+</insert>
+<!--  공지사항 수정  -->
+<update id="noticeUpdate">
+update notice set title = #{title}, contents = #{contents}, fileName = #{fileName, jdbcType=VARCHAR}, 
+fileName2 = #{fileName2, jdbcType=VARCHAR},fileName3 = #{fileName3, jdbcType=VARCHAR} 
+where noticeno = #{noticeno}
+</update>
+<!--  댓글 삭제  -->
+<delete id="ReplyDelete" parameterType="kickoff.model.beans.ReplyVO">
+delete from replyNotice where replyNum = #{replyNum}
+</delete>
+<!--  공지사항 댓글 삭제(1번 글 삭제시 1번에 해당하는 댓글 삭제)  -->
+<delete id="ReplyNoticeDelete" parameterType="int">
+delete from replyNotice where writeNum = #{writeNum}
+</delete>
+<!--  공지사항 글 삭제  -->
+<delete id="deleteNotice" parameterType="kickoff.model.beans.NoticeVO">
+delete from notice where noticeno = #{noticeno}
+</delete>
+
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<insert id="insertmember">
+		insert into member values (memberNum_seq.nextval, #{id}, #{passwd},
+		#{name}, #{birthday}, #{addr}, #{phonenum}, #{email}, 1,
+		SYSDATE, #{pwdQ}, #{pwdA})
+	</insert>
+</mapper>

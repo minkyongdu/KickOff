@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>움직이는 탭</title>
+<script defer src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<style>
+       html, body {
+    margin: 0px;
+    padding: 0px;  
+    font-size: 12px;
+}
+      
+#blog-header-container { 
+    position: fixed;
+    top: 40px;
+    left: 0px;
+      
+    width: 100%;
+    height: 150px;
+      
+    background-color: #fff;
+}
+      
+#blog-header-container h1 {
+    position: relative;
+    top: 40px;
+    left: 20px;
+      
+    font-size: 2.0em;
+    font-weight: bold;
+}
+      
+#menu-container {
+    position: fixed;
+    top: 150px;
+    left: 0px;
+    
+    width:100%;
+    height: 50px;
+    padding-left: 20px;
+    padding-top: 15px;
+    box-sizing: border-box;
+      
+    background-color: #3a3b40;
+      
+    -webkit-transition: padding-left 200ms linear;
+    -moz-transition: padding-left 200ms linear;
+    -ms-transition: padding-left 200ms linear;
+    -o-transition: padding-left 200ms linear;
+    transition: padding-left 200ms linear;
+}
+#menu-container.fixed {
+    padding-left: 70px;
+    opacity: 0.95;
+    -webkit-box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 5px 1px rgba(0,0,0,0.2);
+}
+#menu-container .menu-item {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #fff;
+    
+}
+#menu-container .menu-icon {
+    display: block !important;
+    position: absolute;
+    left: -50px;
+    top: 14px;
+      
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #fff;
+      
+    -webkit-transition: left 300ms linear;
+    -moz-transition: left 300ms linear;
+    -ms-transition: left 300ms linear;
+    -o-transition: left 300ms linear;
+    transition: left 300ms linear;
+}
+#menu-container .menu-icon.on {
+    left: 15px;
+}
+      
+#blog-container {
+    margin-top:200px;
+    padding: 20px;
+}
+<!-- ----------------------------------------------------------- -->
+
+/* Reset */
+.menu,
+.menu ul,
+.menu li,
+.menu a {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+}
+
+/* Menu */
+.menu {
+    width:100%;
+	position: absolute;
+	bottom: -6px;
+	right:-100px;
+    box-sizing: border-box;
+	background-color: #3a3b40;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.menu li {		  
+	position: relative;
+	list-style: none;
+	float: left;
+	display: block;
+	height: 40px;
+}
+
+/* Links */
+
+.menu li a {
+	display: block;
+	padding: 0 20px;
+	margin: 6px 0;
+	line-height: 30px;
+	text-decoration: none;
+	
+	border-left: 1px solid #393942;
+	border-right: 1px solid #4f5058;
+
+	font-family: '넥슨 풋볼고딕', serif;
+	font-weight: bold;
+	font-size: 20px;
+
+	color: #f3f3f3;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+
+	-webkit-transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-o-transition: color .2s ease-in-out;
+	-ms-transition: color .2s ease-in-out;
+	transition: color .2s ease-in-out;
+}
+
+.menu li:first-child a { border-left: none; }
+.menu li:last-child a{ border-right: none; }
+
+.menu li:hover > a { color: #8fde62; }
+
+/* Sub Menu */
+
+.menu ul {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	opacity: 0;
+	padding-left: 10px;
+	
+	background: #1f2024;
+
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+
+	-webkit-transition: opacity .25s ease .1s;
+	-moz-transition: opacity .25s ease .1s;
+	-o-transition: opacity .25s ease .1s;
+	-ms-transition: opacity .25s ease .1s;
+	transition: opacity .25s ease .1s;
+}
+
+.menu li:hover > ul { opacity: 1; }
+
+.menu ul li {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+
+	-webkit-transition: height .25s ease .1s;
+	-moz-transition: height .25s ease .1s;
+	-o-transition: height .25s ease .1s;
+	-ms-transition: height .25s ease .1s;
+	transition: height .25s ease .1s;
+}
+
+.menu li:hover > ul li {
+	height: 36px;
+	overflow: visible;
+	padding: 0;
+
+}
+
+.menu ul li a {
+	width: 130px;
+	padding: 4px 0 4px 40px;
+	margin: 0;
+
+	border: none;
+	border-bottom: 1px solid #353539;
+}
+
+.menu ul li:last-child a { border: none; }
+
+
+<!-- ------------------------------------------------------------------------ -->
+* {
+	margin:0; 
+	padding:0;
+} 
+fieldset {
+	border:0;
+} 
+img,input {
+	vertical-align:middle;
+} 
+    </style>
+    
+    <script>
+ // 현재 스크롤바의 위치를 저장하는 변수 (px)
+    var currentScrollTop = 0;
+         
+    // 비동기식 jQuery이므로 window load 후 jQuery를 실행해야 함
+    window.onload = function() {
+        // 새로고침 했을 경우를 대비한 메소드 실행
+        scrollController();
+         
+        // 스크롤을 하는 경우에만 실행됨
+        $(window).on('scroll', function() {
+            scrollController();
+        });
+    }
+         
+    // 메인 메뉴의 위치를 제어하는 함수
+    function scrollController() {
+        currentScrollTop = $(window).scrollTop();
+        if (currentScrollTop < 150) {
+            $('#blog-header-container').css('top', -(currentScrollTop));
+            $('#menu-container').css('top', 230-(currentScrollTop));
+            if ($('#menu-container').hasClass('fixed')) {
+                $('#menu-container').removeClass('fixed');
+            }
+        } else {
+            if (!$('#menu-container').hasClass('fixed')) {
+                $('#blog-header-container').css('top', -220);
+                $('#menu-container').css('top', 0);
+                $('#menu-container').addClass('fixed');
+            }
+        }
+    }
+    </script>
+    
+</head>
+<body>
+    <div id="blog-header-container">
+        <img src="../../img/space.png" width="15" height="20" align="right">
+<a href="customer.jsp"><img src="../../img/customerH.png" width="60" height="20" align="right"></a>
+<img src="../../img/space.png" width="15" height="20" align="right">
+<a href="order.jsp"><img src="../../img/orderH.png" width="60" height="20" align="right"></a>
+<img src="../../img/space.png" width="15" height="20" align="right">
+<a href="register.jsp"><img src="../../img/registerH.png" width="60" height="20" align="right"></a>
+<img src="../../img/space.png" width="15" height="20" align="right">
+<a href="login.jsp"><img src="../../img/loginH.png" width="50" height="20" align="right"></a>
+<br>
+<hr>
+<center>
+<p><a href="dreamH.jsp"><img src="../../img/mlogo.png" width="373" height="186"></a>
+</p>
+    </div>
+    <div id="menu-container">    
+       		<ul class="menu-container menu">
+				<li><a href="#"><img src="../../img/shoesb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="adidas">아디다스</a></li>
+				<li><a href="#" class="nike">나이키</a></li>
+				<li><a href="#" class="puma">퓨마</a></li>
+				<li><a href="#" class="newbal">뉴밸런스</a></li>
+				<li><a href="#" class="mizuno">미즈노</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/clothesb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="documents">바람막이</a></li>
+				<li><a href="#" class="messages">훈련복</a></li>
+				<li><a href="#" class="signout">점퍼</a></li>
+				<li><a href="#" class="signout">후드</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/ballb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="adidas">아디다스</a></li>
+				<li><a href="#" class="nike">나이키</a></li>
+				<li><a href="#" class="star">스타</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/uniformb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="documents">레알마드리드</a></li>
+				<li><a href="#" class="messages">바르셀로나</a></li>
+				<li><a href="#" class="signout">아스날</a></li>
+				<li><a href="#" class="signout">바이에른 뮌헨</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/bagb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="adidas">아디다스</a></li>
+				<li><a href="#" class="nike">나이키</a></li>
+				<li><a href="#" class="puma">퓨마</a></li>
+				<li><a href="#" class="star">스타</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/protectb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="documents">양말</a></li>
+				<li><a href="#" class="messages">골기퍼장갑</a></li>
+				<li><a href="#" class="signout">보호대</a></li>
+				<li><a href="#" class="signout">아대</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/matchb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="documents">호각</a></li>
+				<li><a href="#" class="messages">주장완장</a></li>
+				<li><a href="#" class="signout">경고카드</a></li>
+				<li><a href="#" class="signout">라인기</a></li>
+				<li><a href="#" class="signout">선심기</a></li>
+				<li><a href="#" class="signout">작전판</a></li>
+			</ul>
+				</li>
+				<li><a href="#"><img src="../../img/etcb.png" width="130" height="32"></a>
+			<ul align="center">
+				<li><a href="#" class="documents">콘</a></li>
+				<li><a href="#" class="messages">사다리</a></li>
+				<li><a href="#" class="signout">허들</a></li>
+			</ul>
+				</li>					
+</ul> 
+        </div>
+    <div id="blog-container">
+    <center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        <style>
+.image_list {overflow: hidden;position: relative;height: 450px;width: 954px; border:1px solid #e1e1e1; cursor:pointer;}
+.image_list .images {position:absolute; display:none; }
+ul, li {list-style:none; margin:0; padding:0; font-size:10pt; }
+.ul_label {width:954px;cursor:pointer;border-bottom:1px solid #e1e1e1;}
+.ul_label li {width:20%;float:left;border-right:1px solid #e1e1e1;border-collapse:collapse;padding:2px;}
+.ul_label li.fir {border-left:1px solid #e1e1e1;}
+
+.no_label {width:954px;cursor:pointer;}
+.no_label li {width:318px;height:20px;float:left}
+
+
+.ul_label li.labelOverClass {font-weight:bold;}
+</style>
+<script type="text/javascript">
+<!--
+function RollImage(json){
+	//이미지 롤링 설정값
+	var config = {
+		currentImg : 0,
+		nextImg : 1,
+		listArea : e(json.list_area),
+		imageList : e(json.list_area).getElementsByTagName("DIV"),
+		imgCnt : e(json.list_area).getElementsByTagName("DIV").length-1, //0부터 시작
+		rollTime : json.roll_time,
+		moveTime : json.move_time,
+		coordX1 : 0,
+		coordX2 : e(json.list_area).offsetWidth,
+		coordY : e(json.list_area).offsetHeight,
+		moveAt : json.moveAt,
+		direction : json.direction,
+		label : e(json.label),
+		labelType : json.labelType
+	};
+	
+	labelBind(config); //라벨(버튼) 바인드
+	setRoll(config); //롤링 시작
+	rollPause(config); //마우스 오버시 롤링 멈춤
+	
+	//이미지 롤링 기본 세팅하기
+	function setRoll(c){
+		c.coordX1 = 0;
+		c.coordX2 = c.listArea.offsetWidth;
+		c.coordY = c.listArea.offsetHeight;
+
+		if(c.direction=="right"){
+			c.coordX2 = c.coordX2 * -1;
+			c.coordY = c.coordY * -1;
+		}
+		
+		c.imageList[c.nextImg].style.display = "block";
+		setPosition(c);
+		rollOver(c)
+		//c.imageList[c.nextImg].style.left = c.coordX2+"px";
+		
+		c.rollTimer = setTimeout(function(){imgMove(c)},c.rollTime);
+	};
+
+	//이미지를 움직이게 한다.
+	function imgMove(c){
+		if(c.direction == "left" || c.direction == "right"){
+			c.imageList[c.currentImg].style.left = c.coordX1 + "px";
+			c.imageList[c.nextImg].style.left = c.coordX2 + "px";
+		}
+		//alert(c.imageList[c.nextImg].style.left);
+		var moveAt = parseInt(c.moveAt);
+		if (c.direction == "left"){
+			c.coordX1 -= moveAt;
+			c.coordX2 -= moveAt;
+		}else if(c.direction == "right"){
+			c.coordX1 += moveAt;
+			c.coordX2 += moveAt;
+		}
+		
+		//if(c.coordX1 < (-1*c.listArea.offsetWidth) ) {
+		if( isNextImgRoll(c) ) {
+			c.currentImg = c.nextImg;
+			c.nextImg += 1;
+			if(c.currentImg == c.imgCnt) c.nextImg = 0;
+			clearTimeout(c.moveTimer);
+			clearTimeout(c.rollTimer);
+			setRoll(c);
+			return;
+		}
+		c.moveTimer = setTimeout(function(){imgMove(c)},c.moveTime);
+	};
+	
+	//다음 이미지 롤링 해야하는지 확인
+	function isNextImgRoll(c){
+		var d = c.direction;
+		if(d=="left" && c.coordX2 < 0 ) return true;
+		else if(d=="right" && c.coordX2 > 0) return true;
+		return false
+	};
+
+	//롤링 방향에 따른 두번째 이미지 위치 좌표 설정
+	function setPosition(c){
+		var d = c.direction;
+		if(d=="left") c.imageList[c.nextImg].style.left = c.listArea.offsetWidth+"px";
+		else if(d=="right") c.imageList[c.nextImg].style.left = (-1 * c.listArea.offsetWidth) + "px";
+		//alert(c.imageList[c.nextImg].style.left);
+	};
+	
+	//onmouseover 시 움직임 멈춤
+	function rollPause(c){
+	//alert(c.listArea.onmouseover);
+		c.listArea.onmouseover = function(){
+			clearTimeout(c.rollTimer);
+		}
+
+		c.listArea.onmouseout = function(){
+			//alert("c.listArea.onmouseout");
+			setRoll(c);
+		}
+	};
+
+	//라벨과 바인드
+	function labelBind(c){
+		if(c.label == null) return;
+		var labels = c.label.getElementsByTagName(c.labelType);
+
+		c.label.onmouseover = function(){
+			for(n in labels){
+				if(labels[n] == event.srcElement){
+					//c.imageList[c.currentImg].style.display = "none";
+					c.currentImg = parseInt(n);
+					c.nextImg = parseInt(n)+1;
+					if(c.currentImg == c.imgCnt) c.nextImg = 0;
+					clearTimeout(c.rollTimer);
+					viewImg(c);
+					rollOver(c);
+					break;
+				}
+			}
+			//alert(event.srcElement)
+		}
+		
+		c.label.onmouseout = function(){
+			for(n in labels){
+				if(labels[n]==event.srcElement){
+					setRoll(c);
+					break;
+				}
+			}
+		}
+	};
+
+	//라벨 onmouseover 시 클래스 적용
+	function rollOver(c){
+		if(c.label == null) return;
+		var els = c.label.getElementsByTagName(c.labelType);
+		
+		if(c.labelType == "img"){
+			
+			for(n in els){
+				if(typeof els[n] == "object"){
+					if(n == c.currentImg){
+						els[n].src = els[n].getAttribute("oversrc");
+					}else{
+						els[n].src = els[n].getAttribute("outsrc");
+					}
+				}
+			}
+		}
+	}
+
+	//라벨에서 선택된 이미지 보이기
+	function viewImg(c){
+		//alert(c.currentImg);
+		for(n=0; n<c.imgCnt+1; n++)	{
+			c.imageList[n].style.display = "none";
+		}
+		
+		c.imageList[c.currentImg].style.left = "0px";
+		c.imageList[c.currentImg].style.top = "0px";
+		c.imageList[c.currentImg].style.display = "block";
+	};
+}
+
+function debug(t){
+e("dis").innerHTML = t + "<br>";
+}
+
+//id값으로 객체 반환
+function e(id){
+	var o = document.getElementById(id);
+	if(typeof o == undefined || o == null) { alert(id+" 이름을 가진 객체가 없습니다."); return null;}
+
+	return o;
+}
+//-->
+</script>
+<center>
+<div class="image_list" id="image_list_3">
+	<div class="images" style="display:block"><img src="../../img/event1.png" /></div>
+	<div class="images"><img src="../../img/event2.png" /></div>
+	<div class="images"><img src="../../img/event3.jpg" /></div>
+</div>
+<ul class="no_label" id="label_3">
+	<li><img src="../../img/1_on.jpg" oversrc="../../img/1_on.jpg" outsrc="../../img/1.jpg" /></li>
+	<li><img src="../../img/2.jpg" oversrc="../../img/2_on.jpg" outsrc="../../img/2.jpg" /></li>
+	<li><img src="../../img/3.jpg" oversrc="../../img/3_on.jpg" outsrc="../../img/3.jpg" /></li>
+</ul>
+<script type="text/javascript">
+<!--
+var j3 = {
+	"list_area":"image_list_3",
+	"moveAt":"200", //현재 숫자에서 다음이미지까지 이동시간
+	"roll_time":"3000",  //숫자,이미지 넘어가는시간
+	"move_time":"100", //현재 이미지에서 다음이미지까지 이동시간
+	"direction":"right",
+	"label":"label_3",
+	labelType : "img"
+};
+new RollImage(j3);
+//oj1.setRoll();
+//-->
+</script>
+<br>
+<hr>
+<p><br>
+  <img src="../../img/space.png" width="150" height="20" align="left">
+  <img src="../../img/new.png" align="left">
+  <br>
+  <br>
+</p>
+<table width="200" border="0">
+  <tr>
+    <td><img src="../../img/new_item1.png" width="300" height="300"></td>
+    <td><img src="../../img/new_item2.png" width="300" height="300"></td>
+    <td><img src="../../img/new_item3.png" width="300" height="300"></td>
+  </tr>
+  <tr>
+    <td align="center">이름</td>
+    <td align="center">이름</td>
+    <td align="center">이름</td>
+  </tr>
+  <tr>
+    <td align="center">가격</td>
+    <td align="center">가격</td>
+    <td align="center">가격</td>
+  </tr>
+</table>
+<p><br>
+  <img src="../../img/space.png" width="150" height="20" align="left">
+  <img src="../../img/best.png" align="left">
+  <br>
+  <br>
+</p>
+<table width="200" border="0">
+  <tr>
+    <td><img src="../../img/best_item1.png" width="300" height="300"></td>
+    <td><img src="../../img/best_item2.png" width="300" height="300"></td>
+    <td><img src="../../img/best_item3.png" width="300" height="300"></td>
+    <td><img src="../../img/best_item4.png" width="300" height="300"></td>
+  </tr>
+  <tr>
+    <td align="center">이름</td>
+    <td align="center">이름</td>
+    <td align="center">이름</td>
+    <td align="center">이름</td>
+  </tr>
+  <tr>
+    <td align="center">가격</td>
+    <td align="center">가격</td>
+    <td align="center">가격</td>
+    <td align="center">가격</td>
+  </tr>
+</table>
+    </div>
+</body>
+</html>

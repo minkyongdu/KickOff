@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="eventBoard">
+  <insert id="eventInsert">
+  	insert into eventboard values (eventboard_seq.nextval, #{title}, #{contents},
+	#{fileName, jdbcType=VARCHAR},#{fileName2, jdbcType=VARCHAR},
+	#{fileName3, jdbcType=VARCHAR},#{writer},0, to_char(SYSDATE, 'YYYY-MM-DD'), #{boardNum}) 
+  </insert>
+<select id="eventselectAll" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.EventBoardVO">
+select * from (select eventno, fileName, title,writer,hit,eventdate, rownum r from (select * from eventboard order by eventno desc ) ) 
+where r between #{startRow} and #{endRow}
+</select>
+<select id="eventCount" resultType="int">select count(*) from eventboard</select>
+<select id="eventDetail" parameterType="int" resultType="kickoff.model.beans.EventBoardVO">
+select * from eventboard where eventno = #{eventno}</select>
+
+<update id="eventUpdate">
+update eventboard set title = #{title}, contents = #{contents}, fileName = #{fileName, jdbcType=VARCHAR}, 
+fileName2 = #{fileName2, jdbcType=VARCHAR},fileName3 = #{fileName3, jdbcType=VARCHAR} 
+where eventno = #{eventno}
+</update>
+
+<delete id="eventDelete" parameterType="kickoff.model.beans.EventBoardVO">
+delete from eventboard where eventno = #{eventno}
+</delete>
+</mapper>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<insert id="insertmember">
+		insert into member values (memberNum_seq.nextval, #{id}, #{password},
+		#{name}, #{birthday}, #{addr1}, #{addr2}, #{phonenum}, #{email}, 1,
+		SYSDATE, #{pwdQ}, #{pwdA})
+	</insert>
+	<select id="selectLoginUser" parameterType="String" resultType="kickoff.model.beans.MemberVO">
+     select * from member where id=#{id} and password=#{password}
+	</select>
+	<select id="searchID" parameterType="String" resultType="kickoff.model.beans.MemberVO">
+	 select id from member where id = #{id}
+	</select>
+	<update id="updateID" parameterType="String">
+	 update member set password=#{password}, addr1=#{addr1}, addr2=#{addr2}, phonenum=#{phonenum}, 
+	 email=#{email}, pwdQ=#{pwdQ}, pwdA=#{pwdA} where id=#{id}
+	</update>
+	<select id="accountsID" parameterType="java.util.Map" resultType="string">
+	select id from member where name=#{name} and email=#{email}
+	</select>
+	<select id="accountsPwd" parameterType="java.util.Map" resultType="string">
+	select password from member where id =#{id} and pwdQ=#{pwdQ} and pwdA=#{pwdA}
+	</select>
+	<select id="certifyID" parameterType="java.util.Map" resultType="String">
+	 select id, password from member where id = #{id} and password = #{password}
+	</select>	
+</mapper>

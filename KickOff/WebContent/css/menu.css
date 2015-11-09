@@ -1,0 +1,219 @@
+/**
+ *********************************************
+ * Prototype of styles for horizontal CSS-menu
+ * @data 30.06.2009
+ *********************************************
+ * (X)HTML-scheme:
+ *  <div id="menu">
+ *      <ul class="menu">
+ *          <li><a href="#" class="parent"><span>level 1</span></a>
+ *              <ul>
+ *                  <li><a href="#" class="parent"><span>level 2</span></a>
+ *                      <ul><li><a href="#"><span>level 3</span></a></li></ul>
+ *                  </li>
+ *              </ul>
+ *          </li>
+ *          <li class="last"><a href="#"><span>level 1</span></a></li>
+ *      </ul>
+ *  </div>
+ *********************************************
+ */
+
+@CHARSET "UTF-8";
+
+body li { background:#171717; }
+
+div#menu { /* 상단메뉴바 아래로 떨어지는 길이 */
+    height: 55px;
+    background-color: #171717;
+}
+
+div#menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+}
+div#menu ul.menu { /* 메뉴바 좌측에서 떨어지는 거리 */
+    padding-left: 94px;
+}
+
+div#menu li {
+    position: relative;
+    margin: 0;
+    padding: 0 5px 0 0;
+    display: block;
+    float: left;
+    z-index: 9;
+}
+div#menu li:hover>ul { /* 건들지마시고 */
+    left: 0;
+}
+
+div#menu a {
+    position: relative;
+    z-index: 10;
+    height: 41px;
+    display: block;
+    float: left;
+    line-height: 41px;
+    text-decoration: none;
+    color: rgb(150,150,150);
+    font: normal 22px NEOTERIQUE, Arial, sans-serif;
+    border: 0px solid #171717;
+    margin-top: 1px;
+    border-bottom: none;
+}
+div#menu.ie6 a {
+    border-color: #171717;
+    filter: chroma(color=#171717);
+}
+div#menu li:hover>a {
+    border: 0px solid #fff;
+    border-bottom-color: #eee;
+    background: #eee;
+}
+div#menu li:hover>a span { /* 마우스 오버시 상단메뉴 글씨컬러 */
+    color: #000000;
+}
+div#menu a:hover {
+    color: #222;
+    border: 1px solid #fff;
+    border-bottom-color: #eee;
+    background: #eee;
+}
+div#menu.js-active a:hover {
+    border: 1px solid #171717;
+    border-bottom-color: #408080;
+    background: #408080;
+}
+div#menu.js-active a:hover span {
+    color: rgb(150,150,150);
+}
+div#menu li.current a {}
+
+div#menu span {
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 95% 0;
+    text-align: center;
+}
+/* div#menu ul ul a.parent span {
+    background-position: 95% 8px;
+    background-image: url(images/item-pointer.gif);
+}
+div#menu ul ul a.parent:hover span {
+    background-image: url(images/item-pointer-mover.gif);
+}
+ */
+/* menu::level1 */
+div#menu a {
+    padding: 0 10px 0 10px;
+    line-height: 24px;
+    height: 54px; /* 노터치 */
+}
+div#menu span { /* 상단 글씨-색상, 상단메뉴,하단메뉴 글씨 */
+    margin-top: 13px;
+    color: #ffffff;
+    font: normal 23px NEOTERIQUE, Arial, sans-serif;
+}
+div#menu li { }
+div#menu li.last { background: none; }
+
+/* menu::level2 */
+div#menu ul ul li {
+    background: none;
+    padding: 0;
+    border-bottom: 0;
+}
+div#menu ul ul li,
+div#menu ul ul li a {
+    z-index: auto;
+}
+div#menu ul ul li ul {
+    z-index: 20;
+}
+div#menu ul ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    left: -999em;
+    width: 163px;
+    padding: 5px 0 0 0;
+    background: #eee; /* 하단메뉴바 색상 */
+    border: 0px solid #fff;
+    margin-top: 1px;
+}
+div#menu ul ul a {
+    padding: 0;
+    height: 30px;
+    float: none;
+    display: block;
+    line-height: 26px;
+    font-size: 18px;
+    border: 0;
+    z-index: -1;
+    white-space: nowrap;
+}
+div#menu ul ul a span { /* 하단메뉴 글씨 조정-크기,색상 */
+    font-size: 18px;
+    line-height: 26px;
+    color: #222;
+}
+div#menu ul ul li:hover>a {
+    border: 0;
+}
+div#menu ul ul a:hover {
+    border: 0;
+    background: #fff;
+}
+div#menu ul ul a:hover span {
+    color: #000;
+}
+div#menu ul ul span {
+    margin-top: 0;
+    text-align: left;
+}
+div#menu ul ul li.last { background: none; }
+div#menu ul ul li {
+    width: 100%;
+    text-indent: 15px;
+}
+
+/* menu::level3 */
+div#menu ul ul ul {
+    padding: 0;
+    margin: -54px 0 0 160px !important;
+    margin-left: 160px;
+}
+
+/** menu::subtext */
+div#menu span.subtext {
+    display: block;
+    font-size: 10px; /* 상단 작은글씨 크기 */
+    color: #f50112; /* 상단 작은글씨 색상 */
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+}
+/* div#menu li:hover>a span.subtext {
+    color: #9ba1ac;
+}
+ */
+/* lava lamp */
+div#menu li.back {
+    position: absolute;
+    width: 10px;
+    height: 57px;
+    z-index: 8;
+    margin-top: 1px;
+}
+/* div#menu li.back .left {
+    height: 57px;
+    border: 1px solid #fff;
+    border-bottom: none;
+    margin-right: 5px;
+    background: #ffffff;
+} */
+
