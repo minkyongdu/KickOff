@@ -192,7 +192,7 @@
 									</table>
 								</div>
 								<center>
-									<input type="image" src="img/register.png">&nbsp;&nbsp;
+									<img src="img/register.png" id="register">&nbsp;&nbsp;
 									<a href="selectRegister"><img src="img/back.png"></a>
 								</center>
 							</form>

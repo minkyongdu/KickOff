@@ -1,5 +1,12 @@
 var regId = /^[A-Za-z]{1}[A-Za-z0-9]{6,11}$/; //아이디 정규식
-	$(document).ready(function() { 
+var idtext = /^[A-Za-z0-9]/; //아이디
+var nametext = /^[가-힣]*$/;	//이름
+var exptext = /^[A-Za-z0-9]/; //이메일 
+var regexp = /d{3,4}$/;
+var numtext = /^[0-9]*$/; // 사업자등록번호
+var chkid = false; 
+
+$(document).ready(function() { 
 	    //아이디 중복검사 
 	    $("#idCheck").click(function() { 
 	       var comcheckId = "id=" + $("#id").val(); 
@@ -26,17 +33,9 @@ var regId = /^[A-Za-z]{1}[A-Za-z0-9]{6,11}$/; //아이디 정규식
 	                } 
 	             } 
 	         }); 
-	       }
+	       } 
 	    });
-	});
-
-function checkfield(){
-	var idtext = /^[A-Za-z0-9]/; //아이디
-	var nametext = /^[가-힣]*$/;	//이름
-	var exptext = /^[A-Za-z0-9]/; //이메일 
-	var regexp = /d{3,4}$/;
-	var numtext = /^[0-9]*$/; // 사업자등록번호
-	
+    $("#register").click(function() { 
 	if(document.comRegister.id.value==""){ //id값이 없을 경우
 		alert("아이디를 입력하세요");         //메세지 경고창을 띄운 후
 		document.comRegister.id.focus();     // id 텍스트박스에 커서를 위치
@@ -45,6 +44,11 @@ function checkfield(){
 		alert("아이디는 영어, 숫자로만 입력해 주세요.");         //메세지 경고창을 띄운 후
 		document.comRegister.id.value="";
 		document.comRegister.id.focus();     // id 텍스트박스에 커서를 위치
+		return false;
+	}else if(regId.test(document.comRegister.id.value)==false){
+		alert("아이디는 7자~12자 사이의 영문과 숫자로만 가능하며 첫 글자는 반드시 문자여야 합니다.");
+		document.comRegister.id.value="";
+		document.comRegister.id.focus();   
 		return false;
 	}else if(document.comRegister.password.value==""){
 		alert("비밀번호를 입력하세요");
@@ -129,31 +133,35 @@ function checkfield(){
 		alert("전화번호를 올바르게 입력해주세요.");
 		document.comRegister.comphonenum1.focus();
 		return false;
-	}else if(document.comRegister.comphonenum2.value==""){
-		alert("전화번호를 올바르게 입력해주세요.");
-		document.comRegister.comphonenum2.focus();
-		return false;
-	}else if(document.comRegister.comphonenum3.value==""){
-		alert("전화번호를 올바르게 입력해주세요.");
-		document.comRegister.comphonenum3.focus();
-		return false;
 	}else if(numtext.test(document.comRegister.comphonenum1.value)==false){
 		alert("숫자만 입력해 주세요.");
 		document.comRegister.comphonenum1.value="";
 		document.comRegister.comphonenum1.focus();
+		return false;
+	}else if(document.comRegister.comphonenum2.value==""){
+		alert("전화번호를 올바르게 입력해주세요.");
+		document.comRegister.comphonenum2.focus();
 		return false;
 	}else if(numtext.test(document.comRegister.comphonenum2.value)==false){
 		alert("숫자만 입력해 주세요.");
 		document.comRegister.comphonenum2.value="";
 		document.comRegister.comphonenum2.focus();
 		return false;
+	}else if(document.comRegister.comphonenum3.value==""){
+		alert("전화번호를 올바르게 입력해주세요.");
+		document.comRegister.comphonenum3.focus();
+		return false;
 	}else if(numtext.test(document.comRegister.comphonenum3.value)==false){
 		alert("숫자만 입력해 주세요.");
 		document.comRegister.comphonenum3.value="";
 		document.comRegister.comphonenum3.focus();
 		return false;
-	}
+	}else if(!chkid){ 
+        alert("아이디 중복확인을 해 주세요."); 
+        return false;
+    }  
 	alert("회원가입에 성공하였습니다. 로그인을 해주세요.");
 	document.comRegister.submit();
 	 return true;
-}
+});
+});
