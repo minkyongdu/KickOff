@@ -30,7 +30,9 @@ select a.imgFile1, b.buyNum, b.aname, b.price, b.buyamount, b.asize, b.buydate, 
 </select>
 <!--  주문한 리스트(회사용)(추가) -->
 <select id="selectOrderCompany" parameterType="int" resultType="kickoff.model.beans.OrderVO">
-select buyNum, subname, subaddr1, subaddr2, subphonenum, aname, price, buyamount, asize, buydate, buyStatus, companyNum from buy where companyNum = #{companyNum} order by buydate desc
+   select * from (select buyNum, subname, subaddr1, subaddr2, subphonenum, buyamount, price, aname, asize, buydate, buyStatus, sendContent, sendNum, sendpackage, companyNum, rownum r 
+   from (select * from buy where companyNum = #{companyNum} order by buyNum desc ) ) 
+   where r between #{startRow} and #{endRow}
 </select>
 <!--  관리자 주문상태 업데이트 (추가) -->
 <update id="StatusOrderUpdate" parameterType="kickoff.model.beans.OrderVO">

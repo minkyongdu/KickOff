@@ -16,5 +16,5 @@ public interface OrderDAO {
 	public int orderlistcount(); //주문 갯수 조회
 	public List<OrderVO> buylist(int memberNum);//개인별 주문 리스트 (추가)
 	public int updateBuyStatus(OrderVO orderVO);//주문상태 업데이트 (추가)
-	public List<OrderVO> companylist(int companyNum); //회사 주문 리스트 (추가)
+	public List<OrderVO> companylist(RowNumVO rownumVO); //회사 주문 리스트 (추가)
 }

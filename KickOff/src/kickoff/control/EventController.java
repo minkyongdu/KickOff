@@ -36,9 +36,6 @@ public class EventController {
 	@RequestMapping(value = "eventWriteForm", method = RequestMethod.GET)
 	public String boardWrite(Model model) 
 	{
-		if (!model.containsAttribute("uploadForm")) {
-			model.addAttribute("uploadForm", new EventBoardVO());
-		}
 		return "eventBoardWrite";
 	}
 	

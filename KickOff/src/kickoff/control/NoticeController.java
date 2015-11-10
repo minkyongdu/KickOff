@@ -41,9 +41,6 @@ public class NoticeController {
 	// 공지사항 글쓰기 폼
 		@RequestMapping(value = "noticeWriteForm", method = RequestMethod.GET)
 		public String NoticeWriteForm(Model model) {
-			if (!model.containsAttribute("uploadForm")) {
-				model.addAttribute("uploadForm", new NoticeVO());
-			}
 			return "noticeWrite";
 		}
 

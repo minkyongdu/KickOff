@@ -23,7 +23,7 @@ drop sequence replyNum_seq;
 drop sequence replyQnANum_seq;
 drop sequence buyepliNum_seq;
 
-select * from buy;
+select * from articlesizeamount
 
   insert into member values (memberNum_seq.nextval, 'master', 'master', '민경두', 
   '19930101', '113-234', '서울시 강동구','010-0000-0000', 'Hongju@naver.com', 6, SYSDATE, '당신이 사는곳은?', '우리집');

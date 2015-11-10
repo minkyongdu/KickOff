@@ -55,7 +55,7 @@ public class ComController {
 			}
 			return "redirect:";
 		}
-		// 회사 수정 전 아이디 체크 폼
+			// 회사 수정 전 아이디 체크 폼
 			@RequestMapping("comPasswordCheckForm")
 			public String pwdResultForm()
 			{

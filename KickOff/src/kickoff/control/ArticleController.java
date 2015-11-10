@@ -206,6 +206,7 @@ public class ArticleController {
 	        PrintWriter writer = response.getWriter();
 	        String[] result = Asize.split(" : "); //수량을 가져오면 230 : 23 이므로 split으로 짜름
 	        String sr= result[1];
+	        System.out.println(sr);
 			Map map = new HashMap();
 			map.put("articleNum", articleNum);
 			map.put("Asize", sr);

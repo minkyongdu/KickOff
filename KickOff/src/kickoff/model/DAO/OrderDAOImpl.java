@@ -71,8 +71,8 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 	
 	//컴퍼니별 리스트(추가)
-	@Override
-	public List<OrderVO> companylist(int companyNum) {
-		return sqlSession.selectList("order.selectOrderCompany", companyNum);
-	}
+	   @Override
+	   public List<OrderVO> companylist(RowNumVO rownumVO) {
+	      return sqlSession.selectList("order.selectOrderCompany", rownumVO);
+	   }
 }

@@ -13,7 +13,7 @@
         </param-value>
      </init-param>
   </servlet>  
-  	<error-page>
+  	 <!-- <error-page>
 		<error-code>400</error-code>
 		<location>/WEB-INF/view/ERROR.jsp</location>
 	</error-page>
@@ -28,7 +28,7 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/view/ERROR.jsp</location>
-	</error-page>
+	</error-page> -->
   <servlet-mapping>
      <servlet-name>dispatcher</servlet-name>
      <url-pattern>/</url-pattern>

@@ -38,9 +38,6 @@ public class QnAController {
 		// QnA 글쓰기 폼
 		@RequestMapping(value = "qnaWriteForm", method = RequestMethod.GET)
 		public String NoticeWriteForm(Model model) {
-			if (!model.containsAttribute("uploadForm")) {
-				model.addAttribute("uploadForm", new NoticeVO());
-			}
 			return "qnaWriteForm";
 		}
 		// QnA 글쓰기 처리

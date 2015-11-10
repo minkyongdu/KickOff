@@ -257,8 +257,6 @@
 							</td>
 						</tr>
 						<tr>
-							<th width="50" align="cetner">이미지첨부</th>
-						<tr>
 							<td align="center"><img src="img/ImageAdd.png" id="addFile"></td>
 							<td>
 								<table id="fileview">

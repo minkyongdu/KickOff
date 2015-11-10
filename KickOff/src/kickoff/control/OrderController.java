@@ -109,14 +109,50 @@ public class OrderController {
 		return "orderList";
 	}
 	
-	//회사 관리 리스트 (추가)
-	@RequestMapping("comOrderList")
-	public String companylist(Model model, @RequestParam int companyNum)
-	{
-		List<OrderVO> list = orderDAO.companylist(companyNum);
-		model.addAttribute("companylist", list);
-		return "comOrderList";
-	}
+	   //회사 관리 리스트 (추가)
+	   @RequestMapping("comOrderList")
+	   public String companylist(Model model, @RequestParam int companyNum, String pageNumber)
+	   {
+	      int pageNum = 1;
+	      if (pageNumber != null)
+	         pageNum = Integer.parseInt(pageNumber);
+	      
+	      int totalCount = orderDAO.orderlistcount(); //////////
+	            
+	      int totalPageCount = totalCount / PAGESIZE;
+
+	      if (totalCount % PAGESIZE != 0) {
+	            totalPageCount++;
+	         }
+	      // startPage or endPage
+	      int startPage = (pageNum - 1) / PAGEGROUP * PAGEGROUP + 1;
+	      int endPage = startPage + (PAGEGROUP - 1);
+	      if (endPage > totalPageCount) {
+	         endPage = totalPageCount;
+	         }
+	         
+	      int endRow = PAGESIZE * pageNum;
+	      int startRow = endRow - PAGESIZE + 1;
+
+	      Map map = new HashMap();
+	      RowNumVO rowNumVO = new RowNumVO();
+	      rowNumVO.setStartRow(startRow);
+	      rowNumVO.setEndRow(endRow);
+	      rowNumVO.setCompanyNum(companyNum);
+	                  
+	      map.put("startRow", startRow);
+	      map.put("endRow", endRow);
+	      System.out.println("list::::::::"+companyNum);
+	      map.put("companyNum", companyNum);
+	      
+	      model.addAttribute("totalPageCount", totalPageCount);
+	      model.addAttribute("startPage", startPage);
+	      model.addAttribute("endPage", endPage);
+	      
+	      List<OrderVO> list = orderDAO.companylist(rowNumVO);
+	      model.addAttribute("companylist", list);
+	      return "comOrderList";
+	   }
 	
 	//관리자용 리스트 배송상태 업데이트 (추가)
 	@RequestMapping(value="orderListUpdate", method = RequestMethod.POST)

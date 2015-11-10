@@ -3,6 +3,7 @@ package kickoff.model.beans;
 public class RowNumVO {
 	private int startRow;
 	private int endRow;
+	private int companyNum;
 	
 	public int getStartRow() {
 		return startRow;
@@ -16,5 +17,10 @@ public class RowNumVO {
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
-	
+	public int getCompanyNum() {
+		return companyNum;
+	}
+	public void setCompanyNum(int companyNum) {
+		this.companyNum = companyNum;
+	}
 }

@@ -47,6 +47,12 @@ public class DesignController {
 	{
 		return "comregterm";
 	}
+	// 기업회원 제품관리 폼
+	@RequestMapping("comRegiSelect")
+	public String comregiSelect()
+	{
+		return "comRegiSelect";
+	}
 	// 에러 폼
 	@RequestMapping("ERROR")
 	public String ErrorForm()
