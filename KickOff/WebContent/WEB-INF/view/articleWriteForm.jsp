@@ -34,7 +34,7 @@ function groupNum() {
 				</c:when>
 	  		</c:choose>
 		</div>
- 	<a href="main"><img src="img/mlogo.png" width="360px" height="160px"></a>
+ 	<a href="/KickOff/"><img src="img/mlogo.png" width="360px" height="160px"></a>
   </div>
   <jsp:include page="main/menubar.jsp" />
   </div>

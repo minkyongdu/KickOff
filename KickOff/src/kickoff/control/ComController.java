@@ -53,7 +53,7 @@ public class ComController {
 			{
 				model.addAttribute("company" , company);
 			}
-			return "main";
+			return "redirect:";
 		}
 		// 회사 수정 전 아이디 체크 폼
 			@RequestMapping("comPasswordCheckForm")

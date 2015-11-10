@@ -155,7 +155,7 @@ function imageURL3(input) {
 				</c:when>
 				</c:choose>
 			</div>
-			<a href="main"><img src="img/mlogo.png" width="360px"
+			<a href="/KickOff/"><img src="img/mlogo.png" width="360px"
 				height="160px"></a>
 		</div> <!-- header end -->
   <div id="menu">
@@ -214,7 +214,7 @@ function imageURL3(input) {
   <tr>
     <td colspan="2" align="center" valign="middle">
     <input type = "image" src = "img/writebtn.png" id = "insert">&nbsp;&nbsp;
-    <a href = "main"><img src = "img/sback.png"></a></td>
+    <a href = "/KickOff/"><img src = "img/sback.png"></a></td>
     </tr>
 
 </table>

@@ -76,7 +76,7 @@ public class MemController {
 			if (dao.meminsert(member)) {
 				model.addAttribute("success", member);
 			}
-			return "loginForm";
+			return "redirect:";
 		}
 		// 로그인 폼 처리
 		@RequestMapping("loginForm")
@@ -98,7 +98,7 @@ public class MemController {
 				if (loginUser != null) {
 					// 세션저장
 					session.setAttribute("userLoginInfo", loginUser);
-					return "redirect:main";
+					return "redirect:";
 				} else {
 					writer.println("<script>alert('" + "아이디가 존재하지 않거나, 비밀번호가 다릅니다." + "');");
 					writer.println("location.href='loginForm'" + "</script>");
@@ -111,7 +111,7 @@ public class MemController {
 				if (comloginUser != null) {
 					// 세션저장
 					session.setAttribute("comLoginInfo", comloginUser);
-					return "redirect:main";
+					return "redirect:";
 				}
 
 				else {
@@ -249,9 +249,9 @@ public class MemController {
 				} 
 				else {
 					writer.println("<script>alert('" + "회원님의 아이디는 " + dao.accountsId(map) + " 입니다." + "');");
-					writer.println("location.href='loginForm'" + "</script>");
+					writer.println("location.href='findIdPwd'" + "</script>");
 					writer.flush();
-					return "redirect:loginForm";
+					return "findIdPwd";
 				}
 		}
 	// id 중복 체크

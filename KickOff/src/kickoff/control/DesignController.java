@@ -16,7 +16,7 @@ public class DesignController {
 	private ArticleDAO articleDAO;
 	
 	//메인
-	@RequestMapping("main")
+	@RequestMapping("")
 	public String mainHome(Model model)
 	{
 		List<ArticleVO> list = articleDAO.mainArticleList();
