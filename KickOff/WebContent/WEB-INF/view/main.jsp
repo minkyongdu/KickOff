@@ -79,9 +79,9 @@ new RollImage(j3);
   	<tr>
   	<c:forEach var="article" items="${NewArticleList}" varStatus="status">
     		<td> 
-    		<table style="border: 1px solid #999;" cellpadding="10" id = "selectImageTbl">
+    		<table style="border: 1px solid #999;" cellpadding="10" id = "selectImageTbl"> 
 	    		<tr>
-	    	       	<td><a href ="articleDetail?articleNum=${article.articleNum}"><img src = "/KickOff/img/${article.imgFile1}" width="220" height="220"></a></td>
+	    	       	<td><a href ="articleDetail?articleNum=${article.articleNum}"><img src = "/KickOff/img/${article.imgFile1}" width="200" height="200"></a></td>
 	    		</tr> 
 	         	<tr>
 			         	<td align ="center"><b>${article.aname}</b></td>

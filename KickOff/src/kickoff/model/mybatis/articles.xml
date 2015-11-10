@@ -89,6 +89,6 @@
 select a.articlenum, a.aname, a.price, b.imgfile1 
 	from (select articlenum, aname, price from article order by articledate desc) a,
 	(select articlenum, imgfile1 from articlefile) b
-	where a.articlenum = b.articlenum and rownum <![CDATA[<]]> 6
+	where a.articlenum = b.articlenum and rownum <![CDATA[<]]> 5
 </select>
 </mapper>

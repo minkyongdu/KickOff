@@ -50,6 +50,10 @@ function checkfield(){
 		alert("이메일형식이 올바르지 않습니다.");
 		document.upregister.email1.focus();
 		return false;
+	}else if(document.upregister.pwdQ.value=="선택"){
+		alert("비밀번호찾기 질문을 선택해주세요.");
+		document.upregister.pwdQ.focus();
+		return false;
 	}else if(document.upregister.pwdA.value==""){
 		alert("비밀번호찾기 답변을 입력해주세요.");
 		document.upregister.pwdA.focus();

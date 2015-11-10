@@ -101,25 +101,7 @@ function groupNum() {
 				 
 		  </table>
           </p>
-          <p>
-          <input type="button" id="addEngamount" value="영어사이즈&수량" />
-          </p>
-          <p>
-            <input
-			type="button" id="addNumamount" value="숫자사이즈&수량" />
-          </p>
-          <p>
-            <input
-			type="button" id="addNoneamount" value="기본사이즈&수량" />
-          </p>
-          <p>
-            <input
-			type="button" id="addSocksamount" value="양말사이즈&수량" />
-            </p>
-          <p>
-            <input
-			type="button" id="addGlovesamount" value="장갑사이즈&수량" />
-          </p></td>
+          </td>
       </tr>
       <tr>
         <td height="196" align="right" valign="top" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;"><p>이미지 업로드 
