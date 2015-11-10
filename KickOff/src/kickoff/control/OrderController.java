@@ -46,7 +46,7 @@ public class OrderController {
 			orderDAO.updateorder(sizeVO);
 			return "articleOrderSuccess";
 		}else{
-			writer.println("<script>alert('" + count + "���Ϸθ� �ֹ��� �����մϴ�.');</script>");
+			writer.println("<script>alert('" + count + "이하로만 주문이 가능합니다.');</script>");
             writer.flush();
 			return "articleOrderForm?articleNum="+articleNum;
 		}
@@ -126,7 +126,7 @@ public class OrderController {
 		response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.println("<script>alert('�ش� �ֹ��� ���°� ������Ʈ �Ǿ����ϴ�.');");
+        writer.println("<script>alert('해당 제품의 상태가 업데이트 되었습니다.');");
         writer.println("location.href='orderList';</script>");
         writer.flush();
 		return "redirect:orderList";

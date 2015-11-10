@@ -47,4 +47,10 @@ public class DesignController {
 	{
 		return "comregterm";
 	}
+	// 에러 폼
+	@RequestMapping("ERROR")
+	public String ErrorForm()
+	{
+		return "ERROR";
+	}
 }

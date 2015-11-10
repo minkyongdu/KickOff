@@ -13,6 +13,24 @@
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
 <script type="text/javascript" src="js/UpdateIDCheck.js"></script>
+<script type="text/javascript">
+$(document).ready(function() { 
+   var ema = $("#email2 option:selected").val();
+   var naver = "naver.com";
+   var daum = "daum.net";
+   var nate = "nate.com";
+   var gmail = "gmail.com"
+   if(ema == naver){
+      $("#email2 option:eq(1)").remove(); 
+   }else if(ema == daum){
+      $("#email2 option:eq(2)").remove(); 
+   }else if(ema == nate){
+      $("#email2 option:eq(3)").remove(); 
+   }else if(ema == gmail){
+      $("#email2 option:eq(4)").remove(); 
+   }
+});
+</script>
 <script>
    function test() {
       win_post = window.open('/KickOff/post', "post",
@@ -45,16 +63,16 @@
          <tr>
             <td valign=top width="100%" height="100%">
                <form name="upregister" method="post" action="upRegister" onSubmit="checkfield();return false">
-							<c:if test="${sessionScope.userLoginInfo.id == null}">
-								<c:choose>
-									<c:when test="${sessionScope.comLoginInfo.id == null}">
-										<script type="text/javascript">
-											location.href = 'loginForm';
-										</script>
-									</c:when>
-								</c:choose>
-							</c:if>
-							<table width="956px" cellpadding=0 cellspacing=0 border=0 style="font-family: arial; font-style: bold;">
+                     <c:if test="${sessionScope.userLoginInfo.id == null}">
+                        <c:choose>
+                           <c:when test="${sessionScope.comLoginInfo.id == null}">
+                              <script type="text/javascript">
+                                 location.href = 'loginForm';
+                              </script>
+                           </c:when>
+                        </c:choose>
+                     </c:if>
+                     <table width="956px" cellpadding=0 cellspacing=0 border=0 style="font-family: arial; font-style: bold;">
                      <tr>
                         <td style="border:5px solid #F3F3F3;">
                            <table width="100%" cellpadding=0 cellspacing=0>
@@ -112,12 +130,12 @@
                                        <tr>
                                           <td>이메일</td>
                                           <td>
-                                             <input type="text" name="email1" size="20" maxlength="80" style='ime-mode: disabled' tabindex='5'>@<select name="email2">
-                                                <option selected>naver.com</option>
-                                                <option>${sessionScope.userLoginInfo.email.split('@')[1]}</option>
-                                                <option>daum.net</option>
-                                                <option>nate.com</option>
-                                                <option>gmail.com</option>
+                                             <input type="text" name="email1" size="20" value="${sessionScope.userLoginInfo.email.split('@')[0]}" maxlength="80" style='ime-mode: disabled' tabindex='5'>@<select id="email2" name="email2">
+                                                <option selected>${sessionScope.userLoginInfo.email.split('@')[1]}</option>
+                                                <option >naver.com</option>
+                                                <option >daum.net</option>
+                                                <option >nate.com</option>
+                                                <option >gmail.com</option>
                                              </select>
                                              <span class=noline style="padding-left:10px">
                                                 <input type=checkbox name=mailling checked>
@@ -181,13 +199,13 @@
                                              <select name="pwdQ" size="1"
                                                 tabindex='31'>
                                                    <option selected>선택</option>
-																	<option>사는 곳이 어디입니까?</option>
-																	<option>어머니의 성함은?</option>
-																	<option>아버지의 성함은?</option>
-																	<option>내가 태어난 곳은?</option>
-																	<option>내가 다닌 초등학교는?</option>
-																	<option>나의 좌우명은?</option>
-											</select>
+                                                   <option>사는 곳이 어디입니까?</option>
+                                                   <option>어머니의 성함은?</option>
+                                                   <option>아버지의 성함은?</option>
+                                                   <option>내가 태어난 곳은?</option>
+                                                   <option>내가 다닌 초등학교는?</option>
+                                                   <option>나의 좌우명은?</option>
+                                 </select>
                                           </td>
                                        </tr>
                                        <tr>

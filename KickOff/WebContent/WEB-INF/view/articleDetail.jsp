@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -148,7 +149,7 @@
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right">${article.price}</td>
+          <td align = "right"><fmt:formatNumber value="${article.price}" groupingUsed="true" /></td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">

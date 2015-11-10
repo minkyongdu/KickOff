@@ -14,6 +14,25 @@
 </head>
 <script type="text/javascript" src = "js/UpdateIDCheck.js"></script>
 <script>
+// 저장된 이메일 값 불러오기
+$(document).ready(function() { 
+	   var ema = $("#comemail2 option:selected").val();
+	   var naver = "naver.com";
+	   var daum = "daum.net";
+	   var nate = "nate.com";
+	   var gmail = "gmail.com"
+	   if(ema == naver){
+	      $("#comemail2 option:eq(1)").remove(); 
+	   }else if(ema == daum){
+	      $("#comemail2 option:eq(2)").remove(); 
+	   }else if(ema == nate){
+	      $("#comemail2 option:eq(3)").remove(); 
+	   }else if(ema == gmail){
+	      $("#comemail2 option:eq(4)").remove(); 
+	   }
+	});
+
+
 	function test() {
 		win_post = window.open('/KickOff/post', "post",
 				"toolbar=no ,width=370 ,height=300 ,directories=no,"
@@ -109,9 +128,11 @@
 											<td width="8">&nbsp;</td>
 											<td colspan="3" class="point_color"><input type="text"
 												name="comemail1" size="20" maxlength="80"
+												value = "${sessionScope.comLoginInfo.comemail.split('@')[0]}"
 												style='ime-mode: disabled' tabindex='5'>@<select
-												name="comemail2">
-													<option selected>naver.com</option>
+												name="comemail2" id = "comemail2">
+													<option selected>${sessionScope.comLoginInfo.comemail.split('@')[1]}</option>
+													<option>naver.com</option>
 													<option>daum.net</option>
 													<option>nate.com</option>
 													<option>gmail.com</option>

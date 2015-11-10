@@ -121,7 +121,7 @@ $(document).ready(function(){
                     <br>
                                                배송시 요청사항 
                     <br>
-                    <input type="text" name="sendContent" size="60" height="50">         
+                    <input type="text" name="sendContent" size="60" height="50" value = "안전 배송 부탁드립니다.">         
 	 			</td>
 			</tr>
 		</table>

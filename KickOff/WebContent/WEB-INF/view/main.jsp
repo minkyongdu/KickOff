@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,9 +68,9 @@ new RollImage(j3);
 //-->
 </script>
 <br>
-<hr>
+<hr> 
 <p><br>
-  <img src="img/space.png" width="150" height="20" align="left">
+  <img src="img/space.png" width="50" height="20" align="left">
   <img src="img/new.png" align="left">
   <br>
   <br>
@@ -77,16 +78,16 @@ new RollImage(j3);
 <table width="200" border="0">
   	<tr>
   	<c:forEach var="article" items="${NewArticleList}" varStatus="status">
-    		<td>
-    		<table cellpadding="10" id = "selectImageTbl">
+    		<td> 
+    		<table style="border: 1px solid #999;" cellpadding="10" id = "selectImageTbl">
 	    		<tr>
-	    	       	<td><a href ="articleDetail?articleNum=${article.articleNum}"><img src = "/KickOff/img/${article.imgFile1}" width="150" height="150"></a></td>
-	    		</tr>
+	    	       	<td><a href ="articleDetail?articleNum=${article.articleNum}"><img src = "/KickOff/img/${article.imgFile1}" width="220" height="220"></a></td>
+	    		</tr> 
 	         	<tr>
-			         	<td>제목 : ${article.aname}</td>
-	         	</tr> 
-	         	<tr>
-			         	<td>가격 : ${article.price}</td>
+			         	<td align ="center"><b>${article.aname}</b></td>
+	         	</tr>  
+	         	<tr>  
+			         	<td align = "center"><fmt:formatNumber value="${article.price}" groupingUsed="true" /></td>
 	         	</tr>
 		   	</table>
 		   	</td>
@@ -94,7 +95,7 @@ new RollImage(j3);
 	</tr>
 </table>
 <p><br>
-  <img src="img/space.png" width="150" height="20" align="left">
+  <img src="img/space.png" width="50" height="20" align="left">
   <img src="img/best.png" align="left">
   <br>
   <br>
