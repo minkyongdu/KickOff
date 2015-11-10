@@ -7,17 +7,11 @@
 <title>회원가입폼</title>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
 <link type="text/css" href="css/menu.css" rel="stylesheet" />
-<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="js/ComRegisterCheck.js"></script>
 <script type="text/javascript">
-	/* var childWin = null;
-	function winsOpen() {
-		childWin = window.open(
-				'comidCheck?id=' + document.comRegister.id.value, 'child',
-				'width=300,height=200');
-	} */
 	function test() {
 		win_post = window.open('/KickOff/post', "post",
 				"toolbar=no ,width=370 ,height=300 ,directories=no,"
@@ -64,9 +58,8 @@
 																<tr>
 																	<td>아이디</td>
 																	<td><input type=text name="id" maxlength=16
-																		 label="아이디"> <img
-																		src="img/overchk.png" border=0 align=absmiddle
-																		onclick="winsOpen();"></td>
+																		 label="아이디" id = "id"> 
+																		 <button type="button" style="font-weight: bold;" id="idCheck">중복체크</button></td>
 																</tr>
 																<tr>
 																	<td colspan=2 height=1 bgcolor="#DEDEDE"
@@ -74,7 +67,7 @@
 																</tr>
 																<tr>
 																	<td>비밀번호</td>
-																	<td><input type=password name=password 
+																	<td><input type=password name=password id = "password"
 																		label="비밀번호" maxlength="12" size="15">
 																		<span>영문, 숫자로 7~12자 이내</span></td>
 																</tr>

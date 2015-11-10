@@ -24,9 +24,9 @@ public class MemberDAOImpl implements MemberDAO {
 		List list = sqlSession.selectList("member.searchID", id);
 		boolean result = false;
 		if(list == null || list.size() == 0)
-			{
-				result = false;
-			}
+		{
+			result = false;
+		}
 		else
 		{
 			result = true;

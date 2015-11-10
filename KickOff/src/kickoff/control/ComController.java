@@ -91,15 +91,15 @@ public class ComController {
 			}
 	
 			// 회사 아이디 중복 체크
-			@RequestMapping("comidCheck")
+			@RequestMapping("comIDCheck")
 			public String comidResult(Model model, HttpServletRequest request)
 			{
 				String id = request.getParameter("id");
 				boolean check = companyDAO.comidSearch(id);
 				   if (check==false) { 
-					   model.addAttribute("checkId", ""); 
-			       } else { 
-			    	   model.addAttribute("checkId", check);
+					   model.addAttribute("comcheckId", ""); 
+			       }else { 
+			    	 model.addAttribute("comcheckId", check);
 			      } 
 				return "comidCheck";
 			}
