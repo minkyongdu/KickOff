@@ -52,8 +52,8 @@ $(document).ready(function() {
 					$('#restartSizeamount').show();
 					$('#productinsert').show(); 
 				}
-			// 6 ~ 8 사이즈 x
-			 if($('#groupNum').val() == "6" || $('#groupNum').val() == "7" || $('#groupNum').val() == "8")
+			// 6 ~ 8, 21 사이즈 x
+			 if($('#groupNum').val() == "6" || $('#groupNum').val() == "7" || $('#groupNum').val() == "8" || $('#groupNum'.val() == "21"))
 					{
 				 	$('#groupImg').hide();
 				 	$('#selectbutton').hide();

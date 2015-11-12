@@ -105,8 +105,6 @@ create table buy -- buy(구매) 테이블
   buydate date, buyStatus varchar2(100) not null, sendContent varchar2(100),
   sendNum number, sendpackage number, companyNum number not null);
 
-  drop table buy cascade constraints;
-  
 create table sendpackage -- sendpackage(택배) 테이블
 ( buyNum number primary key, sendname varchar2(30) not null, 
 sendpay varchar2(5) not null, sendstatus varchar2(30) not null );
@@ -187,7 +185,7 @@ alter table "JAVAUSER"."ARTICLE" add constraint article_group foreign key("GROUP
 -- buy :: article (구매 제품번호)
 alter table "JAVAUSER"."BUY" add constraint buy_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
 -- buy :: member(구매 회원아이디)
-alter table "JAVAUSER"."BUY" add constraint buy_memID foreign key("ID") references "MEMBER"("ID")
+alter table "JAVAUSER"."BUY" add constraint buy_memID foreign key("ID") references "MEMBER"("ID") ON DELETE CASCADE;
 -- replynotice :: notice (공지사항 글번호)
 alter table "JAVAUSER"."REPLYNOTICE" add constraint reply_notice foreign key("WRITENUM") references "NOTICE"("NOTICENO") ON DELETE CASCADE;
 -- replyQnA :: QnAboard (QnA 글번호)
@@ -195,15 +193,13 @@ alter table "JAVAUSER"."REPLYQNA" add constraint replyQnA_QnA foreign key("WRITE
 -- articleFile :: article (제품 번호)
 alter table "JAVAUSER"."ARTICLEFILE" add constraint file_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
 -- replyNotice :: member(공지사항 댓글 회원 아이디)
-alter table "JAVAUSER"."REPLYNOTICE" add constraint replynotice_member foreign key("REPLYID") references "MEMBER"("ID")
+alter table "JAVAUSER"."REPLYNOTICE" add constraint replynotice_member foreign key("REPLYID") references "MEMBER"("ID") ON DELETE CASCADE;
 -- replyQnA :: member(QnA 댓글 회원 아이디)
-alter table "JAVAUSER"."REPLYQNA" add constraint replyQnA_member foreign key("REPLYID") references "MEMBER"("ID")
+alter table "JAVAUSER"."REPLYQNA" add constraint replyQnA_member foreign key("REPLYID") references "MEMBER"("ID") ON DELETE CASCADE;
 -- QnAboard :: member(QnA 게시판 아이디)
-alter table "JAVAUSER"."QNABOARD" add constraint qnaBoard_member foreign key("WRITER") references "MEMBER"("ID")
+alter table "JAVAUSER"."QNABOARD" add constraint qnaBoard_member foreign key("WRITER") references "MEMBER"("ID") ON DELETE CASCADE;
 -- epilogue :: member (후기 게시판 아이디)
-alter table "JAVAUSER"."EPILOGUE" add constraint epilogue_member foreign key("ID") references "MEMBER"("ID")
-
-
+alter table "JAVAUSER"."EPILOGUE" add constraint epilogue_member foreign key("ID") references "MEMBER"("ID") ON DELETE CASCADE;
 
 drop table member cascade constraints;
 drop table company cascade constraints;

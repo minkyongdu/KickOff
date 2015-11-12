@@ -155,13 +155,13 @@
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right"><b>분류번호</b></td>
+          <td align = "right"><b>담당 회사</b></td> 
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
         <tr>
         <td width = "50"></td>
-          <td align = "right">${article.groupNum}번</td>
+          <td align = "right">${findCompanyName}</td>
         </tr>
       </table>
       <table width="400" height="50px" style="border:1px solid #ccc; border-top:none; border-left: none; border-right: none;">
@@ -181,9 +181,10 @@
                 <c:out value="사이즈 : ${item.asize} : 재고 : ${item.amount}" />
                 </option>
               </c:forEach>
-       </select> 
-       <br>
-        <input type="text" name="amount" id = "amount">
+       </select>
+        </td>
+        <td> 
+        <input type="text" name="amount" id = "amount" placeholder="수량을 입력하세요.">
         </td>
       </tr>  
     </table>

@@ -45,6 +45,10 @@
 	and a.groupNum = #{groupNum}
 	order by a.price asc
 </select>
+<!-- 제품 회사명 보여주기 -->
+<select id="findCompanyName" parameterType="int" resultType="String">
+	select comname from company natural join article where articleNum = #{articleNum}
+</select>
 <!-- 영어 사이즈 상세보기 -->
 <resultMap type="kickoff.model.beans.ArticlefileVO" id="articleFileDetail">
 	<result property="imgFile1" column = "imgFile1"/>
@@ -90,5 +94,40 @@ select a.articlenum, a.aname, a.price, b.imgfile1
 	from (select articlenum, aname, price from article order by articledate desc) a,
 	(select articlenum, imgfile1 from articlefile) b
 	where a.articlenum = b.articlenum and rownum <![CDATA[<]]> 5
+</select>
+
+<!-- 제품 내용 업데이트 -->
+<update id="updateArticle" parameterType="kickoff.model.beans.ArticleVO">
+	update article set Aname = #{Aname},price = #{price} where articleNum = #{articleNum}
+</update>
+<!-- 제품 파일 업데이트 -->
+<update id="updateArticleFile" parameterType="kickoff.model.beans.ArticlefileVO">
+	update articleFile set imgFile1 = #{imgFile1, jdbcType=VARCHAR}, imgFile2 = #{imgFile2, jdbcType=VARCHAR}, imgFile3 = #{imgFile3, jdbcType=VARCHAR}, imgFile4 = #{imgFile4, jdbcType=VARCHAR}, imgFile5 = #{imgFile5, jdbcType=VARCHAR}
+	where articleNum = #{ArticleNum}
+</update>
+<!-- 제품 사이즈 업데이트 -->
+<update id="updateArticleSize" parameterType="kickoff.model.beans.ArticleSizeAmountVO">
+	update articleSizeAmount set amount = #{amount} where articleNum = #{articleNum} and Asize = #{asize}
+</update>
+<!-- 제품 내용 삭제 -->
+<delete id="deleteArticle" parameterType="kickoff.model.beans.ArticleVO">
+	delete from article where articleNum = #{articleNum}
+</delete>
+<!-- 제품 파일 삭제 -->
+<delete id="deleteArticleFile" parameterType="kickoff.model.beans.ArticlefileVO">
+	delete from articleFile where articleNum = #{ArticleNum}
+</delete>
+<!-- 제품 사이즈 삭제 -->
+<delete id="deleteArticleSize" parameterType="kickoff.model.beans.ArticleSizeAmountVO">
+	delete from articleSizeAmount where articleNum = #{articleNum}
+</delete>
+<select id="selectCompanyList" parameterType="int" resultType="kickoff.model.beans.ArticleVO">
+	select * from( select articleNum, aname, price, articleDate, imgfile1, imgfile2, imgfile3, imgfile4, imgfile5,rownum r
+	from ( select * from article natural join articlefile 
+                where companyNum = #{companyNum} order by articleNum desc))
+	where r between #{startRow} and #{endRow}
+</select>
+<select id="companyArticleListCount" parameterType="int" resultType="int">
+   select Count(*) from article where companyNum = #{companyNum}
 </select>
 </mapper>

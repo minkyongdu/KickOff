@@ -24,5 +24,19 @@ public class ArticleSizeAmountDAOImpl implements ArticleSizeAmountDAO{
 		return sqlSession.selectList("article.articleDetailList1",articleNum);
 		
 	}
+
+	@Override
+	public boolean updateSizeAmount(ArticleSizeAmountVO articleSizeAmountVO) {
+		int update = sqlSession.update("article.updateArticleSize", articleSizeAmountVO);
+		if(update > 0) return true;
+		return false;
+	}
+
+	@Override
+	public boolean deleteSizeAmount(ArticleSizeAmountVO articleSizeAmountVO) {
+		int delete = sqlSession.delete("article.deleteArticleSize", articleSizeAmountVO);
+		if(delete > 0) return true;
+		return false;
+	}
 }
 

@@ -37,7 +37,7 @@
 		  <img src="img/companypage.png" border="0" usemap="#Map">
           <map name="Map">
             <area shape="poly" coords="549,390,302,298,301,34,319,34,338,36,360,40,379,46,409,57,430,68,452,82,478,102,501,124,520,151,538,183,551,214,561,253,564,285,565,322" href="articleWriteForm">
-            <area shape="poly" coords="49,400,299,299,299,32,274,33,251,36,232,41,210,47,181,59,150,77,121,98,87,133,59,177,40,225,29,287,31,338,35,355" href="admin">
+            <area shape="poly" coords="49,400,299,299,299,32,274,33,251,36,232,41,210,47,181,59,150,77,121,98,87,133,59,177,40,225,29,287,31,338,35,355" href="comCompanyArticleList?companyNum=${sessionScope.comLoginInfo.companyNum}">
             <area shape="poly" coords="300,302,50,402,76,452,103,484,137,515,185,544,237,561,294,568,380,556,431,534,476,502,522,451,538,417,549,395" href="comOrderList?companyNum=${sessionScope.comLoginInfo.companyNum}">
           </map>
 	</div>

@@ -9,10 +9,10 @@
 <body>
 	<img src = "img/uniformbanner.png"> 
 	<br><br><br>
-					<a href ="articleListFormDate?groupNum=10"><img src = "img/mnikebtn.png"></a>
- 	   				<a href ="articleListFormDate?groupNum=11"><img src = "img/madidasbtn.png"></a>
- 	   				<a href ="articleListFormDate?groupNum=12"><img src = "img/mpumabtn.png"></a>
- 	   				<a href ="articleListFormDate?groupNum=13"><img src = "img/mmizuno.png"></a>
- 	   				<a href ="articleListFormDate?groupNum=14"><img src = "img/newbalbtn.png"></a>
+					<a href ="articleListFormDate?groupNum=10"><img src = "img/Reallogo.png"></a>
+ 	   				<a href ="articleListFormDate?groupNum=11"><img src = "img/barlogo.png"></a>
+ 	   				<a href ="articleListFormDate?groupNum=12"><img src = "img/manulogo.png"></a>
+ 	   				<a href ="articleListFormDate?groupNum=13"><img src = "img/arslogo.png"></a>
+ 	   				<a href ="articleListFormDate?groupNum=14"><img src = "img/munchenlogo.png"></a>
 </body>
 </html>

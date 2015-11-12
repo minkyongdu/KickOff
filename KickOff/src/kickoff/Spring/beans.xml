@@ -7,7 +7,7 @@
 	<bean class="kickoff.model.DAO.PostDAOImpl"/>
 	<bean class="kickoff.model.DAO.CompanyDAOImpl"/>
 	<bean class="kickoff.model.DAO.ArticleDAOImpl"/>
-	<bean class="kickoff.model.DAO.ArticlefileDAOImpl"/> 
+	<bean class="kickoff.model.DAO.ArticlefileDAOImpl"/>  
 	<bean class="kickoff.model.DAO.ArticleSizeAmountDAOImpl"/> 
 	<bean class="kickoff.model.DAO.ArticlegroupDAOImpl"/>
 	<bean class="kickoff.model.DAO.NoticeDAOImpl"/>

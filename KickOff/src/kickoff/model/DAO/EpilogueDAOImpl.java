@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import kickoff.model.beans.ArticleVO;
 import kickoff.model.beans.EpilogueVO;
 
 public class EpilogueDAOImpl implements EpilogueDAO{
@@ -42,4 +43,11 @@ public class EpilogueDAOImpl implements EpilogueDAO{
 		if(result > 0) return true;
 		return false;
 	}
+	//에필로그 게시판별 삭제
+		@Override
+		public boolean deleteArticleReply(ArticleVO articleVO) {
+			int result = sqlSession.delete("epilogue.ArticleEpilogueDelete",articleVO);
+			if(result > 0) return true;
+			return false;
+		}
 }
