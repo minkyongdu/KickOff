@@ -101,19 +101,19 @@
 		 </tr>
 	</table>
 	<br><br>  
-    <center> 
-    <table id = "id" border = "1">
+    <center>  
+    <table id = "id">  
      <c:forEach var="article" items="${articleList}" varStatus="status">
     	<c:if test="${(status.index%5)==0}"> <tr> </c:if>
     		<td>
     		<table cellpadding="10" id = "selectImageTbl">
-	    		<tr>
+	    		<tr width = "50px" align="center">
 	    	       	<td><a href ="articleDetail?articleNum=${article.articleNum}"><img src = "/KickOff/img/${article.imgFile1}" width="150" height="150"></a></td>
 	    		</tr>
-	         	<tr>
+	         	<tr width = "50px">
 			         	<td align = "center">${article.aname}</td>
 	         	</tr> 
-	         	<tr>
+	         	<tr width = "50px">
 			         	<td align = "center"><fmt:formatNumber value="${article.price}" groupingUsed="true" /></td>
 	         	</tr>
 		   	</table>

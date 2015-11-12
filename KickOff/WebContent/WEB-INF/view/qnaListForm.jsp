@@ -66,9 +66,18 @@
 								<td width=70 nowrap align=center class=eng style="width: 100px; "><b>${qna.qnaDate.split(" ")[0]}</b></td>
 								<td width=30 nowrap align=center class=eng style="width: 50px; "><b>${qna.hit}</b></td>
 							</tr>
-						</c:forEach>
+						</c:forEach> 
 						</table>
-								<a href="qnaWriteForm"><img src = "img/writebtn.png"></a>
+						<c:if test="${sessionScope.userLoginInfo.memGrade != 6}">
+						<c:choose>
+							<c:when test="${sessionScope.userLoginInfo != null}">
+									<a href="qnaWriteForm"><img src = "img/writebtn.png"></a>
+							</c:when> 
+							<c:when test="${sessionScope.comLoginInfo != null}">
+									<a href="qnaWriteForm"><img src = "img/writebtn.png"></a>
+							</c:when>
+						</c:choose>
+						</c:if>
 						</center>
 					<br>
 					<center>  

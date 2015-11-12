@@ -74,8 +74,8 @@ new RollImage(j3);
   <img src="img/new.png" align="left">
   <br>
   <br>
-</p>
-<table width="200" border="0">
+</p>  
+<table width="200">
   	<tr>
   	<c:forEach var="article" items="${NewArticleList}" varStatus="status">
     		<td> 
@@ -98,9 +98,9 @@ new RollImage(j3);
   <img src="img/space.png" width="50" height="20" align="left">
   <img src="img/best.png" align="left">
   <br>
-  <br>
+  <br> 
 </p>
-<table width="200" border="0">
+<table width="200" style="border: 1px solid #999;" cellpadding="0">
   <tr>
     <td><img src="img/best_item1.png" width="220" height="220"></td>
     <td><img src="img/best_item2.png" width="220" height="220"></td>
@@ -108,16 +108,16 @@ new RollImage(j3);
     <td><img src="img/best_item4.png" width="220" height="220"></td>
   </tr>
   <tr>
-    <td align="center">이름</td>
-    <td align="center">이름</td>
-    <td align="center">이름</td>
-    <td align="center">이름</td>
+    <td align="center"><b>나이키 축구공[TK-model]</b></td>
+    <td align="center"><b>Star 축구공[TK-model]</b></td>
+    <td align="center"><b>Star 축구공[S-model]</b></td>
+    <td align="center"><b>Adidas 축구공[KW-model]</b></td>
   </tr>
   <tr>
-    <td align="center">가격</td>
-    <td align="center">가격</td>
-    <td align="center">가격</td>
-    <td align="center">가격</td>
+    <td align="center">48,000</td>
+    <td align="center">34,000</td>
+    <td align="center">42,000</td>
+    <td align="center">60,000</td> 
   </tr>
   <br>
   <br>

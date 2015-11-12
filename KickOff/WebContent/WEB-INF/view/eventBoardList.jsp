@@ -71,7 +71,7 @@
 									</tr>
 									<tr>
 										<td width=70 nowrap align=left class=eng style="width: 300px; ">
-										<b>이벤트 기간 : ${event.eventDate.split(" ")[0]}~</b></td>
+										<b>이벤트 기간 : ${event.eventDate.split(" ")[0]}~ 별도 공지 전까지</b></td>
 									</tr>
 									<tr>
 										<td width=70 nowrap align=left class=eng style="width: 300px; ">

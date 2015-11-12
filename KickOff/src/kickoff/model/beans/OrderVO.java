@@ -4,6 +4,7 @@ public class OrderVO {
 	
 	private int buyNum;
 	private int memberNum;
+	private String id;
 	private String subname;
 	private String subaddr1;
 	private String subaddr2;
@@ -168,4 +169,13 @@ public class OrderVO {
 	public void setCompanyNum(int companyNum) {
 		this.companyNum = companyNum;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 }

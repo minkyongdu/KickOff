@@ -111,7 +111,7 @@ public class ArticleController {
 		
 		articlefileDAO.insertArticlefile(articlefile); // 파일
 
-		return "redirect:articleListFormLow?groupNum=1";
+		return "redirect:comRegiSelect";
 	}
 
 	// 영어 사이즈 : 최신등록순(신상품순)
@@ -231,4 +231,5 @@ public class ArticleController {
 				return "articleDetail?articleNum="+articleNum;
 			}
 		}
+
 }

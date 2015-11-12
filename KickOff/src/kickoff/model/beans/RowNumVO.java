@@ -4,7 +4,14 @@ public class RowNumVO {
 	private int startRow;
 	private int endRow;
 	private int companyNum;
+	private int memberNum;
 	
+	public int getMemberNum() {
+		return memberNum;
+	}
+	public void setMemberNum(int memberNum) {
+		this.memberNum = memberNum;
+	}
 	public int getStartRow() {
 		return startRow;
 	}

@@ -13,22 +13,69 @@
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
 <script>
-<!-- 공지사항 글 수정 유효성 검사 -->
+<!-- 이벤트 글 수정 유효성 검사 -->
+	$(document).ready(function() {
+			$('#update').click(function() {
+					if ($('#title').val() == "" && $('#contents').val() == "") {
+						alert('제목 및 내용을 입력해주세요.');
+						$('#title').focus();
+						return false
+					} else if ($('#title').val() == "") {
+						alert('제목을 입력해주세요.');
+						$('#title').focus();
+						return false;
+					} else if ($('#contents').val() == "") {
+						alert('내용을 입력해주세요.');
+						$('#contents').focus();
+						return false;
+					}else if(document.getElementById('files[0]').value != null){
+						var img = document.getElementById('files[0]').value;
+						img = img.slice(img.indexOf(".") + 1).toLowerCase();
+						if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');
+							return false;
+						 }//확장자를 확인합니다.
+					 }
+					if(document.getElementById('files[1]').value != null){
+						var img1 = document.getElementById('files[1]').value;
+						img1 = img1.slice(img1.indexOf(".") + 1).toLowerCase();
+						if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');
+							return false;
+						}//확장자를 확인합니다.
+					}
+					if(document.getElementById('files[2]').value !=null){
+						var img2 = document.getElementById('files[2]').value;
+						img2 = img2.slice(img2.indexOf(".") + 1).toLowerCase();
+						if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');	 
+							return false;
+						}//확장자를 확인합니다.	  
+					} else {
+						$("#eventupdate").submit();
+					}
+			});
+	});
+</script>
+<script>
+<!--파일추가 버튼 클릭시 append를 이용하여 <input type="file" 이 생성됨 -->
 $(document).ready(function() {
-      $('#update').click(function() {
-         if ($('#title').val() == ""&& $('#contents').val() == "") {
-            alert('제목 및 내용을 입력해주세요.');
-            $('#title').focus();
-         }else if ($('#title').val() == "") {
-            alert('제목을 입력해주세요.');
-            $('#title').focus();
-         }else if ($('#contents').val() == "") {
-            alert('내용을 입력해주세요.');
-            $('#contents').focus();
-         }else {
-            $("#eventupdate").submit();
-         }
-      });
+	$('#addFile').click(function() { 
+		var fileIndex = $('#fileview tr').length; //<table id="fileview"> 밑에 tr 갯수을 fileIndex에 담음
+		if (Number(fileIndex) >= '3') { //file Upload 갯수를 3개로 제한
+			alert('FILE UPLOAD는 3개만 가능 합니다.');
+			return;
+		}
+		var i = $('#fileview tr').length;
+		if(Number(i) >= '3'){
+			return;
+		}
+		$('#fileview').append(
+				'<tr><td>'
+					+ '   <input type="file" id="files['+ fileIndex +']" name="files['+ fileIndex +']" onchange="imageURL'+(i+1)+'(this)" />'
+					+ '</td></tr>');
+		});
+		
 });
 </script>
 <script type="text/javascript">
@@ -171,17 +218,18 @@ function imageURL3(input) {
        </tr>
        <tr>
        	<th width = "50" align = "cetner">이미지첨부</th>
-       	<td><input type="file" id="files[0]" name="files[0]" onchange="imageURL1(this)"><br>
-       		<input type="file" id="files[1]" name="files[1]" onchange="imageURL2(this)"><br>
-       		<input type="file" id="files[2]" name="files[2]" onchange="imageURL3(this)"><br>
-       	</td>
-       </tr>
+       <tr>
+							<td align="center"><img src="img/ImageAdd.png" id="addFile"></td>
+							<td>
+								<table id="fileview">
+
+								</table>
+							</td>
+						</tr>
        <tr></tr><tr></tr>
       </table>
-      <img src = "img/gomodifybtn.png" id = "update">
+      <input type="image" id="update" src="img/gomodifybtn.png" >
       <input type = "image" src = "img/golistbtn.png" onclick="location.href='eventListForm'">
-      <!-- <input type="button" value="수정" id="update">
-      <input type="button" value="목록" onclick="location.href = 'noticeListForm'"> -->
 	
 	<input type="hidden" id = "writer" name="writer" value="${eventUpdateForm.writer}">
   </center>

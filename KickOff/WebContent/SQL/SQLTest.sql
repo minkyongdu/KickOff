@@ -1,4 +1,4 @@
-create sequence memberNum_seq start with 1 increment by 1; -- member 시퀀스
+
 create sequence companyNum_seq start with 1 increment by 1; -- company 시퀀스
 create sequence articleNum_seq start with 1 increment by 1; -- article 시퀀스
 create sequence articleFileNum_seq start with 1 increment by 1; -- articleFile 시퀀스
@@ -11,7 +11,7 @@ create sequence replyNum_seq start with 1 increment by 1; -- notice reply 시퀀
 create sequence replyQnANum_seq start with 1 increment by 1; -- QnA reply 시퀀스
 create sequence buyepliNum_seq start with 1 increment by 1; -- 후기 시퀀스
 
-drop sequence memberNum_seq;
+
 drop sequence companyNum_seq;
 drop sequence articleNum_seq;
 drop sequence articleFileNum_seq;
@@ -19,23 +19,29 @@ drop sequence articleSizeAmount_seq;
 drop sequence buyNum_seq;
 drop sequence noticeno_seq;
 drop sequence eventboard_seq;
+drop sequence QnAboard_seq;
 drop sequence replyNum_seq;
 drop sequence replyQnANum_seq;
 drop sequence buyepliNum_seq;
 
-select * from articlesizeamount
 
-  insert into member values (memberNum_seq.nextval, 'master', 'master', '민경두', 
-  '19930101', '113-234', '서울시 강동구','010-0000-0000', 'Hongju@naver.com', 6, SYSDATE, '당신이 사는곳은?', '우리집');
 
-  insert into company values (companyNum_seq.nextval, 'ruden55', '4995791', '���罻', '���ȸ��', 'ruden55@naver.com',
-  '132-343', '����� ������', '134-34-32142', '010-3211-3232', 5);
-  
-  select * from member
+// 관리자 계정
+insert into member values ( 'master', 'master', '관리자', 
+  '1993-01-01', '113-234', '서울시 강남구','010-0000-0000', 'master@naver.com', 
+6, SYSDATE, '사는 곳이 어디입니까?', '서울');
+
+// 회사 계정
+insert into company values (companyNum_seq.nextval, 'company', 'company', '홍길동',
+'길동네', 'company@naver.com', '134-865', '서울시 강동구', '123-45-56789', '010-1234-5678', 5);
+ 
+// 회원 계정
+insert into member values ('members', 'members', '장석현', 
+  '1990-04-07', '132-432', '서울시 강서구','010-3432-5678', 'members@naver.com', 
+1, SYSDATE, '사는 곳이 어디입니까?', '서울');
 
 create table member -- member 테이블
-( memberNum number primary key,
-  id varchar2(20) not null, password varchar2(30) not null, name varchar2(50) not null, 
+(  id varchar2(20) primary key, password varchar2(30) not null, name varchar2(50) not null, 
   birthday varchar2(30) not null, addr1 varchar2(30) not null, addr2 varchar2(500) not null, phonenum varchar2(15) not null, 
   email varchar2(30) not null,  memGrade number not null, 
   joindate date, pwdQ varchar2(100) not null, pwdA varchar2(30) not null);
@@ -55,9 +61,9 @@ create table articlegroup -- articlegroup(제품 분류) 테이블 1 ~ 29개
 (groupNum number primary key,
 	Mgroup varchar2(30) not null, Sgroup varchar2(30));  
   
-insert into articlegroup values (1,'축구화','퓨마');
-insert into articlegroup values (2,'축구화','나이키');
-insert into articlegroup values (3,'축구화','아디다스');
+insert into articlegroup values (1,'축구화','나이키');
+insert into articlegroup values (2,'축구화','아디다스');
+insert into articlegroup values (3,'축구화','퓨마');
 insert into articlegroup values (4,'축구화','미즈노');
 insert into articlegroup values (5,'축구화','뉴발란스');
 insert into articlegroup values (6,'축구공','나이키');
@@ -93,10 +99,9 @@ create table articleSizeAmount -- articleSizeAmount(제품 사이즈&수량) 테
 (ArticleNum number not null, Asize varchar2(20) not null, amount number not null);
  
 create table buy -- buy(구매) 테이블
-(buyNum number primary key,
-  memberNum number not null, subname varchar2(15) not null, subaddr1 varchar2(7) not null, subaddr2 varchar2(200) not null, 
+(buyNum number primary key, id varchar2(20) not null, subname varchar2(15) not null, subaddr1 varchar2(7) not null, subaddr2 varchar2(200) not null, 
   subphonenum varchar2(15) not null, price number not null, Aname varchar2(50) not null,
-  buyamount number not null, Asize varchar2(5) not null, ArticleNum number not null,
+  buyamount number not null, Asize varchar2(20) not null, ArticleNum number not null,
   buydate date, buyStatus varchar2(100) not null, sendContent varchar2(100),
   sendNum number, sendpackage number, companyNum number not null);
 
@@ -160,6 +165,7 @@ create table replyNotice -- replyNotice(공지사항 댓글) 테이블
   writeNum number not null, 
   boardNum number not null ); 
   
+
 create table replyQnA -- replyQnA(질문&답변 댓글) 테이블
 ( replyNum number primary key, 
   replyid varchar2(20) not null,  
@@ -177,17 +183,14 @@ alter table "JAVAUSER"."MEMBER" add constraint mem_grade foreign key("MEMGRADE")
 -- company :: grade (회원등급)
 alter table "JAVAUSER"."COMPANY" add constraint com_grade foreign key("COMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
 
-ALTER TABLE buy DROP CONSTRAINT buy_sendpack
-
-
 -- article :: articlegroup(제품 그룹번호)
 alter table "JAVAUSER"."ARTICLE" add constraint article_group foreign key("GROUPNUM") references "ARTICLEGROUP"("GROUPNUM") ON DELETE CASCADE;
 
 -- buy :: article (구매 제품번호)
 alter table "JAVAUSER"."BUY" add constraint buy_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
 
--- buy :: member(구매 회원번호)
-alter table "JAVAUSER"."BUY" add constraint buy_memNum foreign key("MEMBERNUM") references "MEMBER"("MEMBERNUM") ON DELETE CASCADE;
+-- buy :: member(구매 회원아이디)
+alter table "JAVAUSER"."BUY" add constraint buy_memID foreign key("ID") references "MEMBER"("ID")
 -- replynotice :: notice (공지사항 글번호)
 alter table "JAVAUSER"."REPLYNOTICE" add constraint reply_notice foreign key("WRITENUM") references "NOTICE"("NOTICENO") ON DELETE CASCADE;
 -- replyQnA :: QnAboard (QnA 글번호)
@@ -212,3 +215,5 @@ drop table eventboard cascade constraints;
 drop table QnAboard cascade constraints;
 drop table epilogue cascade constraints;
 
+
+select * from buy

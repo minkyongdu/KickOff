@@ -34,18 +34,18 @@
         </li>
         <li><a href="#"><span>Uniform</span></a>
         <ul>
-            	<li><a href="articleListFormDate?groupNum=10"><span>Nike</span></a></li>
-                <li><a href="articleListFormDate?groupNum=11"><span>Adidas</span></a></li>
-                <li><a href="articleListFormDate?groupNum=12"><span>Puma</span></a></li>
-                <li><a href="articleListFormDate?groupNum=13"><span>Mizuno</span></a></li>
-                <li><a href="articleListFormDate?groupNum=14"><span>New Balance</span></a></li>
+            	<li><a href="articleListFormDate?groupNum=10"><span>Real Madrid</span></a></li>
+                <li><a href="articleListFormDate?groupNum=11"><span>Barcelona</span></a></li>
+                <li><a href="articleListFormDate?groupNum=12"><span>Manchester</span></a></li>
+                <li><a href="articleListFormDate?groupNum=13"><span>Arsonal</span></a></li>
+                <li><a href="articleListFormDate?groupNum=14"><span>Munich</span></a></li>
             </ul>
         </li>
 		<li><a href="#"><span>Bag</span></a>
 			<ul>
-            	<li><a href="articleListFormDate?groupNum=15"><span>Nike</span></a></li>
+            	<li><a href="articleListFormDate?groupNum=15"><span>Puma</span></a></li>
                 <li><a href="articleListFormDate?groupNum=16"><span>Adidas</span></a></li>
-                <li><a href="articleListFormDate?groupNum=17"><span>Puma</span></a></li>
+                <li><a href="articleListFormDate?groupNum=17"><span>Nike</span></a></li>
                 <li><a href="articleListFormDate?groupNum=18"><span>Star</span></a></li>
             </ul>
 		</li>

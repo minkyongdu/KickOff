@@ -50,7 +50,7 @@ public class ArticleDAOImpl implements ArticleDAO{
 		public ArticleVO articleDetail(int articleNum) {
 			return sqlSession.selectOne("article.articleDetailList", articleNum);
 		}
-
+ 
 
 		@Override
 		public List<ArticleVO> mainArticleList() {

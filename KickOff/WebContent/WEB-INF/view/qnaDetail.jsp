@@ -178,21 +178,24 @@
     	<tr>
     		<%-- <td>ID</td><td>${sessionScope.userLoginInfo.id}</td> --%>
     		<td width = "30"></td> 
-    		<td><textarea name="replycontent" rows="3" cols="65" id = "replycontent"></textarea></td>
+    		<td><textarea name="replycontent" rows="3" cols="65" id = "replycontent"></textarea>
+    		</td>
     		<td><img src = "img/savebtn.jpg" id = "saveReply"></td>
-    		<td width = "30"></td>
+    		<td width = "30"></td> 
     	</tr>
     </c:if>
     <tr height = "20">
     	<td colspan = "4"></td> 
     </tr>
     </table>
+    
 </form>
 </center>
 </div>
+</div>
+<center>
  <table width="600" id = "repltinsertForm">
 			<tr> 
-			<center>
 				<td colspan="5" align="center"><c:if test="${startPage>1}">
 						<span> <a href="/KickOff/qnaDetail?qnano=${QnADetail.qnano}&pageNumber=${startPage-1}">이전</a>
 						</span>
@@ -213,24 +216,55 @@
 					<span> <a href="/KickOff/qnaDetail?qnano=${QnADetail.qnano}&pageNumber=${endPage+1}">다음</a>
 						</span>
 					</c:if></td>
-			</center>
-			</tr>
+			</tr> 
         </table>
-        <div align="center">
-                <a href="qnaListForm">
-	             <img src = "img/golistbtn.png"></a>
-             <c:if test="${sessionScope.userLoginInfo.memGrade==6}">
-             	<a href = "qnaUpdateForm?qnano=${QnADetail.qnano}">
+        </center>
+        <input type="hidden" name="title" value="${QnADetail.title}">
+        <input type="hidden" name="writer" value="${QnADetail.writer}">
+     <!-- contents -->  
+     </div> 
+ <center>
+ <c:if test="${sessionScope.userLoginInfo != null}">
+ <c:choose>
+ 	<c:when test="${sessionScope.userLoginInfo.id.equals(QnADetail.writer)}">
+        		<a href="qnaListForm">    
+	             <img src = "img/golistbtn.png"></a> 
+        		<a href = "qnaUpdateForm?qnano=${QnADetail.qnano}">
+               <img src = "img/gomodifybtn.png"></a>
+             	 <a href = "qnaDelete?qnano=${QnADetail.qnano}&filename=${QnADetail.fileName}&filename2=${QnADetail.fileName2}&filename3=${QnADetail.fileName3}">
+             	 <img src = "img/godelbtn.png"></a>  
+    </c:when>
+    <c:when test="${sessionScope.userLoginInfo.memGrade == 6}">
+    			<a href="qnaListForm">    
+	             <img src = "img/golistbtn.png"></a> 
+        		<a href = "qnaUpdateForm?qnano=${QnADetail.qnano}">
+               <img src = "img/gomodifybtn.png"></a>
+             	 <a href = "qnaDelete?qnano=${QnADetail.qnano}&filename=${QnADetail.fileName}&filename2=${QnADetail.fileName2}&filename3=${QnADetail.fileName3}">
+             	 <img src = "img/godelbtn.png"></a>  
+    </c:when>
+        <c:otherwise> 
+     			<a href="qnaListForm">    
+	             <img src = "img/golistbtn.png"></a> 
+     </c:otherwise>  
+</c:choose>
+ </c:if>
+<c:if test="${sessionScope.comLoginInfo != null}">
+<c:choose>
+	<c:when test="${sessionScope.comLoginInfo.id.equals(QnADetail.writer)}">
+        		<a href="qnaListForm">    
+	             <img src = "img/golistbtn.png"></a> 
+        		<a href = "qnaUpdateForm?qnano=${QnADetail.qnano}">
                <img src = "img/gomodifybtn.png"></a>
              	 <a href = "qnaDelete?qnano=${QnADetail.qnano}&filename=${QnADetail.fileName}&filename2=${QnADetail.fileName2}&filename3=${QnADetail.fileName3}">
              	 <img src = "img/godelbtn.png"></a>
-             </c:if><br><br>
-            <hr>
-        </div>
-        <input type="hidden" name="title" value="${QnADetail.title}">
-        <input type="hidden" name="writer" value="${QnADetail.writer}">
-</div>
-</div> <!-- contents -->
-  <jsp:include page="main/bottom.jsp" />
-</body>
-</html>
+     </c:when>
+     <c:otherwise>
+     			<a href="qnaListForm">    
+	             <img src = "img/golistbtn.png"></a> 
+	 </c:otherwise>
+</c:choose>
+ </c:if> 
+<jsp:include page="main/bottom.jsp" />   
+ </center>
+</body> 
+</html> 

@@ -13,7 +13,8 @@ update notice set hit = hit+1 where noticeno = #{noticeno}
 update notice set hit = hit-1 where noticeno = #{noticeno}
 </update>
 <select id="noticeselectAll" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.NoticeVO">
-select * from (select noticeno,title,writer,hit,noticedate, rownum r from (select * from notice order by noticeno desc ) ) where r between #{startRow} and #{endRow}
+select * from (select noticeno,title,writer,hit,noticedate, rownum r 
+from (select * from notice order by noticeno desc ) ) where r between #{startRow} and #{endRow}
 </select>
 
 <select id="noticeCount" resultType="int">select count(*) from notice</select>
@@ -44,6 +45,10 @@ where noticeno = #{noticeno}
 <!--  댓글 삭제  -->
 <delete id="ReplyDelete" parameterType="kickoff.model.beans.ReplyVO">
 delete from replyNotice where replyNum = #{replyNum}
+</delete>
+<!-- 회원 탈퇴시에 댓글 삭제 -->
+<delete id="ReplyDeleteID" parameterType="String">
+delete from replyNotice where replyid = #{replyid}
 </delete>
 <!--  공지사항 댓글 삭제(1번 글 삭제시 1번에 해당하는 댓글 삭제)  -->
 <delete id="ReplyNoticeDelete" parameterType="int">

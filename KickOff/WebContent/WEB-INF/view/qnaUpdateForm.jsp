@@ -14,72 +14,48 @@
 </head>
 <script>
 <!-- 공지사항 글 수정 유효성 검사 -->
-$(document)
-		.ready(
-				function() {
-					$('#update')
-							.click(
-									function() {
-										if ($('#title').val() == ""
-												&& $('#contents').val() == "") {
-											alert('제목 및 내용을 입력해주세요.');
-											$('#title').focus();
-											return false
-										} else if ($('#title').val() == "") {
-											alert('제목을 입력해주세요.');
-											$('#title').focus();
-											return false;
-										} else if ($('#contents').val() == "") {
-											alert('내용을 입력해주세요.');
-											$('#contents').focus();
-											return false;
-										} else if (document
-												.getElementById('files[0]').value != null) {
-											var img = document
-													.getElementById('files[0]').value;
-											img = img.slice(
-													img.indexOf(".") + 1)
-													.toLowerCase();
-											if (img != "jpg"
-													&& img != "png"
-													&& img != "gif"
-													&& img != "bmp") {
-												alert('이미지 파일만 등록 가능합니다.');
-												return false;
-											}//확장자를 확인합니다.
-										} else if (document
-												.getElementById('files[1]').value != null) {
-											var img1 = document
-													.getElementById('files[1]').value;
-											img1 = img1.slice(
-													img.indexOf(".") + 1)
-													.toLowerCase();
-											if (img1 != "jpg"
-													&& img1 != "png"
-													&& img1 != "gif"
-													&& img1 != "bmp") {
-												alert('이미지 파일만 등록 가능합니다.');
-												return false;
-											}//확장자를 확인합니다.
-										} else if (document
-												.getElementById('files[2]').value != null) {
-											var img2 = document
-													.getElementById('files[2]').value;
-											img2 = img2.slice(
-													img.indexOf(".") + 1)
-													.toLowerCase();
-											if (img2 != "jpg"
-													&& img2 != "png"
-													&& img2 != "gif"
-													&& img2 != "bmp") {
-												alert('이미지 파일만 등록 가능합니다.');
-												return false;
-											}//확장자를 확인합니다.	  
-										} else {
-											$("#noticeupdate").submit();
-										}
-									});
-				});
+	$(document).ready(function() {
+			$('#update').click(function() {
+					if ($('#title').val() == "" && $('#contents').val() == "") {
+						alert('제목 및 내용을 입력해주세요.');
+						$('#title').focus();
+						return false
+					} else if ($('#title').val() == "") {
+						alert('제목을 입력해주세요.');
+						$('#title').focus();
+						return false;
+					} else if ($('#contents').val() == "") {
+						alert('내용을 입력해주세요.');
+						$('#contents').focus();
+						return false;
+					}else if(document.getElementById('files[0]').value != null){
+						var img = document.getElementById('files[0]').value;
+						img = img.slice(img.indexOf(".") + 1).toLowerCase();
+						if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');
+							return false;
+						 }//확장자를 확인합니다.
+					 }
+					if(document.getElementById('files[1]').value != null){
+						var img1 = document.getElementById('files[1]').value;
+						img1 = img1.slice(img1.indexOf(".") + 1).toLowerCase();
+						if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');
+							return false;
+						}//확장자를 확인합니다.
+					}
+					if(document.getElementById('files[2]').value !=null){
+						var img2 = document.getElementById('files[2]').value;
+						img2 = img2.slice(img2.indexOf(".") + 1).toLowerCase();
+						if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
+							alert('이미지 파일만 등록 가능합니다.');	 
+							return false;
+						}//확장자를 확인합니다.	  
+					} else {
+						$("#qnaupdate").submit();
+					}
+			});
+	});
 </script>
 <script>
 <!--파일추가 버튼 클릭시 append를 이용하여 <input type="file" 이 생성됨 -->
@@ -187,7 +163,7 @@ function imageURL3(input) {
 			    <area shape="rect" coords="770,35,817,56" href="eventListForm">
 			    <area shape="rect" coords="866,36,901,54" href="qnaListForm">
 		      </map>
-	<form id= "qnaUpdate" action="qnaUpdate" method="post" enctype="multipart/form-data">
+	<form id= "qnaupdate" action="qnaUpdate" method="post" enctype="multipart/form-data">
 	<c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">
@@ -259,10 +235,8 @@ function imageURL3(input) {
 						</tr>
        <tr></tr><tr></tr>
       </table>
-      <img src = "img/gomodifybtn.png" id = "update">
+      <input type="image" id="update" src="img/gomodifybtn.png" >
       <input type = "image" src = "img/golistbtn.png" onclick="location.href='qnaListForm'">
-      <!-- <input type="button" value="수정" id="update">
-      <input type="button" value="목록" onclick="location.href = 'noticeListForm'"> -->
 	
 	<input type="hidden" id = "writer" name="writer" value="${qnaUpdateForm.writer}">
   </center>

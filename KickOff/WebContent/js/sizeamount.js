@@ -33,22 +33,22 @@ $(document).ready(function() {
 					$('#groupImg').hide();
 					$('#selectbutton').hide();
 					$('#sizeamountview').append( //['+ u +']
-							'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "230" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "240" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "250" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "260" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "270" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "280" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize7" id = "asize7" value = "290" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount7" id = "amount7"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize8" id = "asize8" value = "300" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount8" id = "amount8"></td></tr>');
+							'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "230" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "240" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "250" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "260" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "270" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "280" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "290" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize7" id = "asize7" value = "300" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount7" id = "amount7" value = "0"></td></tr>');
 					$('#restartSizeamount').show();
 					$('#productinsert').show(); 
 				}
@@ -56,9 +56,10 @@ $(document).ready(function() {
 			 if($('#groupNum').val() == "6" || $('#groupNum').val() == "7" || $('#groupNum').val() == "8")
 					{
 				 	$('#groupImg').hide();
+				 	$('#selectbutton').hide();
 				 	$('#sizeamountview').append(
-							'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "default" size= "2" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr>'
+							'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "default" size= "2" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr>'
 							);
 				 	$('#restartSizeamount').show();
 					$('#productinsert').show();
@@ -69,18 +70,18 @@ $(document).ready(function() {
 				 $('#groupImg').hide();
 				 $('#selectbutton').hide();
 				 $('#sizeamountview').append(				//['+ u +']
-							'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "XXL" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "XL" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "L" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "M" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "XS" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "S" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6"></td></tr>');
+							'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "XXLZ" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "XL" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "L" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "M" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "XS" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "S" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5" value = "0"></td></tr>');
 				 $('#restartSizeamount').show();			
 				 $('#productinsert').show();
 				}
@@ -89,18 +90,18 @@ $(document).ready(function() {
 					 $('#groupImg').hide();
 					 $('#selectbutton').hide();
 					 $('#sizeamountview').append(				//['+ u +']
-								'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "XXL" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr><br>'
-								+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "XL" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount2" id = "amount2"></td></tr><br>'
-								+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "L" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount3" id = "amount3"></td></tr><br>'
-								+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "M" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount4" id = "amount4"></td></tr><br>'
-								+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "XS" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount5" id = "amount5"></td></tr><br>'
-								+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "S" size = "1" readonly>'
-								+ ' 수량 : <input type = "text" name = "amount6" id = "amount6"></td></tr>');
+								'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "XXL" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr><br>'
+								+ '<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "XL" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount1" id = "amount1" value = "0"></td></tr><br>'
+								+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "L" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount2" id = "amount2" value = "0"> </td></tr><br>'
+								+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "M" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount3" id = "amount3" value = "0"></td></tr><br>'
+								+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "XS" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount4" id = "amount4" value = "0"></td></tr><br>'
+								+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "S" size = "1" readonly>'
+								+ ' 수량 : <input type = "text" name = "amount5" id = "amount5" value = "0"></td></tr>');
 					 $('#restartSizeamount').show();
 					 $('#productinsert').show();
 				}
@@ -109,20 +110,20 @@ $(document).ready(function() {
 					$('#groupImg').hide();
 					$('#selectbutton').hide();
 					$('#sizeamountview').append(				//['+ u +']
-							'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "22" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "23" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "24" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "25" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "26" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "27" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6"></td></tr>'
-							+'<tr><td> 사이즈 : <input type = "text" name = "asize7" id = "asize7" value = "28" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount7" id = "amount7"></td></tr>');
+							'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "22" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "23" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "24" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "25" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "26" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "27" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5" value = "0"></td></tr>'
+							+'<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "28" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6" value = "0"></td></tr>');
 					$('#restartSizeamount').show();
 					$('#productinsert').show();
 				}
@@ -131,20 +132,20 @@ $(document).ready(function() {
 					$('#groupImg').hide();
 					$('#selectbutton').hide();
 					$('#sizeamountview').append(				//['+ u +']
-							'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "4" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "5" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "6" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "7" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "8" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5"></td></tr><br>'
-							+ '<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "9" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6"></td></tr>'
-							+'<tr><td> 사이즈 : <input type = "text" name = "asize7" id = "asize7" value = "10" size = "1" readonly>'
-							+ ' 수량 : <input type = "text" name = "amount7" id = "amount7"></td></tr>');
+							'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "4" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "5" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount1" id = "amount1" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize2" id = "asize2" value = "6" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount2" id = "amount2" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize3" id = "asize3" value = "7" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount3" id = "amount3" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize4" id = "asize4" value = "8" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount4" id = "amount4" value = "0"></td></tr><br>'
+							+ '<tr><td> 사이즈 : <input type = "text" name = "asize5" id = "asize5" value = "9" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount5" id = "amount5" value = "0"></td></tr>'
+							+'<tr><td> 사이즈 : <input type = "text" name = "asize6" id = "asize6" value = "10" size = "1" readonly>'
+							+ ' 수량 : <input type = "text" name = "amount6" id = "amount6" value = "0"></td></tr>');
 					$('#restartSizeamount').show();
 					$('#productinsert').show();
 				} 
@@ -155,8 +156,8 @@ $(document).ready(function() {
 						 $('#groupImg').hide();
 						 $('#selectbutton').hide();
 						 $('#sizeamountview').append(
-									'<tr><td> 사이즈 : <input type = "text" name = "asize1" id = "asize1" value = "default" size= "2" readonly>'
-									+ ' 수량 : <input type = "text" name = "amount1" id = "amount1"></td></tr>'
+									'<tr><td> 사이즈 : <input type = "text" name = "asize0" id = "asize0" value = "default" size= "2" readonly>'
+									+ ' 수량 : <input type = "text" name = "amount0" id = "amount0" value = "0"></td></tr>'
 									);
 						 $('#restartSizeamount').show();
 						 $('#productinsert').show();

@@ -21,4 +21,8 @@
 <delete id="epilogueDelete" parameterType="kickoff.model.beans.EpilogueVO"> 
 	delete from epilogue where buyepliNum = #{buyepliNum} 
 </delete>
+<!-- 아이디 댓글 삭제  -->
+<delete id="epilogueDeleteID" parameterType="String">
+	delete from epilogue where id = #{id}
+</delete>
 </mapper>

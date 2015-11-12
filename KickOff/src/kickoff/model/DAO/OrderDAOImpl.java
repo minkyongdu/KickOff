@@ -1,5 +1,6 @@
 package kickoff.model.DAO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,8 +59,8 @@ public class OrderDAOImpl implements OrderDAO {
 
 	//개인주문 리스트(추가)
 	@Override
-	public List<OrderVO> buylist(int memberNum) {
-		return sqlSession.selectList("order.selectOrderMember", memberNum);
+	public List<OrderVO> buylist(String id ) {
+		return sqlSession.selectList("order.selectOrderMember", id);
 	}
 
 	//주문상태 업데이트(추가)
@@ -75,4 +76,22 @@ public class OrderDAOImpl implements OrderDAO {
 	   public List<OrderVO> companylist(RowNumVO rownumVO) {
 	      return sqlSession.selectList("order.selectOrderCompany", rownumVO);
 	   }
+
+	@Override
+	public List<OrderVO> selectbuyID(int buyNum) {
+		return sqlSession.selectList("order.selectbuyID", buyNum);
+	}
+
+	@Override
+	public List<OrderVO> selectOrderMemberPage(Map map) {
+		return sqlSession.selectList("order.selectOrderMemberPage",map);
+	}
+
+	@Override
+	public int orderMemberlistcount(String id) {
+		int count = 0;
+		count = sqlSession.selectOne("order.OrderMemberCount", id);
+		return count;
+	}
+	   
 }

@@ -12,7 +12,7 @@
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
 <script>
-	<!-- 공지사항 글 입력 유효성 검사 -->
+	<!-- Q&A 글 입력 유효성 검사 -->
 	   $(document).ready(function (){
 	      $('#insert').click(function() {
 	         if($('#title').val()==""&&$('#content').val()==""&&$('#writer').val()==""){
@@ -38,22 +38,24 @@
 		        	 alert('이미지 파일만 등록 가능합니다.');
 			         return false;
 		         }//확장자를 확인합니다.
-	         }else if(document.getElementById('files[1]').value != null){
+	         }
+	         if(document.getElementById('files[1]').value != null){
 	        	 var img1 = document.getElementById('files[1]').value;
-	        	 img1 = img1.slice(img.indexOf(".") + 1).toLowerCase();
+	        	 img1 = img1.slice(img1.indexOf(".") + 1).toLowerCase();
 	        	 if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){
 	        		 alert('이미지 파일만 등록 가능합니다.');
 		             return false;
 	        	 }//확장자를 확인합니다.
-	         }else if(document.getElementById('files[2]').value != null){
+	         }
+	         if(document.getElementById('files[2]').value !=null){
 	        	 var img2 = document.getElementById('files[2]').value;
-	        	 img2 = img2.slice(img.indexOf(".") + 1).toLowerCase();
+	        	 img2 = img2.slice(img2.indexOf(".") + 1).toLowerCase();
 	             if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
-	            	 alert('이미지 파일만 등록 가능합니다.');
+	            	 alert('이미지 파일만 등록 가능합니다.');	 
 		             return false;
-	             }//확장자를 확인합니다.	  
+	         	 }//확장자를 확인합니다.	  
 	         }else{
-	            $("#form").submit();
+	            $("#qnainsert").submit();
 	         }
 	      });
 	   });
@@ -173,7 +175,7 @@ function imageURL3(input) {
 			    <area shape="rect" coords="866,36,901,54" href="qnaListForm">
 		      </map>
 
-<form method="post" id="form" action="qnainsert" name="form" enctype="multipart/form-data">
+<form method="post" id="qnainsert" action="qnainsert" name="qnainsert" enctype="multipart/form-data">
 				<c:if test="${sessionScope.userLoginInfo.id == null}">
 					<c:choose>
 						<c:when test="${sessionScope.comLoginInfo.id == null}">
@@ -227,11 +229,11 @@ function imageURL3(input) {
 </center>
 <!-- 일반 회원 유저가 작성시 -->
 <c:if test="${sessionScope.userLoginInfo != null }">
-	<input type="hidden" name="writer" value="${sessionScope.userLoginInfo.name}">
+	<input type="hidden" name="writer" value="${sessionScope.userLoginInfo.id}">
 </c:if>
 <!-- 회사 회원 유저가 작성시 -->
 <c:if test="${sessionScope.comLoginInfo != null }">
-	<input type="hidden" name="writer" value="${sessionScope.comLoginInfo.comceo}">
+	<input type="hidden" name="writer" value="${sessionScope.comLoginInfo.id}">
 </c:if>
 			<input type="hidden" name="boardNum" 
 				value="3"> <!-- QnA 번호 : 3번 -->

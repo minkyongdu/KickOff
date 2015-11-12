@@ -1,25 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
+<c:if test="${sessionScope.userLoginInfo.id == null}">
+      <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
+      	<script type="text/javascript">
+      	location.href='loginForm';
+      	</script>
+      	</c:when>
+	</c:choose>
+	</c:if>
+<c:if test="${buyMemberlist[0].id == null}">
+	<script type="text/javascript">
+			alert('ì£¼ë¬¸ ë‚´ì—­ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');
+	      	location.href='/KickOff/';
+	</script>
+</c:if>
+<c:if test="${buyMemberlist[0].id != null}">
+<c:choose>
+	<c:when test="${sessionScope.userLoginInfo.id != buyMemberlist[0].id}">
+		<script type="text/javascript">
+				alert('ë‹¤ë¥¸ ìœ ì €ì˜ ì •ë³´ëŠ” ë³´ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.');
+		      	location.href='/KickOff/';
+		</script>
+	</c:when> 
+</c:choose>
+</c:if>
+<div class="wrap">
+  <div class="header" align="center"> 
+	  	<div class="toparea" align="right">
+	  	
+	  	<c:choose>
+	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 1}">
+		  			<jsp:include page="main/memLogout.jsp" />
+	  			</c:when>
+	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 6}">
+		  			<jsp:include page="main/memLogout.jsp" />
+	  			</c:when>
+		  		<c:when test="${(sessionScope.userLoginInfo == null) || (sessionScope.comLoginInfo == null)}">
+		  			<jsp:include page="main/selectLogin.jsp" />
+				</c:when>
+	  		</c:choose>   
+		</div>     
+ 	<a href="/KickOff/"><img src="img/mlogo.png" width="360px" height="160px"></a>
+  </div>
+  <center> 
+  <jsp:include page="main/menubar.jsp" />
+  </center>
+  </div> 
 	<center>
-		<h3>°³ÀÎÁ¦Ç°ÁÖ¹®¸®½ºÆ®</h3>
+		<h3>ê°œì¸ì œí’ˆì£¼ë¬¸ë¦¬ìŠ¤íŠ¸</h3>
 		<hr>
 		<table border="1" cellpadding="5">
 			<tr bgcolor="yellow">
-				<th>ÁÖ¹®¹øÈ£</th>
-				<th>¹°Ç°ÀÌ¹ÌÁö</th>
-				<th>Á¦Ç°ÀÌ¸§</th>
-				<th>ÁÖ¹®»çÀÌÁî</th>
-				<th>ÁÖ¹®°¡°İ(¼ö·®)</th>
-				<th>ÁÖ¹®³¯ÀÚ</th>
-				<th>ÁÖ¹®»óÅÂ</th>
+				<th>ì£¼ë¬¸ë²ˆí˜¸</th>
+				<th>ë¬¼í’ˆì´ë¯¸ì§€</th>
+				<th>ì œí’ˆì´ë¦„</th>
+				<th>ì£¼ë¬¸ì‚¬ì´ì¦ˆ</th>
+				<th>ì£¼ë¬¸ê°€ê²©(ìˆ˜ëŸ‰)</th>
+				<th>ì£¼ë¬¸ë‚ ì</th>
+				<th>ì£¼ë¬¸ìƒíƒœ</th>
 			</tr>
 			 <c:forEach var="buylist" items="${buyMemberlist}">
 				<tr>
@@ -29,12 +75,43 @@
 					</td>
 					<td>${buylist.aname}</td>
 					<td>${buylist.asize}</td>
-					<td>${buylist.price}¿ø(${buylist.buyamount}°³)</td>
+					<td>${buylist.price}ì›(${buylist.buyamount}ê°œ)</td>
 					<td>${buylist.buydate}</td>
 					<td>${buylist.buyStatus}</td>
 				</tr>
 			</c:forEach>					
-	 	</table>
+	 	</table> 
 	 </center>
+	 <center>
+	  <table width="600">
+			<tr>
+			<center>
+				<td colspan="5" align="center"><c:if test="${startPage>1}">
+						<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${startPage-1}">ì´ì „</a>
+						</span> 
+					</c:if> <c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:choose>
+							<c:when test="${pageNumber == i }">
+								<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${i}"
+									style="text-decoration: none; color: blue; font-weight: bold;">${i}</a>&nbsp;
+								</span>
+							</c:when>
+							<c:otherwise>
+								<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.id}&pageNumber=${i}"
+									style="text-decoration: none; color: gray;">${i}</a>&nbsp;
+								</span>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach> <c:if test="${endPage < totalPageCount}">
+					<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${endPage+1}">ë‹¤ìŒ</a>
+						</span>
+					</c:if></td>
+			</center>
+			</tr>
+        </table>
+        </center>
+ <center>
+  <jsp:include page="main/bottom.jsp" />
+ </center>
 </body>
 </html>

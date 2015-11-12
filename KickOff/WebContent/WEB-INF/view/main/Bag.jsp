@@ -6,12 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<img src = "img/bagbanner.png"> 
+<body> 
+	<img src = "img/bagbanner.png">
 	<br><br><br>
-					<a href ="articleListFormDate?groupNum=15"><img src = "img/mnikebtn.png"></a>
+					<a href ="articleListFormDate?groupNum=15"><img src = "img/mpumabtn.png"></a>
  	   				<a href ="articleListFormDate?groupNum=16"><img src = "img/madidasbtn.png"></a>
- 	   				<a href ="articleListFormDate?groupNum=17"><img src = "img/mpumabtn.png"></a>
+ 	   				<a href ="articleListFormDate?groupNum=17"><img src = "img/mnikebtn.png"></a>
  	   				<a href ="articleListFormDate?groupNum=18"><img src = "img/starlogo.png"></a>
 </body>
 </html>

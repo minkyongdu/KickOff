@@ -12,39 +12,50 @@
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
 <script>
-	<!-- 공지사항 글 입력 유효성 검사 -->
+	<!-- 이벤트 글 입력 유효성 검사 -->
 	   $(document).ready(function (){
 	      $('#insert').click(function() {
-	         var img = document.getElementById('files[0]').value; //파일을 추가한 input 박스의 값
-	         img = img.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	         var img1 = document.getElementById('files[1]').value; //파일을 추가한 input 박스의 값
-	         img1 = img1.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	         var img2 = document.getElementById('files[2]').value; //파일을 추가한 input 박스의 값
-	         img2 = img2.slice(img.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
-	         
-	         if($('#title').val()==""&&$('#content').val()==""&&$('#writer').val()==""){
+	         if($('#title').val()==""&&$('#contents').val()==""&&$('#writer').val()==""){
 	            alert('제목과 내용을 입력해주세요.');
 	            $('#title').focus();
+	            return false;
 	         }else if($('#title').val()==""){
 	            alert('제목을 입력해주세요.');
 	            $('#title').focus();
-	         }else if($('#content').val()==""){
+	            return false;
+	         }else if($('#contents').val()==""){
 	            alert('내용을 입력해주세요.');
-	            $('#content').focus();
+	            $('#contents').focus();
+	            return false;
 	         }else if($('#writer').val()==""){
 	            alert("로그인을 해주세요.");
 	            location.href='loginForm';
-	         }else if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){ //확장자를 확인합니다.
-	            alert('이미지 파일만 등록 가능합니다.');
 	            return false;
-	         }else if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){ //확장자를 확인합니다.
-	            alert('이미지 파일만 등록 가능합니다.');
-	            return false;
-	         }else if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){ //확장자를 확인합니다.
-	            alert('이미지 파일만 등록 가능합니다.');
-	            return false;
+	         }else if(document.getElementById('files[0]').value != null){
+	        	 var img = document.getElementById('files[0]').value;
+	        	 img = img.slice(img.indexOf(".") + 1).toLowerCase();
+		         if(img != "jpg" && img != "png" &&  img != "gif" &&  img != "bmp"){
+		        	 alert('이미지 파일만 등록 가능합니다.');
+			         return false;
+		         }//확장자를 확인합니다.
+	         }
+	         if(document.getElementById('files[1]').value != null){
+	        	 var img1 = document.getElementById('files[1]').value;
+	        	 img1 = img1.slice(img1.indexOf(".") + 1).toLowerCase();
+	        	 if(img1 != "jpg" && img1 != "png" &&  img1 != "gif" &&  img1 != "bmp"){
+	        		 alert('이미지 파일만 등록 가능합니다.');
+		             return false;
+	        	 }//확장자를 확인합니다.
+	         }
+	         if(document.getElementById('files[2]').value !=null){
+	        	 var img2 = document.getElementById('files[2]').value;
+	        	 img2 = img2.slice(img2.indexOf(".") + 1).toLowerCase();
+	             if(img2 != "jpg" && img2 != "png" &&  img2 != "gif" &&  img2 != "bmp"){
+	            	 alert('이미지 파일만 등록 가능합니다.');	 
+		             return false;
+	         	 }//확장자를 확인합니다.	  
 	         }else{
-	            $("#form").submit();
+	            $("#eventinsert").submit();
 	         }
 	      });
 	   });
@@ -169,7 +180,7 @@ function imageURL3(input) {
 			    <area shape="rect" coords="866,36,901,54" href="qnaListForm">
 		      </map>
 
-<form method="post" id="form" action="eventinsert" name="form" enctype="multipart/form-data">
+<form method="post" id="eventinsert" action="eventinsert" name="eventinsert" enctype="multipart/form-data">
 	  <c:choose>
 	  <c:when test="${sessionScope.userLoginInfo.memGrade != 6}">
          <script type="text/javascript">

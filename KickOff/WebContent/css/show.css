@@ -46,6 +46,48 @@
 	border-right: none;
 	background: #fbfbfb;
 }
+.tablestyle {
+		height : 30px;
+		padding:3px 4px 2px;
+		color: #ffffff;
+		border-top: 1px solid rgb(51,51,51);
+		border-bottom : 1px solid rgb(51,51,51);
+		background-color:rgb(51,51,51);
+		
+}
 
+.line {
+	border-top: 1px solid #cdcdcd;	
+}
 
+table.orderitem-list {
+	width: 100%;
+}
+
+table.orderitem-list thead tr th {
+	border-top: 2px solid #303030;
+	border-bottom: 1px solid #d6d6d6;
+	background: #f0f0f0;
+	height: 25px;
+}
+
+table.orderitem-list tbody tr td {
+	border-bottom: 1px solid #d6d6d6;
+	padding: 3px;
+}
+
+table.orderitem-list tbody tr td table td {
+	border: none;
+}
+
+table.orderitem-list tfoot tr td {
+	border-bottom: 1px solid #efefef;
+	background: #f7f7f7;
+	height: 25px;
+	text-align: right;
+}
+
+table.orderitem-list tfoot tr td table td {
+	border: none;
+}
 

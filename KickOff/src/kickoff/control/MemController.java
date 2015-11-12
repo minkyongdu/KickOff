@@ -267,6 +267,12 @@ public class MemController {
 		return "memIDCheck";
 	}
 	// 비밀번호 찾기 처리
+		/**
+		 * @param request
+		 * @param response
+		 * @return
+		 * @throws IOException
+		 */
 		@RequestMapping("passwordfindhandel")
 		public String findPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			response.setContentType("text/html; charset=UTF-8");

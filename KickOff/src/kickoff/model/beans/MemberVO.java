@@ -1,7 +1,6 @@
 package kickoff.model.beans;
 
 public class MemberVO {
-	   private int memberNum;
 	   private String id;
 	   private String password;
 	   private String name;
@@ -20,12 +19,6 @@ public class MemberVO {
 		// TODO Auto-generated constructor stub
 	}   
 	 	   
-	public int getMemberNum() {
-		return memberNum;
-	}
-	public void setMemberNum(int memberNum) {
-		this.memberNum = memberNum;
-	}
 	public String getId() {
 		return id;
 	}

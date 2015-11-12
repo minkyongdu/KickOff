@@ -8,7 +8,13 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript" src="js/jquery.js"></script>
-<body>  
+<script type="text/javascript">
+var childWin = null;   
+function winOpen(buyNum){
+		    childWin = window.open('comOrderSelectID?buyNum='+buyNum,'child','width=900,height=150');
+		}
+</script> 
+<body>   
 <div class="wrap">
   <div class="header" align="center">
 	  	<div class="toparea" align="right">
@@ -33,46 +39,49 @@
 </c:if>
 <script type="text/javascript">
 </script>
-<c:if test="${sessionScope.comLoginInfo.companyNum != companylist[0].companyNum}">
+<c:if test="${companylist[0].companyNum == null}">
 	<script type="text/javascript">
-			alert('해당 제품의 담당 회사가 아니라면 접근 하실 수 없습니다.');
-	      	location.href='/KickOff/';
+			alert('주문 내역이 존재하지 않습니다.');
+	      	location.href='comRegiSelect';
 	</script>
 </c:if> 
+<c:if test="${companylist[0].companyNum != null}">
+<c:choose>
+	<c:when test="${sessionScope.comLoginInfo.companyNum != companylist[0].companyNum}">
+		<script type="text/javascript">
+				alert('해당 제품의 담당 회사가 아니라면 접근 하실 수 없습니다.');
+		      	location.href='/KickOff/';
+		</script>
+	</c:when> 
+</c:choose>
+</c:if>
 <!-- 컴퍼니리스트 --> 
- 
+  
 	<center>
-		<h3>회사제품 주문리스트</h3>
-		<hr>
-		<table border="1" cellpadding="5">
-			<tr bgcolor="yellow">
-				<th>번호</th>
-				<th>주문자이름</th>
-				<th>우편번호</th>
-				<th>주소</th>
-				<th>전화번호</th>
-				<th>주문가격</th>
-				<th>주문량</th>
-				<th>제품이름</th>
-				<th>주문사이즈</th>
-				<th>주문날자</th>
-				<th>주문상태</th> 
-			</tr>
-			
-			<c:forEach var="buy" items="${companylist}">
-				<tr>
-					<td>${buy.buyNum}</td>
-					<td>${buy.subname}</td>
-					<td>${buy.subaddr1}</td>
-					<td>${buy.subaddr2}</td>
-					<td>${buy.subphonenum}</td>
-					<td>${buy.price}</td>
-					<td>${buy.buyamount}</td>
-					<td>${buy.aname}</td>
-					<td>${buy.asize}</td>
-					<td>${buy.buydate}</td> 
-					<td>
-					<form method="post" action="orderCompanyUpdate">
+		<img src="img/orderpostbanner.png" />
+
+<table width="950" height="100%" border="0" cellspacing="0">
+  <tr>
+    <th width="50" align="center" class="tablestyle">번호</th>
+    <th width="100" align="center" class="tablestyle">구매자</th>
+    <th align="center" class="tablestyle" width="270">제품명</th>
+    <th align="center" class="tablestyle" width="80">사이즈</th> 
+    <th align="center" class="tablestyle" width="70">수량</th>
+    <th align="center" class="tablestyle" width="100">구매금액</th>
+    <th align="center" class="tablestyle" width="80">주문일시</th>
+    <th align="center" class="tablestyle" width="200">주문상태</th>
+  </tr> 
+  <c:forEach var="buy" items="${companylist}" varStatus="status">	
+  <tr>
+    <td height="40" align="center"><a href = "javascript:window.opener=winOpen(${buy.buyNum});" id = "a">${buy.buyNum}</a></td>
+    <td height="40" align="center">${buy.subname}</td>
+    <td height="40" align="center">${buy.aname}</td>
+    <td height="40" align="center">${buy.asize}</td>
+    <td height="40" align="center">${buy.buyamount}</td>
+    <td height="40" align="center">${buy.price}</td>
+    <td height="40" align="center">${buy.buydate}</td>
+    <td height="40" align="center">
+    <form method="post" action="orderCompanyUpdate">
 						<select name="buyStatus" id="buyStatus">
 							<option>${buy.buyStatus}</option>
 							<option>---------------</option>
@@ -85,12 +94,11 @@
 							<input type="hidden" name="buyNum" value="${buy.buyNum}">
 							<input type="hidden" name="companyNum" value="${buy.companyNum}">		
 					</form>
-					</td>
-				</tr>
-			</c:forEach>
-	 	</table>
-
-	 	       <table width="600">
+	</td>
+  </tr>
+  </c:forEach>
+</table>
+      <table width="600">
          <tr>
             <td colspan="5" align="center"><c:if test="${startPage>1}">
                   <span> <a href="/KickOff/comOrderList?companyNum=${sessionScope.comLoginInfo.companyNum}&pageNumber=${startPage-1}">이전</a>
@@ -116,6 +124,7 @@
          </tr>
       </table>
 	</center>
+	<br><br><br><br><br><br><br><br><br> 
 	<center>
 	<jsp:include page="main/bottom.jsp" />  
 	</center>

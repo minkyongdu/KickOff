@@ -10,7 +10,7 @@
 <center>
 	<h5>주문이 성공하였습니다.</h5>
 	<hr>
-	<input type="button" value="마이 리스트로" onclick="location.href='/KickOff/memOrderList?memberNum=${sessionScope.userLoginInfo.memberNum}'">
+	<input type="button" value="마이 리스트로" onclick="location.href='/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}'">
 	<input type="button" value="회사 리스트로" onclick="location.href='/KickOff/comOrderList?companyNum=${sessionScope.comLoginInfo.companyNum}'">
 	<input type="button" value="관리 리스트로" onclick="location.href='/KickOff/orderList'">
 </center>

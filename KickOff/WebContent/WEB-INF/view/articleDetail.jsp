@@ -185,10 +185,14 @@
        <br>
         <input type="text" name="amount" id = "amount">
         </td>
-      </tr> 
+      </tr>  
     </table>
       <p align="center"></p> 
-    <p align = "center"><input type = "image" id = "order" src = "img/prodbuy.png" height = "70" width="150"></p></td>
+    <p align = "center">
+    <c:if test="${sessionScope.comLoginInfo == null || sessionScope.userLoginInfo.memGrade == 6}">
+    <input type = "image" id = "order" src = "img/prodbuy.png" height = "70" width="150">
+    </c:if>
+    </p></td>
   </tr>
   <tr>
     <td colspan="3"><table width="400" height="100" border="0px">

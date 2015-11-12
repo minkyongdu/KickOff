@@ -48,7 +48,7 @@
 					<tr>
 						<td height="47" align="center" valign="middle">
 						<img src = "img/modifyready.png"></td> 
-					</tr>
+					</tr> 
 					<tr>
 						<td height="68" align="center" valign="middle">
 						<input type="password" id = "password" name = "password"/></td>

@@ -232,7 +232,7 @@ $(document).ready(function() {
       </table>
       <br>
       <input type="image" src="img/modify.png">&nbsp;&nbsp;
-         <a href="javascript:history.back();"><input type="image" src="img/back.png"></a>
+         <a href="javascript:history.back();"><img src="img/back.png"></a>
          <br>
          <br>
          <a href=""><input type="image" src="img/leave.png" align="right" width="80px" height="100%"></a>

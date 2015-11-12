@@ -12,7 +12,7 @@
 		  			<img src="img/space.png" width="10px" height="20px">
 			  		<a href="comPasswordCheckForm"><img src="img/mypaget.png" width="40px" height="15px"></a> <!-- 마이페이지 -->			  		
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="comRegiSelect"><img src="img/ordert.png" width="40px" height="15px"></a>
+			  		<a href="comRegiSelect"><img src="img/managementbtn.png" width="40px" height="15px"></a>
 			  		<img src="img/space.png" width="10px" height="20px">
 			  		<a href="noticeListForm"><img src="img/customert.png" width="40px" height="15px"></a>
 </body>

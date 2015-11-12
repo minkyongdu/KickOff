@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>로그인하자</title>
+<title></title>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
 <link type="text/css" href="css/menu.css" rel="stylesheet" />
 	<script type="text/javascript" src="js/jquery.js"></script>

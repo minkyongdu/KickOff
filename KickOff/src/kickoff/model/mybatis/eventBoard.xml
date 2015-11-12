@@ -7,7 +7,7 @@
 	#{fileName3, jdbcType=VARCHAR},#{writer},0, to_char(SYSDATE, 'YYYY-MM-DD'), #{boardNum}) 
   </insert>
 <select id="eventselectAll" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.EventBoardVO">
-select * from (select eventno, fileName, title,writer,hit,eventdate, rownum r from (select * from eventboard order by eventno desc ) ) 
+select * from (select eventno, contents, fileName, title,writer,hit,eventdate, rownum r from (select * from eventboard order by eventno desc ) ) 
 where r between #{startRow} and #{endRow}
 </select>
 <select id="eventCount" resultType="int">select count(*) from eventboard</select>
