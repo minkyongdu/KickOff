@@ -17,4 +17,6 @@ public interface MemberDAO {
 	public boolean deleteMember(MemberVO member);
 	
 	public String memberAddr(MemberVO member); // �ֹ��ϱ⿡�� �ּ� ��� �ö�.
+	
+	public String searchIdPassword(Map map);
 }

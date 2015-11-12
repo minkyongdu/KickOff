@@ -41,11 +41,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return false;
 	}
 	@Override
-	public boolean deleteMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
 	public String memberAddr(MemberVO member) {
 		// TODO Auto-generated method stub
 		return null;
@@ -61,5 +56,15 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public String certifyID(Map map) {
 		return sqlSession.selectOne("member.certifyID", map);
+	}
+	@Override
+	public String searchIdPassword(Map map) {
+		return sqlSession.selectOne("member.searchPassword", map);
+	}
+	@Override
+	public boolean deleteMember(MemberVO member) {
+		int result = sqlSession.delete("member.deleteID", member);
+		if(result > 0) return true;
+		return false;
 	}
 }

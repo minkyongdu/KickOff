@@ -297,4 +297,28 @@ public class MemController {
 					return "redirect:loginForm";
 				}
 		}
+		// 회원 탈퇴 폼
+		@RequestMapping("memDelete")
+		public String memdelete() {
+			return "memDelete";
+		}
+		// 회원 탈퇴 처리
+		@RequestMapping ("memderDelete")
+		public String deletemember(@RequestParam String id, @RequestParam String password ,
+						Model model, HttpServletRequest request,MemberVO memberVO, HttpSession session){
+			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", id);
+			map.put("password", password);
+			String userid = dao.searchIdPassword(map);
+			if(userid == null){
+				model.addAttribute("checkpass", "");
+			}else{
+				model.addAttribute("checkpass", userid);
+				dao.deleteMember(memberVO); 
+				session.invalidate(); 
+			}
+			return "memPasswordCheck";
+		}
+
 	}

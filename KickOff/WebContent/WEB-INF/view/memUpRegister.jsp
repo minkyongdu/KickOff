@@ -234,8 +234,8 @@ $(document).ready(function() {
       <input type="image" src="img/modify.png">&nbsp;&nbsp;
          <a href="javascript:history.back();"><img src="img/back.png"></a>
          <br>
-         <br>
-         <a href=""><input type="image" src="img/leave.png" align="right" width="80px" height="100%"></a>
+         <br>      
+         <a href="memDelete"><img src="img/leave.png" align="right" height="50" width="100"></a>
    </div>
    </form><!-- contents -->
    <div class="footer" align="center">
