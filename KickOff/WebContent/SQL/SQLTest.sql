@@ -182,13 +182,10 @@ create table epilogue -- epilogue(제품 후기) 테이블
 alter table "JAVAUSER"."MEMBER" add constraint mem_grade foreign key("MEMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
 -- company :: grade (회원등급)
 alter table "JAVAUSER"."COMPANY" add constraint com_grade foreign key("COMGRADE") references "GRADE"("GRADENUM") ON DELETE CASCADE;
-
 -- article :: articlegroup(제품 그룹번호)
 alter table "JAVAUSER"."ARTICLE" add constraint article_group foreign key("GROUPNUM") references "ARTICLEGROUP"("GROUPNUM") ON DELETE CASCADE;
-
 -- buy :: article (구매 제품번호)
 alter table "JAVAUSER"."BUY" add constraint buy_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
-
 -- buy :: member(구매 회원아이디)
 alter table "JAVAUSER"."BUY" add constraint buy_memID foreign key("ID") references "MEMBER"("ID")
 -- replynotice :: notice (공지사항 글번호)
@@ -197,6 +194,16 @@ alter table "JAVAUSER"."REPLYNOTICE" add constraint reply_notice foreign key("WR
 alter table "JAVAUSER"."REPLYQNA" add constraint replyQnA_QnA foreign key("WRITENUM") references "QNABOARD"("QNANO") ON DELETE CASCADE;
 -- articleFile :: article (제품 번호)
 alter table "JAVAUSER"."ARTICLEFILE" add constraint file_article foreign key("ARTICLENUM") references "ARTICLE"("ARTICLENUM") ON DELETE CASCADE;
+-- replyNotice :: member(공지사항 댓글 회원 아이디)
+alter table "JAVAUSER"."REPLYNOTICE" add constraint replynotice_member foreign key("REPLYID") references "MEMBER"("ID")
+-- replyQnA :: member(QnA 댓글 회원 아이디)
+alter table "JAVAUSER"."REPLYQNA" add constraint replyQnA_member foreign key("REPLYID") references "MEMBER"("ID")
+-- QnAboard :: member(QnA 게시판 아이디)
+alter table "JAVAUSER"."QNABOARD" add constraint qnaBoard_member foreign key("WRITER") references "MEMBER"("ID")
+-- epilogue :: member (후기 게시판 아이디)
+alter table "JAVAUSER"."EPILOGUE" add constraint epilogue_member foreign key("ID") references "MEMBER"("ID")
+
+
 
 drop table member cascade constraints;
 drop table company cascade constraints;
