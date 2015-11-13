@@ -9,14 +9,15 @@
 </head>
 <body>
 		  			<img src="img/space.png" width="10px" height="20px">
-		  			<a href = "logout"><img src = "img/logoutt.png" width="40px" height="15px"></a> <!-- 로그아웃 -->
+		  			<a href = "logout"><img src = "img/logoutt.png" width="50px" height="20px"></a> <!-- 로그아웃 -->
 		  			<img src="img/space.png" width="10px" height="20px">
-			  		<a href="memPasswordCheckForm"><img src="img/mypaget.png" width="40px" height="15px"></a> <!-- 마이페이지 -->
+			  		<a href="memPasswordCheckForm">
+			  		<img src="img/mypaget.png" width="50px" height="20px"></a> <!-- 마이페이지 -->
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href=""><img src="img/cartlistt.png" width="40px" height="15px"></a>
+			  		<a href=""><img src="img/cartlistt.png" width="50px" height="20px"></a>
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="memOrderList?id=${sessionScope.userLoginInfo.id}"><img src="img/ordert.png" width="40px" height="15px"></a>
+			  		<a href="memOrderList?id=${sessionScope.userLoginInfo.id}"><img src="img/ordert.png" width="50px" height="20px"></a>
 			  		<img src="img/space.png" width="10px" height="20px">
-			  		<a href="noticeListForm"><img src="img/customert.png" width="40px" height="15px"></a>
+			  		<a href="noticeListForm"><img src="img/customert.png" width="50px" height="20px"></a>
 </body>
 </html>

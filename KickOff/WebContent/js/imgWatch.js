@@ -153,9 +153,6 @@ $(document).ready(function (){
                  alert('이미지를 추가해주세요.');
                  return false;
               } else{
-              
-           
-   
               $("#productForm").submit();
               }
            

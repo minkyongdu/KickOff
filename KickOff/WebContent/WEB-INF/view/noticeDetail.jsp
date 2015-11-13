@@ -106,11 +106,11 @@
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr><td></td></tr>
-<tr height="300">
-    <td valign="top"><div id="article_content">
-         	<c:choose>
+<tr height="300">  
+    <td valign="top"><div id="article_content"> 
+         	<c:choose> 
 				<c:when test="${NoticeDetail.fileName != null}">
-					<img src="/KickOff/img/${NoticeDetail.fileName}" width = "100%"><br>		
+					<img src="/KickOff/img/${NoticeDetail.fileName}" width = "300" height = "300"><br>		
 				</c:when>
 			</c:choose>
 			<c:choose>	
@@ -119,7 +119,7 @@
 			</c:choose>
          	<c:choose>	
 				<c:when test="${NoticeDetail.fileName2 != null}">
-					<img src="/KickOff/img/${NoticeDetail.fileName2}" width = "100%"><br>							
+					<img src="/KickOff/img/${NoticeDetail.fileName2}" width = "300" height = "300"><br>							
 				</c:when>
 			</c:choose>
          	<c:choose>	
@@ -128,7 +128,7 @@
 			</c:choose>
          	<c:choose>		
 				<c:when test="${NoticeDetail.fileName3 != null}">
-					<img src="/KickOff/img/${NoticeDetail.fileName3}" width = "100%"><br>						
+					<img src="/KickOff/img/${NoticeDetail.fileName3}" width = "300" height = "300"><br>						
 				</c:when>
 			</c:choose>
          	<c:choose>	

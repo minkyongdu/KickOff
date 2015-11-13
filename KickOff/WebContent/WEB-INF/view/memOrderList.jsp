@@ -58,26 +58,26 @@
 		<h3>개인제품주문리스트</h3>
 		<hr>
 		<table border="1" cellpadding="5">
-			<tr bgcolor="yellow">
-				<th>주문번호</th>
-				<th>물품이미지</th>
-				<th>제품이름</th>
-				<th>주문사이즈</th>
-				<th>주문가격(수량)</th>
-				<th>주문날자</th>
-				<th>주문상태</th>
+			<tr bgcolor="black">
+				<th><font color = "white">주문번호</font></th>
+				<th><font color = "white">물품이미지</font></th>
+				<th><font color = "white">제품이름</font></th>
+				<th><font color = "white">주문사이즈</font></th>
+				<th><font color = "white">주문가격(수량)</font></th> 
+				<th><font color = "white">주문날짜</font></th>
+				<th><font color = "white">주문상태</font></th>
 			</tr>
 			 <c:forEach var="buylist" items="${buyMemberlist}">
-				<tr>
-					<td>${buylist.buyNum}</td>
-					<td>
+				<tr> 
+					<td align = "center">${buylist.buyNum}</td>
+					<td align = "center">
 						<img src="/KickOff/img/${buylist.imgFile1}" width="100" height="100">
 					</td>
-					<td>${buylist.aname}</td>
-					<td>${buylist.asize}</td>
-					<td>${buylist.price}원(${buylist.buyamount}개)</td>
-					<td>${buylist.buydate}</td>
-					<td>${buylist.buyStatus}</td>
+					<td align = "center">${buylist.aname}</td>
+					<td align = "center">${buylist.asize}</td>
+					<td align = "center">${buylist.price}원(${buylist.buyamount}개)</td>
+					<td align = "center">${buylist.buydate}</td>
+					<td align = "center">${buylist.buyStatus}</td>
 				</tr>
 			</c:forEach>					
 	 	</table> 
@@ -87,23 +87,23 @@
 			<tr>
 			<center>
 				<td colspan="5" align="center"><c:if test="${startPage>1}">
-						<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${startPage-1}">이전</a>
+						<span> <a href="/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}&pageNumber=${startPage-1}">이전</a>
 						</span> 
 					</c:if> <c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<c:choose>
 							<c:when test="${pageNumber == i }">
-								<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${i}"
+								<span> <a href="/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}&pageNumber=${i}"
 									style="text-decoration: none; color: blue; font-weight: bold;">${i}</a>&nbsp;
 								</span>
 							</c:when>
 							<c:otherwise>
-								<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.id}&pageNumber=${i}"
+								<span> <a href="/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}&pageNumber=${i}"
 									style="text-decoration: none; color: gray;">${i}</a>&nbsp;
 								</span>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach> <c:if test="${endPage < totalPageCount}">
-					<span> <a href="/KickOff/memOrderList?idNum=${sessionScope.userLoginInfo.idNum}&pageNumber=${endPage+1}">다음</a>
+					<span> <a href="/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}&pageNumber=${endPage+1}">다음</a>
 						</span>
 					</c:if></td>
 			</center>

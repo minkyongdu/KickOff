@@ -81,15 +81,15 @@
 <tr><td></td></tr>
 <tr height="300">
     <td valign="top"><div id="article_content">
-         	<c:choose>
+         	<%-- <c:choose>
 				<c:when test="${eventDetail.fileName != null}">
-					<img src="/KickOff/img/${eventDetail.fileName}" width = "100%" height = "1000px"><br>		
+					<img src="/KickOff/img/${eventDetail.fileName}" width = "100%" height = "100%"><br>		
 				</c:when>
 			</c:choose>
 			<c:choose>	
 				<c:when test="${eventDetail.fileName == null}">
 				</c:when>
-			</c:choose>
+			</c:choose> --%>
          	<c:choose>	
 				<c:when test="${eventDetail.fileName2 != null}">
 					<img src="/KickOff/img/${eventDetail.fileName2}" width = "100%"><br>							

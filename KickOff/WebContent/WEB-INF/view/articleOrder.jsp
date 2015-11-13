@@ -97,6 +97,14 @@
 </script>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
 <body onload="init();">
+<c:if test="${sessionScope.userLoginInfo.id == null}">
+      <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
+      	<script type="text/javascript">
+      	location.href='loginForm';
+      	</script>
+      	</c:when>
+	</c:choose>
+	</c:if>
    <div class="wrap">
       <div class="header" align="center">
          <div class="toparea" align="right">
