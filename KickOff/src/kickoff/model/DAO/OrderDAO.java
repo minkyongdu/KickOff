@@ -17,6 +17,7 @@ public interface OrderDAO {
 	public int orderlistcount(); //주문 갯수 조회
 	public List<OrderVO> buylist(String id);//개인별 주문 리스트 (추가)
 	public int updateBuyStatus(OrderVO orderVO);//주문상태 업데이트 (추가)
+	public int updateSendpackage(OrderVO orderVO);//주문상태 업데이트 (추가)
 	public List<OrderVO> companylist(RowNumVO rownumVO); //회사 주문 리스트 (추가)
 	public List<OrderVO> selectbuyID(int buyNum);
 	public List<OrderVO> selectOrderMemberPage(Map map); // 리스트 페이징

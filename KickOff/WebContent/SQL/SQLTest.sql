@@ -25,7 +25,7 @@ drop sequence replyQnANum_seq;
 drop sequence buyepliNum_seq;
 
 
-
+select * from buy;
 // 관리자 계정
 insert into member values ( 'master', 'master', '관리자', 
   '1993-01-01', '113-234', '서울시 강남구','010-0000-0000', 'master@naver.com', 
@@ -103,7 +103,7 @@ create table buy -- buy(구매) 테이블
   subphonenum varchar2(15) not null, price number not null, Aname varchar2(50) not null,
   buyamount number not null, Asize varchar2(20) not null, ArticleNum number not null,
   buydate date, buyStatus varchar2(100) not null, sendContent varchar2(100),
-  sendNum number, sendpackage number, companyNum number not null);
+  sendpackage number, companyNum number not null);
 
 create table sendpackage -- sendpackage(택배) 테이블
 ( buyNum number primary key, sendname varchar2(30) not null, 

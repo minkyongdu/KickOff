@@ -93,5 +93,12 @@ public class OrderDAOImpl implements OrderDAO {
 		count = sqlSession.selectOne("order.OrderMemberCount", id);
 		return count;
 	}
+
+	@Override
+	public int updateSendpackage(OrderVO orderVO) {
+		int result = 0;
+		result = sqlSession.update("order.SendpackageUpdate", orderVO);
+		return result;
+	}
 	   
 }

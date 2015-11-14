@@ -17,7 +17,6 @@ public class OrderVO {
 	private String buydate;
 	private String buyStatus;
 	private String sendContent;
-	private int sendNum; 
 	private int sendpackage;
 	private String imgFile1;
 	private int companyNum;
@@ -137,15 +136,6 @@ public class OrderVO {
 	public void setSendContent(String sendContent) {
 		this.sendContent = sendContent;
 	}
-
-	public int getSendNum() {
-		return sendNum;
-	}
-
-	public void setSendNum(int sendNum) {
-		this.sendNum = sendNum;
-	}
-
 	public int getSendpackage() {
 		return sendpackage;
 	}

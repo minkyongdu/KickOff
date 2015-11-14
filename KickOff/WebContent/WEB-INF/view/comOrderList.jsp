@@ -13,6 +13,36 @@ var childWin = null;
 function winOpen(buyNum){
 		    childWin = window.open('comOrderSelectID?buyNum='+buyNum,'child','width=900,height=150');
 		}
+$(document).ready(function(){
+	$('#test').hide();
+	$('#sendpackage').hide();
+	if($('#buyStatus').val() == '주문완료')
+		{
+			$('#test').hide();
+			$('#sendpackage').hide();
+		}
+	else if($('#buyStatus').val() == '배송준비' || $('#buyStatus').val() == '배송중' || $('#buyStatus').val() == '배송완료'  )
+		{	 
+						var buyNum = $('#buyNum').val();
+						var OrderVO = {"buyNum": buyNum, "sendpackage" : $('#sendpackage').val()}
+			$('#test').show(); 
+			$('#sendpackage').show();  
+					$('#test').on("click",function(){
+						alert(sendpackage);
+						$.ajax({
+							url : "updateSendpackage",
+							type : "post",
+							data : OrderVO,
+							success : function(request){
+								alert('굿데이');
+							},
+							error : function(error){
+								alert('실패다');	
+							}
+						});
+					});
+		} 
+});
 </script> 
 <body>   
 <div class="wrap">
@@ -60,7 +90,7 @@ function winOpen(buyNum){
 	<center>
 		<img src="img/orderpostbanner.png" />
 
-<table width="950" height="100%" border="0" cellspacing="0">
+<table width="1200" height="100%" border="0" cellspacing="0">
   <tr>
     <th width="50" align="center" class="tablestyle">번호</th>
     <th width="100" align="center" class="tablestyle">구매자</th>
@@ -70,6 +100,7 @@ function winOpen(buyNum){
     <th align="center" class="tablestyle" width="100">구매금액</th>
     <th align="center" class="tablestyle" width="80">주문일시</th>
     <th align="center" class="tablestyle" width="200">주문상태</th>
+    <th align="center" class="tablestyle" width="250">배송번호</th>
   </tr> 
   <c:forEach var="buy" items="${companylist}" varStatus="status">	
   <tr>
@@ -94,6 +125,12 @@ function winOpen(buyNum){
 							<input type="hidden" name="buyNum" value="${buy.buyNum}">
 							<input type="hidden" name="companyNum" value="${buy.companyNum}">		
 					</form>
+	</td>
+	<td id = "plussend" align = "center">
+		<input type = "text" id = "sendpackage" name = "sendpackage" value = "${buy.sendpackage}" size = "4">
+		<input type = "button" value = "배송번호입력" id = "test">
+		<input type="hidden" id = "buyNum" name="buyNum" value="${buy.buyNum}">
+		<input type="hidden" id = "companyNum" name="companyNum" value="${buy.companyNum}">	
 	</td>
   </tr>
   </c:forEach>
@@ -124,8 +161,9 @@ function winOpen(buyNum){
          </tr>
       </table>
 	</center>
-	<br><br><br><br><br><br><br><br><br> 
-	<center>
+	<center> 
+	<a href = "javascript:history.back(-1)"><img src = "img/backbtn.png"></a> 
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<jsp:include page="main/bottom.jsp" />  
 	</center>
 </body>

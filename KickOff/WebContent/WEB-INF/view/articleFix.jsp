@@ -50,7 +50,7 @@ $(document).ready(function() {
   <jsp:include page="main/menubar.jsp" />
   </div>
   <center>
-  <img src = "img/writeformbanner.png">
+  <img src = "img/prodmodifybanner.png">
   <img src = "img/direction.png">
   </center> 
 <form method="post" name= "productForm" id="productForm" action="articleFixUpdate" name="productForm"
@@ -64,7 +64,7 @@ $(document).ready(function() {
       		</script>
       	</c:when>
 	</c:choose>
-</c:if>         
+</c:if>          
 <center>
 <table width="710" height="100%" border="0" cellspacing="0">
   <tr>
@@ -133,17 +133,19 @@ $(document).ready(function() {
  
                           </table></td>
   </tr>
-  <tr>   
-    <td colspan="2" align="center" valign="middle">  
+  <tr>    
+    <td colspan="3" align="center" valign="middle">  
+    <br><br>
     <input type = "image" src = "img/produpload.png" id = "productinserts">
       <a href="/KickOff/comCompanyArticleList?companyNum=${sessionScope.comLoginInfo.companyNum}"><img src="img/back.png" /></a>
       </td>  
     </tr>
 </table>
 </center>
-</form>
-<%-- <center>
+</form> 
+<br><br>
+<center>
 <jsp:include page="main/bottom.jsp" />
-</center> --%>
+</center>
 </body>
 </html>

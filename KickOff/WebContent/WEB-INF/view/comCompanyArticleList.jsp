@@ -110,7 +110,10 @@ function deleteSelectQ()
          </tr>
       </table>
     </center>
-    <br><br><br><br><br><br><br><br><br>  
+    	<center>
+    		<a href = "comRegiSelect"><img src = "img/backbtn.png"></a>
+    	</center>
+    <br><br><br><br><br><br><br><br><br><br><br><br>   
      <center>
   <jsp:include page="main/bottom.jsp" />
  </center>

@@ -167,6 +167,13 @@ public class OrderController {
 		orderDAO.updateBuyStatus(orderVO);
 		return "redirect:comOrderList?companyNum="+orderVO.getCompanyNum();
 	}
+	// 배송번호 업데이트
+	@RequestMapping(value = "updateSendpackage", method = RequestMethod.POST)
+	public String updateSendpackage(OrderVO orderVO, HttpServletRequest request)
+	{
+		orderDAO.updateSendpackage(orderVO);
+		return "redirect:comOrderList?companyNum="+orderVO.getCompanyNum();
+	}
 	//아이디 클릭시 정보 조회
 	@RequestMapping("comOrderSelectID")
 	public String comOrderselectID(@RequestParam int buyNum, HttpServletRequest request)

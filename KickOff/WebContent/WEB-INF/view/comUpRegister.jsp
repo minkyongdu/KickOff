@@ -231,9 +231,8 @@ $(document).ready(function() {
 													<tr>
 														<td><input type="image"
 															src="img/modify.png"></td>
-														<td><a
-															href="javascript:'history.back()'"><img
-																src="img/back.png"></a></td>
+														<td><a href="/KickOff/"><img
+																src="img/gomainbig.png"></a></td>
 													</tr>
 												</table>
 											</td>

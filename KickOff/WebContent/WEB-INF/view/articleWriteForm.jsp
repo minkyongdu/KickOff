@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src = "js/imgWatch.js"></script>
 <script type="text/javascript" src = "js/sizeamount.js"></script>
@@ -53,6 +54,7 @@ function groupNum() {
    </c:choose>
    </c:if>       
 <center>
+<div class="engtext">
 <table width="710" height="100%" border="0" cellspacing="0">
   <tr>
     <td colspan="2" align="center" valign="middle"
@@ -121,6 +123,7 @@ function groupNum() {
     <a href="javascript:history.back(-1);"><img src="img/back.png" alt="" /></a>    
 
 </table>
+</div>
 </center>
 </form>
 <center>
