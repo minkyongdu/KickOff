@@ -2,16 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html> 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src = "js/imgWatch.js"></script>
-<script type="text/javascript" src = "js/sizeamount.js"></script>
+<script type="text/javascript" src = "js/imgWatchFix.js"></script>
+
+<script src = "js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {   
+    $('#addFile').click(function() { 
+       var fileIndex = $('#fileview tr').length; //<table id="fileview"> 밑에 tr 갯수을 fileIndex에 담음
+       if (Number(fileIndex) >= '5') { //file Upload 갯수를 5개로 제한
+          alert('FILE UPLOAD는 5개만 가능 합니다.');
+          return;
+       }
+       var i = $('#fileview tr').length;
+       if(Number(i) >= '5'){
+          return;
+       }
+       $('#fileview').append(
+             '<tr><td>'
+                + '   <input type="file" id="files['+ fileIndex +']" name="files['+ fileIndex +']" onchange="imageURL'+(i+1)+'(this)" />'
+                + '</td></tr>'); 
+    });
+ });
+</script> 
 <body>
-<div class="wrap">
+<div class="wrap"> 
   <div class="header" align="center">
         <div class="toparea" align="right">
         <c:choose>
@@ -50,7 +69,8 @@
 <table width="710" height="100%" border="0" cellspacing="0">
   <tr>
     <td colspan="2" align="center" valign="middle"
-                           style="border: 1px solid #ccc; border-left: none; border-right: none;"><table width="300" border="0" cellspacing="0">
+                           style="border: 1px solid #ccc; border-left: none; border-right: none;">
+                           <table width="300" border="0" cellspacing="0">
       <tr>
         <td width="80" height="100" align="right" valign="middle" style="border: 1px solid #ccc; border-top:none; border-left: none; border-right: none;">분류
       :</td>
@@ -96,8 +116,14 @@
                            style="border: 1px solid #ccc; border-top: none; border-left: none; border-right:none;"><table width="200" border="0">
       <tr>
         	<td height="150px" align="center" valign="middle">
-        	<img src="/KickOff/img/${article.imgFile1}" alt="" width="300" height="300" id="img1" /></td>
-        </td>
+        	<img src="/KickOff/img/${article.imgFile1}" alt="" width="300" height="300" id="img1" />
+        	 
+			<input type="hidden" value="${article.imgFile1}" name="imgFile1">
+			<input type="hidden" value="${article.imgFile2}" name="imgFile2">
+			<input type="hidden" value="${article.imgFile3}" name="imgFile3">
+			<input type="hidden" value="${article.imgFile4}" name="imgFile4">
+			<input type="hidden" value="${article.imgFile5}" name="imgFile5">
+        	</td>
         </tr>
       </table></td>
     <td align="center" valign="middle"
@@ -105,19 +131,19 @@
       <input type="button" id="addFile" value="이미지추가" /> <p>
                            <table id="fileview">
 
-                          </table> </p>   </td>
+                          </table></td>
   </tr>
-  <tr>
-    <td colspan="2" align="center" valign="middle">
-    	<input type="image" src="img/produpload.png" id ="productinsert" />
-      <a href="/KickOff/comCompanyArticleList?companyNum=${sessionScope.comLoginInfo.companyNum}"><img src="img/back.png" /></a></td>
+  <tr>   
+    <td colspan="2" align="center" valign="middle">  
+    <input type = "image" src = "img/produpload.png" id = "productinserts">
+      <a href="/KickOff/comCompanyArticleList?companyNum=${sessionScope.comLoginInfo.companyNum}"><img src="img/back.png" /></a>
+      </td>  
     </tr>
-    <input type="image" src="img/produpload.png" id ="productinsert" />
 </table>
 </center>
 </form>
-<center>
+<%-- <center>
 <jsp:include page="main/bottom.jsp" />
-</center>
+</center> --%>
 </body>
 </html>

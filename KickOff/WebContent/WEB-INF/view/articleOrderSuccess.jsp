@@ -19,7 +19,6 @@
 <div class="wrap">
   <div class="header" align="center"> 
 	  	<div class="toparea" align="right">
-	  	
 	  	<c:choose>
 	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 1}">
 		  			<jsp:include page="main/memLogout.jsp" />
@@ -44,7 +43,6 @@
 <center>
 	<h5>주문이 성공하였습니다.</h5> 
 	<h5>잠시 후 주문 목록으로 이동합니다.</h5>
-	<meta http-equiv="refresh" content="2;url=/KickOff/memOrderList?id=${sessionScope.userLoginInfo.id}">
 </center>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
