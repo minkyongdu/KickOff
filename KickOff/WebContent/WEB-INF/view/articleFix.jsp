@@ -130,7 +130,7 @@ $(document).ready(function() {
                            style="border: 1px solid #ccc; border-top: none; border-left: none; border-right: none;">이미지 업로드
       <input type="button" id="addFile" value="이미지추가" /> <p>
                            <table id="fileview">
-
+ 
                           </table></td>
   </tr>
   <tr>   
