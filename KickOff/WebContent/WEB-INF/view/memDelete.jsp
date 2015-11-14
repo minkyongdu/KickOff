@@ -178,7 +178,7 @@
 	<br> 
    <table cellpadding="0" cellspacing="0" border="0"align="center">
 <tr>
-    <td><input type="checkbox" id="check1" name="check1" value="1" ></td>
+    <td><input type="checkbox" id="check1" name="check1" value="1"></td>
     <td width="5"></td>
     <td><label for="check1">회원탈퇴와 관련한 내용을 모두 확인하였으며 이에 동의 합니다.</label></td>
 </tr>
@@ -193,7 +193,7 @@
 <div style="width:100%; text-align:center; padding-top:10; padding-bottom:20" class=noline>
 <img src="img/leave.png" border=0 id="deletemem">&nbsp;
 <a href="javascript:history.back();" onFocus="this.blur();"><img src="img/back.png" border="0" alt="취소"></a></div>
-
+<input type = "hidden" name = "id" value = "${sessionScope.userLoginInfo.id}">
 </form>
 
 </div>

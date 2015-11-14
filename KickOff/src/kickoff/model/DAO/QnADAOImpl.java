@@ -65,4 +65,10 @@ public class QnADAOImpl implements QnADAO{
 		if(result > 0) return true;
 		return false;
 	}
+	@Override
+	public boolean deleteQnAboard(String id) {
+		int result = sqlSession.delete("qna.QnADeleteID",id);
+		if(result > 0)return true;
+		return false;
+	}
 }

@@ -31,6 +31,8 @@ import kickoff.model.DAO.CompanyDAO;
 import kickoff.model.DAO.LoginDAO;
 import kickoff.model.DAO.MemberDAO;
 import kickoff.model.DAO.PostDAO;
+import kickoff.model.DAO.QnADAO;
+import kickoff.model.DAO.ReplyQnADAO;
 import kickoff.model.beans.CompanyVO;
 import kickoff.model.beans.MemberVO;
 import kickoff.model.beans.PostVO;
@@ -46,6 +48,10 @@ public class MemController {
 	private LoginDAO loginDAO;
 	@Autowired
 	private PostDAO postDAO;
+	@Autowired
+	private QnADAO qnaDAO;
+	@Autowired
+	private ReplyQnADAO replyqnaDAO;
 
 	private static final Logger logger = LoggerFactory.getLogger(MemController.class);
 
@@ -302,11 +308,11 @@ public class MemController {
 		public String memdelete() {
 			return "memDelete";
 		}
-		// 회원 탈퇴 처리
+
 		@RequestMapping ("memderDelete")
-		public String deletemember(@RequestParam String id, @RequestParam String password ,
+		public String deletemember(@RequestParam String id, @RequestParam String password,
 						Model model, HttpServletRequest request,MemberVO memberVO, HttpSession session){
-			
+			String qnaID = request.getParameter("id");
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("id", id);
 			map.put("password", password);
@@ -315,10 +321,11 @@ public class MemController {
 				model.addAttribute("checkpass", "");
 			}else{
 				model.addAttribute("checkpass", userid);
+				qnaDAO.deleteQnAboard(qnaID);
+				replyqnaDAO.deleteQnAReplyID(qnaID);
 				dao.deleteMember(memberVO); 
 				session.invalidate(); 
 			}
 			return "memPasswordCheck";
 		}
-
 	}

@@ -48,4 +48,10 @@ public class ReplyQnADAOImpl implements ReplyQnADAO{
 		num = sqlSession.delete("qna.ReplyQnADelete",writeNum);
 		return num;
 	}
+	@Override
+	public boolean deleteQnAReplyID(String id) {
+		int result = sqlSession.delete("qna.ReplyQnADeleteID", id);
+		if(result > 0) return true;
+		return false;
+	}
 }	

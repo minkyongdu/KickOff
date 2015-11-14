@@ -14,4 +14,5 @@ public interface QnADAO {
 	public int qnaDelete(QnAVO qnaVO); //공지사항 글 삭제
 	public boolean plusHit(int qnano); // 글 상세보기시 조회수 증가
 	public boolean minusHit(int qnano); // 글 수정시 조회수 감소
+	public boolean deleteQnAboard(String id); // QnA게시판 아이디 삭제
 }

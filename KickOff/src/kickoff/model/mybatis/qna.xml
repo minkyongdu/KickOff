@@ -52,11 +52,11 @@ delete from replyQnA where replyNum = #{replyNum}
 delete from replyQnA where writeNum = #{writeNum}
 </delete>
 <!-- QnA 댓글 회원 탈퇴 -->
-<delete id="ReplyQnADeleteID" parameterType="int">
-delete from replyQnA where id = #{id}
+<delete id="ReplyQnADeleteID" parameterType="String">
+delete from replyQnA where replyid = #{replyid}
 </delete>
 <!-- QnA 회원 탈퇴 -->
-<!-- <delete id = "QnADeleteID" parameterType="">
-
-</delete> -->
+<delete id = "QnADeleteID" parameterType="String">
+delete from QnAboard where writer = #{writer}
+</delete>
 </mapper>

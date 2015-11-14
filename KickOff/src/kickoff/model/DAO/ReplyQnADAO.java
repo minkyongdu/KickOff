@@ -13,4 +13,5 @@ public interface ReplyQnADAO {
 	public int QnAReplyCount(int writeNum); //QnA 댓글 갯수 확인  
 	public boolean QnAdeleteReply(ReplyVO replyVO); //QnA 댓글 삭제
 	public int QnAdeleteNoticeReply(int writeNum); //QnA 댓글 삭제
+	public boolean deleteQnAReplyID(String id); // QnA 댓글 아이디 삭제
 }
