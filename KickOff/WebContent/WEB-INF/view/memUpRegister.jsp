@@ -30,6 +30,29 @@ $(document).ready(function() {
       $("#email2 option:eq(4)").remove(); 
    }
 });
+$(document).ready(function() { 
+	   var ema = $("#pwdQ option:selected").val();
+	   var q1 = "사는 곳이 어디입니까?";
+	   var q2 = "어머니의 성함은?";
+	   var q3 = "아버지의 성함은?";
+	   var q4 = "내가 태어난 곳은?";
+	   var q5 = "내가 다닌 초등학교는?";
+	   var q6 = "나의 좌우명은?";
+	   if(ema == q1){
+	      $("#pwdQ option:eq(1)").remove(); 
+	   }else if(ema == q2){
+	      $("#pwdQ option:eq(2)").remove(); 
+	   }else if(ema == q3){
+	      $("#pwdQ option:eq(3)").remove(); 
+	   }else if(ema == q4){
+	      $("#pwdQ option:eq(4)").remove(); 
+	   }else if(ema == q5){
+	      $("#pwdQ option:eq(5)").remove();  
+	   }else if(ema == q6){
+	      $("#pwdQ option:eq(6)").remove(); 
+	   }
+	   
+	});
 </script>
 <script>
    function test() {
@@ -196,9 +219,9 @@ $(document).ready(function() {
                                        <tr>
                                           <td>비밀번호<br>찾기 질문&nbsp;&nbsp;</td>
                                           <td>
-                                             <select name="pwdQ" size="1"
+                                             <select name="pwdQ" size="1" id = "pwdQ"
                                                 tabindex='31'>
-                                                   <option selected>선택</option>
+                                                   <option selected>${sessionScope.userLoginInfo.pwdQ}</option>
                                                    <option>사는 곳이 어디입니까?</option>
                                                    <option>어머니의 성함은?</option>
                                                    <option>아버지의 성함은?</option>
@@ -215,7 +238,8 @@ $(document).ready(function() {
                                           <td>비밀번호<br>찾기 답안&nbsp;&nbsp;</td>
                                           <td>
                                              <input type="text"
-                                                name="pwdA" size="40" maxlength="100" tabindex='18'>
+                                                name="pwdA" size="40" maxlength="100" tabindex='18'
+                                                value = "${sessionScope.userLoginInfo.pwdA}">
                                           </td>
                                        </tr>
                                        <input type="hidden" value="${sessionScope.userLoginInfo.id}" name="id">
