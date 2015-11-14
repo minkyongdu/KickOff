@@ -122,7 +122,7 @@ select a.articlenum, a.aname, a.price, b.imgfile1
 	delete from articleSizeAmount where articleNum = #{articleNum}
 </delete>
 <select id="selectCompanyList" parameterType="int" resultType="kickoff.model.beans.ArticleVO">
-	select * from( select articleNum, aname, price, articleDate, imgfile1, imgfile2, imgfile3, imgfile4, imgfile5,rownum r
+	select * from( select articleNum, companyNum, aname, price, articleDate, imgfile1, imgfile2, imgfile3, imgfile4, imgfile5,rownum r
 	from ( select * from article natural join articlefile 
                 where companyNum = #{companyNum} order by articleNum desc))
 	where r between #{startRow} and #{endRow}

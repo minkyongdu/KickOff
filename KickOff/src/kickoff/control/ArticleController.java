@@ -382,6 +382,7 @@ public class ArticleController {
 					model.addAttribute("startPage", startPage);
 					model.addAttribute("endPage", endPage);
 					model.addAttribute("companyArticleList", list);
+					model.addAttribute("reqCompanyNum", companyNum);
 					return "comCompanyArticleList";
 				}
 

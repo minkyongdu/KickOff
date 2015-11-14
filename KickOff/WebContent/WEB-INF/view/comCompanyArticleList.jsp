@@ -19,10 +19,20 @@ function deleteSelectQ()
          location.href = $('#deleteFileURL').attr("onClick");
       }
 }
-</script>
+</script> 
 </head>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
 <body>
+<c:if test="${(companyArticleList[0].companyNum != null) || (companyArticleList[0].companyNum == null)}">
+<c:choose>
+	<c:when test="${sessionScope.comLoginInfo.companyNum != reqCompanyNum}">
+		<script type="text/javascript">
+				alert('해당 제품의 담당 회사가 아니라면 접근 하실 수 없습니다.');
+		      	location.href='javascript:history.back(-1)';
+		</script>
+	</c:when> 
+</c:choose> 
+</c:if>
 <div class="wrap">
   <div class="header" align="center"> 
         <div class="toparea" align="right">
