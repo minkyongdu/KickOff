@@ -17,6 +17,9 @@
 			if($('#replycontent').val() == ""){
 				alert('댓글 내용이 없습니다.');
 				$('#replycontent').focus();
+			}else if($('#replycontent').val().length > 30){
+				   alert("30글자 이하로 작성해주세요.");
+				   return false;
 			}
 			else
 				{

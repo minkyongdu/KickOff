@@ -65,6 +65,9 @@
 		{ 
 			alert('후기를 입력해 주세요.');
 			return false;
+		}else if(insertEpli.length > 30){
+			   alert("30글자 이하로 작성해주세요.");
+			   return false;
 		}
 		else if (stars == "평점입력")
 		{
