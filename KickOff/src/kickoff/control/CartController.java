@@ -103,10 +103,9 @@ public class CartController {
          
          for(int i = 0; i<list.size(); i++){
             Map map = new HashMap();
-            String size= list.get(i).getAsize();
-            String Asize = size.trim();
+            String size= list.get(i).getAsize().trim();
             map.put("articleNum", list.get(i).getArticleNum());
-            map.put("Asize", Asize);
+            map.put("Asize", size);
             int count = orderDAO.orderProductCount(map);
 
             if(count > list.get(i).getAmount()){
@@ -135,10 +134,9 @@ public class CartController {
            List<CartVO> list =  (List<CartVO>) session.getAttribute("list");
            for(int i = 0; i<list.size(); i++){
             Map map = new HashMap();
-            String size= list.get(i).getAsize();
-            String Asize = size.trim();
+            String size= list.get(i).getAsize().trim();
             map.put("articleNum", list.get(i).getArticleNum());
-            map.put("Asize", Asize);
+            map.put("Asize", size);
             int count = orderDAO.orderProductCount(map);
 
             if(count > list.get(i).getAmount()){
