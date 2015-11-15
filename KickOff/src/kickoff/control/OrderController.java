@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kickoff.model.DAO.OrderDAO;
 import kickoff.model.beans.ArticleSizeAmountVO;
+import kickoff.model.beans.CartVO;
 import kickoff.model.beans.OrderVO;
 import kickoff.model.beans.RowNumVO;
 
@@ -59,7 +61,45 @@ public class OrderController {
 	private final int PAGESIZE = 10;
 	private final int PAGEGROUP = 10;
 	
-	
+	@RequestMapping("articleOrderCart")
+	public String articleOrderCart(OrderVO orderVO,ArticleSizeAmountVO sizeVO,@RequestParam int buyamount,HttpSession session,
+			HttpServletRequest request,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+        PrintWriter writer = response.getWriter();
+		List<CartVO> list = (List) session.getAttribute("list");
+		for (int i = 0; i < list.size(); i++) {
+			String name =list.get(i).getAname();
+			int ArticleNum = list.get(i).getArticleNum();
+			String Asize = list.get(i).getAsize();
+			int CompanyNum = list.get(i).getCompanyNum();
+			int price = list.get(i).getPrice();
+			String amount =Integer.toString(list.get(i).getAmount());
+			orderVO.setBuyamount(amount);
+			orderVO.setAname(name);
+			orderVO.setArticleNum(ArticleNum);
+			orderVO.setAsize(Asize);
+			orderVO.setCompanyNum(CompanyNum);
+			orderVO.setPrice(price);
+			int count = Integer.parseInt(amount);
+		
+			if(count>=buyamount){
+			orderDAO.orderinsert(orderVO);
+			sizeVO.setAmount(buyamount);
+			orderDAO.updateorder(sizeVO);
+			session.removeAttribute("list");
+			}
+			else{
+				writer.println("<script>alert('" + count + "이하로만 주문이 가능합니다.');");
+				writer.println("javascript:history.go(-1)</script>");
+	            writer.flush();
+				return "articleOrderForm?articleNum="+ArticleNum;
+			}
+		
+		}
+		
+		return "articleOrderSuccess";
+	}
 	//주문한 관리자용 총 리스트 (추가)
 	@RequestMapping("orderList")
 	public String orderlist(Model model, String pageNumber)

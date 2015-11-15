@@ -392,6 +392,40 @@ public class ArticleController {
 					model.addAttribute("reqCompanyNum", companyNum);
 					return "comCompanyArticleList";
 				}
-
+				@RequestMapping("articlecartOrder")
+				public String aritclecartOrder(@RequestParam int articleNum, @RequestParam String aasize,
+											@RequestParam int amount, Model model, 
+						HttpServletRequest req, HttpServletResponse response)throws IOException{
+					response.setContentType("text/html; charset=UTF-8");
+			        req.setCharacterEncoding("UTF-8");
+			        
+			        PrintWriter writer = response.getWriter();
+			        String[] result = aasize.split(" : "); //수량을 가져오면 230 : 23 이므로 split으로 짜름
+			        String sr= result[1];
+					Map map = new HashMap();
+					map.put("articleNum", articleNum);
+					map.put("Asize", sr);
+					writer.println("<script>alert('1234');</script>");
+					int count = orderDAO.orderProductCount(map);
+					if(count >= amount){
+						model.addAttribute("article", articleDAO.articleDetail(articleNum));
+						model.addAttribute("amount", amount);
+						model.addAttribute("Asize",sr);
+						return "redirect:cartinsert";
+					}
+					else if (count < amount)
+					{
+						writer.println("<script>alert('재고가 부족합니다.');");
+						writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+			            writer.flush();
+						return "articleDetail?articleNum="+articleNum;
+					}
+					else{
+						writer.println("<script>alert( '" + count + "이하로만 주문이 가능합니다.');");
+						writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+			            writer.flush();
+						return "articleDetail?articleNum="+articleNum;
+					}
+				}	
 	
 }

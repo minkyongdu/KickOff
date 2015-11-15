@@ -10,6 +10,16 @@
 </head>
 <script type="text/javascript" src = "js/jquery.js"></script>
 <script type="text/javascript">
+	$(document).ready(function(){
+		$('#carts').click(function() { 
+		var asize = document.getElementById('Asize').value;
+		var Amount = document.getElementById('amount').value;
+
+		$('#aasize').attr("value", asize);
+		$('#AAmount').attr("value", Amount);
+		$('#carts').submit();
+		})
+	});
 	// 이미지 위에 올릴시 이미지 변경
 	$(document).ready(function(){
 		$('#img2').mouseover(function(){
@@ -55,6 +65,22 @@
 			return false;
 		}
 		document.articleOrder.submit();
+		return true;
+	}
+	function test2()
+	{
+		var amount = document.getElementById("amount").value;
+		var numtext = /^[0-9]*$/;
+		if(amount == ""){
+			alert('수량을 입력해 주세요.');
+			return false;
+		}
+		else if (numtext.test(amount) == false)
+		{
+			alert('숫자만 입력해 주세요.');
+			return false;
+		}
+		document.articlecartOrder.submit();
 		return true;
 	}
 	function insertEpliogue()
@@ -178,8 +204,8 @@
       <td width = "200">
       </td>
         <td align = "center">
-        <select name="Asize" size="1">
-              <c:forEach var="item" items="${articleSize}" varStatus="status">
+        <select id = "Asize" name="Asize" size="1">
+              <c:forEach var="item" items="${articleSize}">
               <option>
                 <c:out value="사이즈 : ${item.asize} : 재고 : ${item.amount}" />
                 </option>
@@ -196,7 +222,9 @@
     <c:if test="${sessionScope.comLoginInfo == null || sessionScope.userLoginInfo.memGrade == 6}">
     <input type = "image" id = "order" src = "img/prodbuy.png" height = "70" width="150" onclick="test();">
     </c:if>
-    </p></td>
+    </p>
+    
+    </td>
   </tr>
   <tr>
     <td colspan="3"><table width="400" height="100" border="0px">
@@ -235,6 +263,17 @@
 </table>
 <input type = "hidden" name = "articleNum" value = "${article.articleNum}">
 </form> 
+<form name="articlecartOrder" id="articlecartOrder" action="cart" method="post" onsubmit="return test2();">
+<!-- //<form action="articleOrderForm" method="post" name="articleOrder" id = "articleOrder" onsubmit="return test();"> -->
+ <input type = "hidden" name = "articleNum" value = "${article.articleNum}">
+ <input type = "hidden" name = "price" value = "${article.price}">
+ <input type = "hidden" name = "aname" value = "${article.aname}">
+ <input type="hidden" name="imgFile" value="${article.imgFile1}">
+ <input type="hidden" name="companyNum" value="${article.companyNum}">
+ <input type="hidden" id="aasize" name="aasize">
+ <input type="hidden" id="AAmount" name="AAmount">
+ <input type="submit" value="장바구니 담기" id = "carts">
+ </form>
 <table>
 <tr>
         <td> 
