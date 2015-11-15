@@ -11,7 +11,6 @@ create sequence replyNum_seq start with 1 increment by 1; -- notice reply 시퀀
 create sequence replyQnANum_seq start with 1 increment by 1; -- QnA reply 시퀀스
 create sequence buyepliNum_seq start with 1 increment by 1; -- 후기 시퀀스
 
-
 drop sequence companyNum_seq;
 drop sequence articleNum_seq;
 drop sequence articleFileNum_seq;

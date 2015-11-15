@@ -162,14 +162,14 @@ public class OrderController {
 	
 	//회사용 리스트 배송상태 업데이트 (추가)
 	@RequestMapping(value="orderCompanyUpdate", method = RequestMethod.POST)
-	public String orderCompanyUpdate(OrderVO orderVO, Model model)
-	{
+	public String orderCompanyUpdate(OrderVO orderVO)
+	{ 
 		orderDAO.updateBuyStatus(orderVO);
 		return "redirect:comOrderList?companyNum="+orderVO.getCompanyNum();
 	}
 	// 배송번호 업데이트
 	@RequestMapping(value = "updateSendpackage", method = RequestMethod.POST)
-	public String updateSendpackage(OrderVO orderVO, HttpServletRequest request)
+	public String updateSendpackage(OrderVO orderVO)
 	{
 		orderDAO.updateSendpackage(orderVO);
 		return "redirect:comOrderList?companyNum="+orderVO.getCompanyNum();
@@ -229,4 +229,5 @@ public class OrderController {
 		model.addAttribute("endPage", endPage);
 		return "memOrderList";
 	}
+
 }

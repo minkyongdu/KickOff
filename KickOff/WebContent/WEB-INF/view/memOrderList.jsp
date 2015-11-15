@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head> 
+</head>  
 <body>
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
@@ -64,12 +64,13 @@
         <tr>
             <th width="50" class="tablestyle">번호</th>
             <th width="100" class="tablestyle">물품이미지</th>
-            <th width="270" class="tablestyle">제품명</th>
-            <th width="80" class="tablestyle">사이즈</th>
-            <th width="70" class="tablestyle">수량</th>
+            <th width="240" class="tablestyle">제품명</th>
+            <th width="70" class="tablestyle">사이즈</th>
+            <th width="60" class="tablestyle">수량</th>
             <th width="100" class="tablestyle">구매금액</th>
-            <th width="80" class="tablestyle">주문일시</th>
-            <th width="200" class="tablestyle">주문상태</th>
+            <th width="100" class="tablestyle">주문일시</th>
+            <th width="140" class="tablestyle">주문상태</th>
+            <th width="90" class="tablestyle">배송번호</th>
          </tr>
          <c:forEach var="buylist" items="${buyMemberlist}">
             <tr>
@@ -82,6 +83,7 @@
                <td align="center" valign="middle"><fmt:formatNumber value="${buylist.price}" groupingUsed="true" /></td>
                <td align="center" valign="middle">${buylist.buydate}</td>
                <td align="center" valign="middle">${buylist.buyStatus}</td>
+               <td align="center" valign="middle">${buylist.sendpackage}</td>
             </tr>
          </c:forEach>
       </table>

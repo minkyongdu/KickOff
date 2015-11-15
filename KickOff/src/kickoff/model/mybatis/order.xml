@@ -34,7 +34,7 @@
 <!-- 주문 개인확인 리스트 + 페이징 -->
 <select id="selectOrderMemberPage" parameterType="map" resultType="kickoff.model.beans.OrderVO">
 	select * from (select  a.imgFile1, a.articleNum, b.id, b.buyNum, b.aname, b.price, b.buyamount, b.asize, 
-	b.buydate, b.buyStatus, rownum r from articleFile a, buy b 
+	b.buydate, b.buyStatus, b.sendpackage, rownum r from articleFile a, buy b 
 	where a.articleNum = b.articleNum and b.id = #{id} order by b.buydate desc)
 	where r between #{startRow} and #{endRow}
 </select>
@@ -56,4 +56,5 @@ update buy set buyStatus = #{buyStatus} where buyNum = #{buyNum}
 <update id="SendpackageUpdate" parameterType="kickoff.model.beans.OrderVO">
 update buy set sendpackage = #{sendpackage} where buyNum = #{buyNum}
 </update>
+
 </mapper> 

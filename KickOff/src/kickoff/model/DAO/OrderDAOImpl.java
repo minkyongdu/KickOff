@@ -100,5 +100,12 @@ public class OrderDAOImpl implements OrderDAO {
 		result = sqlSession.update("order.SendpackageUpdate", orderVO);
 		return result;
 	}
+
+	@Override
+	public int existbuyOrder(Map map) {
+		int result = 0;
+		result = sqlSession.selectOne("order.existbuyOrder", map);
+		return result;
+	}
 	   
 }

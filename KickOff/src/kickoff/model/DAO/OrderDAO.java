@@ -22,4 +22,5 @@ public interface OrderDAO {
 	public List<OrderVO> selectbuyID(int buyNum);
 	public List<OrderVO> selectOrderMemberPage(Map map); // 리스트 페이징
 	public int orderMemberlistcount(String id); // 개인 주문 갯수 조회
+	public int existbuyOrder(Map map);
 }

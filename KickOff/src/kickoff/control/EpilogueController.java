@@ -17,11 +17,11 @@ public class EpilogueController {
 	@Autowired
 	private EpilogueDAO epilogueDAO;
 	
+	//상품 후기 작성 처리
 	@RequestMapping(value = "epilogueReply", method = RequestMethod.POST)
 	public String epilogueReplyinsert(EpilogueVO epilogueVO, HttpServletRequest req) {
 		epilogueDAO.EpilogueReply(epilogueVO);
 		return "redirect:articleDetail?articleNum="+epilogueVO.getArticleNum();
-
 	}
 	
 	@RequestMapping(value = "epilogueReplyDelete", method = RequestMethod.GET)

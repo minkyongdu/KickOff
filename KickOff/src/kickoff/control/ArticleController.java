@@ -145,7 +145,7 @@ public class ArticleController {
 	
 	// 상품 상세보기
 	@RequestMapping("articleDetail")
-	public String articleEngDetalis(@RequestParam int articleNum, Model model, String pageNumber) {
+	public String articleEngDetalis(@RequestParam int articleNum, Model model, String pageNumber, HttpSession session) {
 	      int pageNum = 1;
 	      if (pageNumber != null)
 	         pageNum = Integer.parseInt(pageNumber);
@@ -175,7 +175,8 @@ public class ArticleController {
 	      map.put("articleNum", articleNum);
 	      map.put("startRow", startRow);
 	      map.put("endRow", endRow);
-	                        
+	      
+	     
 	      List<EpilogueVO> list2 = epilogueDAO.EpilogueSelect(map);
 
 	      model.addAttribute("EpilogueReply", list2);
@@ -209,15 +210,21 @@ public class ArticleController {
 	        PrintWriter writer = response.getWriter();
 	        String[] result = Asize.split(" : "); //수량을 가져오면 230 : 23 이므로 split으로 짜름
 	        String sr= result[1];
-	        System.out.println(sr);
 			Map map = new HashMap();
 			map.put("articleNum", articleNum);
 			map.put("Asize", sr);
 			int count = orderDAO.orderProductCount(map);
-			if(count >= amount){
+			if(count > amount){
 				model.addAttribute("article", articleDAO.articleDetail(articleNum));
 				model.addAttribute("amount", amount);
 				model.addAttribute("Asize",sr);
+				if(amount == 0)
+				{
+					writer.println("<script>alert('수량을 올바르게 입력해 주세요.');");
+					writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+		            writer.flush();
+					return "articleDetail?articleNum="+articleNum;
+				}
 				return "articleOrder";
 			}
 			else if (count < amount)
@@ -228,7 +235,7 @@ public class ArticleController {
 				return "articleDetail?articleNum="+articleNum;
 			}
 			else{
-				writer.println("<script>alert( '" + count + "이하로만 주문이 가능합니다.');");
+				writer.println("<script>alert( '" + count + "이상으로만 주문이 가능합니다.');");
 				writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
 	            writer.flush();
 				return "articleDetail?articleNum="+articleNum;

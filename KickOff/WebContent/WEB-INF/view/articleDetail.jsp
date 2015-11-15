@@ -179,7 +179,7 @@
       </td>
         <td align = "center">
         <select name="Asize" size="1">
-              <c:forEach var="item" items="${articleSize}">
+              <c:forEach var="item" items="${articleSize}" varStatus="status">
               <option>
                 <c:out value="사이즈 : ${item.asize} : 재고 : ${item.amount}" />
                 </option>
@@ -194,7 +194,7 @@
       <p align="center"></p> 
     <p align = "center">
     <c:if test="${sessionScope.comLoginInfo == null || sessionScope.userLoginInfo.memGrade == 6}">
-    <input type = "image" id = "order" src = "img/prodbuy.png" height = "70" width="150">
+    <input type = "image" id = "order" src = "img/prodbuy.png" height = "70" width="150" onclick="test();">
     </c:if>
     </p></td>
   </tr>
@@ -275,8 +275,8 @@
 </table>
 </center>
 <br><br><br><br>
-<form method="post" action="epilogueReply" name="epilogueReplyForm">
 <input type="hidden" name="articleNum" value="${article.articleNum}">
+<input type="hidden" name="id" value = "${sessionScope.userLoginInfo.id}">
 <table cellpadding="5" align="center">   
     <tr bgcolor="black">  
        <th width="150"><font color = "white">아이디</font></th>
@@ -331,7 +331,6 @@
 		</td>
 	</tr> 
 </table>
-</form>
 <br>
 <form method="post" action="epilogueReply" name="epilogueReplyForm" 
 			id = "epilogueReplyForm" onsubmit="return insertEpliogue();">
