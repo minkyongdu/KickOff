@@ -59,4 +59,9 @@ public class DesignController {
 	{
 		return "ERROR";
 	}
+	@RequestMapping("test")
+	public String test()
+	{
+		return "test";
+	}
 }

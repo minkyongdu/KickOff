@@ -1,22 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>장바구니</title>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
+<link type="text/css" href="css/menu.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
 </head>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src = "js/imgWatch.js"></script>
-<script type="text/javascript" src = "js/sizeamount.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+	  $('#order').click(function(){		  
+		  var checkboxs = $('.checkbox');
+
+		  var notChk="";
+          var cnt=0;
+		  for(var i=0; i<checkboxs.length; i++){			 
+			 if(!checkboxs[i].checked){			
+				   notChk+=i+",";			       
+			 }else{
+				cnt++;//체크된 개수 구하기 
+			 }
+		  }//for
+		   if(cnt==0){
+			   alert("물품을 선택해 주세요");
+			   location.href='cartinsert';//모두체크X
+		   }
+		   else if(cnt<checkboxs.length)
+		        location.href='cartCheck?notChk='+notChk; //전체 미만
+		   
+		   else if(cnt==checkboxs.length)     
+				location.href='cartAllCheck';//모두체크
+			 			 
+	  });
+  });
+  var sell_price;
+  var amount;
+  function init () {
+      sell_price = document.articleOrderForm.sell_price.value;
+      amount = document.articleOrderForm.buyamount.value;
+      document.articleOrderForm.price.value = sell_price;
+      change();
+  }
+  function add () {
+      hm = document.articleOrderForm.buyamount;
+      sum = document.articleOrderForm.price;
+      pax = document.articleOrderForm.pax.value;
+      hm.value ++ ;
+      sum.value = parseInt(hm.value) * sell_price + parseInt(pax);
+  }
+  function del () {
+      hm = document.articleOrderForm.buyamount;
+      sum = document.articleOrderForm.price;
+      pax = document.articleOrderForm.pax.value;
+          if (hm.value > 1) {
+              hm.value -- ;
+              sum.value = parseInt(hm.value) * sell_price + parseInt(pax);
+          }
+  }
+  function change () {
+      hm = document.articleOrderForm.buyamount;
+      sum = document.articleOrderForm.price;
+      pax = document.articleOrderForm.pax.value;
+          if (hm.value < 0) {
+              hm.value = 0;
+          }
+  sum.value = parseInt(hm.value) * sell_price + parseInt(pax);
+  } 
+
+  function test() {
+  	   win_post = window.open('/KickOff/post', "post",
+  	         "toolbar=no ,width=370 ,height=300 ,directories=no,"
+  	               + "status=yes,scrollbars=yes,menubar=no");
+  	}
+
+  $(document).ready(function(){
+  	$("input[type='radio'][id='addr']").click(function(){
+  		$("input[type='text'][id='addr1']").val("${sessionScope.userLoginInfo.addr1}");
+  		$("input[type='text'][id='addr2']").val("${sessionScope.userLoginInfo.addr2}");
+  		$("img[id='post']").hide();
+  	})		
+  	$("input[type='radio'][id='newaddr']").click(function(){
+  		$("input[type='text'][id='addr1']").val("");
+  		$("input[type='text'][id='addr2']").val("").attr("readonly",false);
+  		$("img[id='post']").show();
+  	})
+  })
 </script>
 <body>
-<div class="wrap">
-  <div class="header" align="center">
+   <div class="wrap">
+  <div class="header" align="center"> 
 	  	<div class="toparea" align="right">
+	  	
 	  	<c:choose>
+	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 1}">
+		  			<jsp:include page="main/memLogout.jsp" />
+	  			</c:when>
 	  			<c:when test="${sessionScope.userLoginInfo.memGrade == 6}">
 		  			<jsp:include page="main/memLogout.jsp" />
 	  			</c:when>
@@ -24,111 +106,100 @@
 		  			<jsp:include page="main/comLogout.jsp" />
 		  		</c:when>
 		  		<c:when test="${(sessionScope.userLoginInfo == null) || (sessionScope.comLoginInfo == null)}">
-		  			<jsp:include page="main/selectLogin.jsp" /> 
+		  			<jsp:include page="main/selectLogin.jsp" />
 				</c:when>
-	  		</c:choose>
-		</div>
+	  		</c:choose>    
+		</div>     
  	<a href="/KickOff/"><img src="img/mlogo.png" width="360px" height="160px"></a>
   </div>
+  <center> 
   <jsp:include page="main/menubar.jsp" />
+  </center>
   </div>
-  <center>
-  <img src = "img/writeformbanner.png">
-  <img src = "img/direction.png">
-  </center> 
-<form method="post" name= "productForm" id="productForm" action="articleFixUpdate" name="productForm"
-       enctype="multipart/form-data">
-<input type = "hidden" name = "companyNums" value = "${sessionScope.comLoginInfo.companyNum}" >
-<c:if test="${sessionScope.userLoginInfo.id == null}">
-      <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
-      	<script type="text/javascript">
-      	location.href='loginForm';
-      	</script>
-      	</c:when>
-	</c:choose>
-	</c:if>       
+      <!-- header end -->
 <center>
-<table width="700" height="100%" border="0">
-  <tr>
-    <td width="200" align="right"><table width="150" height="100%" border="0">
-      <tr>
-        <td height="150px" align="center" valign="middle"><img src="/KickOff/img/${article.imgFile1}" alt="" width="150" height="150" id="img1" /></td>
-        <td><input type="hidden" value="${article.imgFile1}" name="imgFile1"></td>
-      </tr>
-      <tr>
-        <td height="150px" align="center" valign="middle"><img src="/KickOff/img/${article.imgFile2}" alt="" width="150" height="150" id="img2" /></td>
-      	<td><input type="hidden" value="${article.imgFile2}" name="imgFile2"></td>
-      </tr>
-      <tr>
-        <td height="150px" align="center" valign="middle"><img src="/KickOff/img/${article.imgFile3}" alt="" width="150" height="150" id="img3" /></td>
-		<td><input type="hidden" value="${article.imgFile3}" name="imgFile3"></td>      
-      </tr>
-      <tr>
-        <td height="150px" align="center" valign="middle"><img src="/KickOff/img/${article.imgFile4}" alt="" width="150" height="150" id="img4" /></td>
-      	<td><input type="hidden" value="${article.imgFile4}" name="imgFile4"></td>
-      </tr>
-      <tr>
-        <td height="150px" align="center" valign="middle"><img src="/KickOff/img/${article.imgFile5}" alt="" width="150" height="150" id="img5" /></td>
-      	<td><input type="hidden" value="${article.imgFile5}" name="imgFile5"></td>
-      </tr>
-    </table></td>
-    <td width="500"><table width="400" height="700" border="0">
-      <tr>
-        <td height="35" align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">분류번호 :          
-          <input type="text" id="groupNum"
-					name="groupNum" size="2" readonly="readonly" value="${article.groupNum}"/>
-        </td>
-        </tr>
-      <tr>
-        <td align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">제품명 :          
-          <input type="text" id="Aname" name="Aname" size = "30" value="${article.aname}"/></td>
-        </tr>
-      <tr>
-        <td align="right" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">가격 :          
-          <input type="text" id="price" name="price" size = "30" value="${article.price}"/></td>
-        </tr>
-      <tr>
-        <td height="310" align="right" valign="top" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;">
-        <p>사이즈 & 수량 </p>
-          <p>
-              	<c:forEach var="item" items="${articleSize}" varStatus="status">
-                	사이즈 : <input type="text" name="asize${status.index}" value="${item.asize}" size="1" readonly> 수량 : <input type="text" name="amount${status.index}" value="${item.amount}" size="1"><br>
-              	</c:forEach>
-            <input type="hidden" name="articleNum" id="articleNum"
-			value="${article.articleNum}" />
-          </p>
-          <p>
-          <table id = "sizeamountview">
-				 
-		  </table>
-          </p>
-          </td>
-      </tr>
-      <tr>
-        <td height="196" align="right" valign="top" style="border:1px solid #ccc; border-top:none; border-left:none; border-right:none;"><p>이미지 업로드 
-          <input
-			type="button" id="addFile" value="이미지추가" />
-        </p>
-          <p>
-         	<table id = "fileview">
-
-			</table> 
-          </p>
-         </td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center" valign="middle">
-    	<input type="image" src="img/produpload.png" id ="productinsert" />
-      <a href="/KickOff/comCompanyArticleList?companyNum=${sessionScope.comLoginInfo.companyNum}"><img src="img/back.png" /></a></td>
-    </tr>
-    <input type="image" src="img/produpload.png" id ="productinsert" />
-</table>
-</center>
-</form>
-<center>
-<jsp:include page="main/bottom.jsp" />
-</center>
+      <div class="contents" align="center">
+         <img src="img/cartlist.png" width="940px" height="100px">
+         <div class="indiv">
+            <form name=frmCart method=post>
+               <input type=hidden name=mode value=modItem> <br>
+               <table cellpadding="0" cellspacing="0" border="1">
+                  <col width=30>
+                  <col width=60>
+                  <col>
+                  <col width=60>
+                  <col width=80>
+                  <col width=50>
+                  <col width=80>
+                  <thead align="center">
+                     <tr>
+                        <td style="width: 20px;"></td>
+                        <td colspan=2 style="width: 200px;">메인 이미지</td>
+                        <td style="width: 300px;">상품 이름</td>
+                        <td style="width: 100px;">주문수량</td>
+                        <td style="width: 100px;">가격</td>
+			<td style="width: 100px;">사이즈</td>
+                        <td style="width: 100px;">비고</td>
+                     </tr>
+		     <c:forEach var="list" items="${list}" varStatus="status">
+                     <form method = "post" action ="cartSelectDelete">
+					<tr>
+                        <td style="width: 20px;"><a href=""><label>
+                        <input type="checkbox" class="checkbox" value="${status.index}">
+                        </label></a></td>
+                        <td colspan=2 style="width: 100px;">
+                        <img src ="/KickOff/img/${list.imgFile1}" width = "100" height = "100">
+                        </td>
+                        <td style="width: 300px;">
+                        ${list.aname} 
+						<input type="hidden" name = "num" value="${list.articleNum}" id="num">
+                        </td>
+                        <td style="width: 100px;">
+                        <input type="text" name="buyamount" value="${list.amount}" size="1" onchange="change();" >개 
+						<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
+                        </td>
+                        <td style="width: 50px;">
+                        ${list.price}원
+						<br>
+						+ 배송비 : <input type="text" name="pax" value="2500" size="2" readonly>원
+                        </td>
+                        <td style="width: 100px;">
+                         ${list.asize}
+                        </td>
+                        <td style="width: 60px;">
+                        <input type = "hidden" value = "${status.index}" name="hiddenNum">
+                        <input type="image"
+                           src="img/deletelist.png" width="48px" height="21px"></td>
+                     </tr>
+                     </form>
+                     </c:forEach>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+               </table>
+               <br>
+               <a href=""><img src="img/deletechk.png" width="80px" height="30px "></a>
+                </form>
+            <br>
+            <table width=100% cellpadding=0 cellspacing=0 border=0>
+               <tr>
+                  <td align=right>&nbsp;</td>
+               </tr>
+            </table>
+            <br>
+            <center>
+               <br>
+               <br><img src="img/sbuybtn.png" id="order">&nbsp; <a
+                  href=""><img src="img/sback.png"></a>
+               <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </center>
+         </div>
+      </div>
+      </center>
+ <center>
+  <jsp:include page="main/bottom.jsp" />
+ </center>
 </body>
 </html>
