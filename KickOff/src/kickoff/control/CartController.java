@@ -43,7 +43,12 @@ public class CartController {
    
    @RequestMapping("cart")   
    public String cart(@RequestParam String aasize, HttpServletRequest request,HttpServletResponse response,CartVO cartvo, Model model,HttpSession session)throws Exception{
-   
+	   
+	   response.setContentType("text/html; charset=UTF-8");
+       request.setCharacterEncoding("UTF-8");
+       
+       PrintWriter writer = response.getWriter();
+	   
       String articleNum = request.getParameter("articleNum");
       String price = request.getParameter("price");
       String aname = request.getParameter("aname");
@@ -51,8 +56,8 @@ public class CartController {
       String companyNum = request.getParameter("companyNum");
       String amount = request.getParameter("AAmount");
        String[] result = aasize.split(":"); //�닔�웾�쓣 媛��졇�삤硫� 230 : 23 �씠誘�濡� split�쑝濡� 吏쒕쫫
-       String sr= result[1];      
-       
+       String sr= result[1].trim();      
+      int Amount = Integer.parseInt(amount);
       cartvo.setArticleNum(Integer.parseInt(articleNum));// = 
       cartvo.setPrice(Integer.parseInt(price));
       cartvo.setAname(aname);
@@ -74,10 +79,38 @@ public class CartController {
             }
          }
       }
-      list.add(cartvo);
-
-      session.setAttribute("list",list);      
-      return "redirect:cartinsert";
+      list.add(cartvo);    
+     
+      	Map map = new HashMap();
+		map.put("articleNum", articleNum);
+		map.put("Asize", sr);
+		int count = orderDAO.orderProductCount(map);
+		if(count > Amount){
+			session.setAttribute("list",list);  
+			if(Amount == 0)
+			{
+				writer.println("<script>alert('수량을 올바르게 입력해 주세요.');");
+				writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+	            writer.flush();
+				return "articleDetail?articleNum="+articleNum;
+			}
+			 return "redirect:cartinsert";
+		}
+		else if (count < Amount)
+		{
+			writer.println("<script>alert('재고가 부족합니다.');");
+			writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+			writer.flush();
+			return "articleDetail?articleNum="+articleNum;
+		}
+		else{
+			writer.println("<script>alert( '" + count + "이상으로만 주문이 가능합니다.');");
+			writer.println("location.href = 'articleDetail?articleNum=" + articleNum + "'</script>");
+          writer.flush();
+			return "articleDetail?articleNum="+articleNum;
+		}
+      
+      
    }
    @RequestMapping("cartSelectDelete")
    public String deleteCart(HttpSession session, HttpServletRequest request)
@@ -103,9 +136,9 @@ public class CartController {
          
          for(int i = 0; i<list.size(); i++){
             Map map = new HashMap();
-            String size= list.get(i).getAsize().trim();
+           // String size= list.get(i).getAsize().trim();
             map.put("articleNum", list.get(i).getArticleNum());
-            map.put("Asize", size);
+            map.put("Asize", list.get(i).getAsize());
             int count = orderDAO.orderProductCount(map);
 
             if(count > list.get(i).getAmount()){
@@ -134,9 +167,9 @@ public class CartController {
            List<CartVO> list =  (List<CartVO>) session.getAttribute("list");
            for(int i = 0; i<list.size(); i++){
             Map map = new HashMap();
-            String size= list.get(i).getAsize().trim();
+            //String size= list.get(i).getAsize().trim();
             map.put("articleNum", list.get(i).getArticleNum());
-            map.put("Asize", size);
+            map.put("Asize", list.get(i).getAsize());
             int count = orderDAO.orderProductCount(map);
 
             if(count > list.get(i).getAmount()){
