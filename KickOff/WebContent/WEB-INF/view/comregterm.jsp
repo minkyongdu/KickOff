@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 </head>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script>
 function Radiocheck(){
 	if($(':radio[name="chkConfirm"]:checked').val() == "N" 
@@ -23,7 +24,7 @@ function Radiocheck(){
 		document.comregterm.submit();
 }
 </script>
-<body>
+<body class="kortext">
 <div class="wrap">
   <div class="header" align="center">
 	  	<div class="toparea" align="right">

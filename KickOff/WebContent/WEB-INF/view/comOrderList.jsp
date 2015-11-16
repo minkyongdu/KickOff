@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 var childWin = null;   
@@ -39,7 +40,7 @@ $(document).ready(function(){
 	
 });
 </script> 
-<body>   
+<body class="kortext">   
 <div class="wrap">
   <div class="header" align="center">
 	  	<div class="toparea" align="right">

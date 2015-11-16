@@ -30,7 +30,7 @@
       <mvc:jsp prefix="/WEB-INF/view/" />
       <!-- SpringMVC/WEB-INF/view/ 전달될 뷰 이름 .jsp -->
    </mvc:view-resolvers>
-   <!-- 컨트롤러 스캔 -->
+   <!-- 컨트롤러 스캔 --> 
    <context:component-scan base-package="kickoff.control" />
    <!-- mybatis 연결 : DataSource 설정(DB 연결) -->
    <bean class="org.apache.tomcat.jdbc.pool.DataSource" id="driverManagerDataSource">

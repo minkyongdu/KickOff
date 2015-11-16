@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 </head>
-<body>
+<body class="kortext">
 <div class="wrap">
   <div class="header" align="center">
 	  	<div class="toparea" align="right">

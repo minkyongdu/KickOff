@@ -11,6 +11,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
    $(document).ready(function() {
       $('#order').click(function() {
@@ -105,7 +106,7 @@
          })
 
 </script> 
-<body onload="init();">
+<body onload="init();" class="kortext">
    <div class="wrap">
       <div class="header" align="center">
          <div class="toparea" align="right">

@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	function sendAdd(groupNum){
 	    opener.document.getElementById("groupNum").value=groupNum;
 	    window.close();
 	 }
 </script>
-<body>
+<body class="kortext">
 <center>
 <table border = "5">
 	<tr>

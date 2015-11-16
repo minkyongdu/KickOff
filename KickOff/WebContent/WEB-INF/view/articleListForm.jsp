@@ -28,7 +28,7 @@
 	});
 </script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<body>
+<body class="kortext">
 <div class="wrap">
   <div class="header" align="center"> 
 	  	<div class="toparea" align="right">

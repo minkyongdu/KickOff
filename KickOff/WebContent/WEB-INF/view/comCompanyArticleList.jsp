@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 var Question; 
 function deleteSelectQ()  
 {
@@ -22,7 +23,7 @@ function deleteSelectQ()
 </script> 
 </head>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
-<body>
+<body class="kortext">
 <c:if test="${(companyArticleList[0].companyNum != null) || (companyArticleList[0].companyNum == null)}">
 <c:choose>
 	<c:when test="${sessionScope.comLoginInfo.companyNum != reqCompanyNum}">

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript" src = "js/imgWatchFix.js"></script>
-
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script src = "js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {   
@@ -29,7 +29,7 @@ $(document).ready(function() {
     });
  });
 </script> 
-<body>
+<body class="kortext">
 <div class="wrap"> 
   <div class="header" align="center">
         <div class="toparea" align="right">

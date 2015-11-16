@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주소검색</title>
 </head>
-
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script>
    //main페이지로 값 전달: 부모로 값전달하기 위해서는 opener사용
    function sendAdd(ZIPCODE, ADDR){
@@ -27,7 +27,7 @@
    }
 </script>
 
-<body>
+<body class="kortext">
    <form name="f" method="post" onsubmit="check()">
       <table border="1" width="100%">
          <tr align="center">

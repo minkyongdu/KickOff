@@ -10,6 +10,7 @@
 <link type="text/css" href="css/menu.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
@@ -77,7 +78,7 @@ $(document).ready(function(){
 </script>
 
 <link href="css/show.css" rel="stylesheet" type="text/css" />
-<body onload="init();">
+<body onload="init();" class="kortext">
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src = "js/imgWatch.js"></script>
 <script type="text/javascript" src = "js/sizeamount.js"></script>
@@ -19,7 +19,7 @@ function groupNum() {
                   + "status=yes,scrollbars=yes,menubar=no");
    }
 </script>
-<body>
+<body class="kortext">
 <div class="wrap">
   <div class="header" align="center">
         <div class="toparea" align="right">

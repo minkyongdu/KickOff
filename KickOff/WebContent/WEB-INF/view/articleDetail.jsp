@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript" src = "js/jquery.js"></script>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#carts').click(function() { 
@@ -104,7 +105,7 @@
 		return true;
 	}
 </script>
-<body>
+<body class="kortext">
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
-<body>
+<body class="kortext">
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
          <script type="text/javascript">

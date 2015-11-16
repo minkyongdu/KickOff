@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
+<body class="kortext">
 <center>
 <h3>회원 상세정보</h3>
 <table style="border:1px solid #999; border-top: none; border-left: none; border-right: none;" cellspacing="0"> 

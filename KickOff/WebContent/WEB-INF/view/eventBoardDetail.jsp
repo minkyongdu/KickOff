@@ -13,7 +13,7 @@
 </head>
 <script type="text/javascript">
 </script>
-<body>
+<body class="kortext">
 <div class="wrap">
 		<div class="header" align="center">
 			<div class="toparea" align="right">

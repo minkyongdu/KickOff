@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
+<body class="kortext">
 	<center>
 		<h3>제품주문 전체리스트</h3>
 		<hr>

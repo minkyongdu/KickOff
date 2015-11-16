@@ -20,7 +20,7 @@ function test() {
                + "status=yes,scrollbars=yes,menubar=no");
 }
 </script>
-<body>
+<body class="kortext">
 <div class="wrap">
   <div class="header" align="center">
 	  	<div class="toparea" align="right">

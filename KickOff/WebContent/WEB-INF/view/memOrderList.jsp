@@ -8,7 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>  
-<body>
+<link href="css/show.css" rel="stylesheet" type="text/css" />
+<body class="kortext">
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">

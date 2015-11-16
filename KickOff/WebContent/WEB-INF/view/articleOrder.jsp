@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문페이지</title>
 <link type="text/css" href="css/menu.css" rel="stylesheet" />
+<link href="css/show.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
@@ -96,7 +97,7 @@
          })
 </script>
 <link href="css/show.css" rel="stylesheet" type="text/css" />
-<body onload="init();">
+<body onload="init();" class="kortext">
 <c:if test="${sessionScope.userLoginInfo.id == null}">
       <c:choose><c:when test="${sessionScope.comLoginInfo.id == null}">
       	<script type="text/javascript">
