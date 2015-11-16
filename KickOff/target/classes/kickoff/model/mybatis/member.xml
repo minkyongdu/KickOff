@@ -31,4 +31,7 @@
 	<delete id="deleteID" parameterType="String">
 		delete from member where id = #{id} 
 	</delete>
+	<update id="updatePwd" parameterType="String">
+		update member set password=#{password} where id =#{id}
+	</update>	
 </mapper>

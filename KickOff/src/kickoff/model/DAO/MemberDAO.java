@@ -19,4 +19,5 @@ public interface MemberDAO {
 	public String memberAddr(MemberVO member); // �ֹ��ϱ⿡�� �ּ� ��� �ö�.
 	
 	public String searchIdPassword(Map map);
+	public boolean updatePassword(MemberVO member);
 }

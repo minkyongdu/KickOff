@@ -297,10 +297,10 @@ public class MemController {
 					writer.flush();
 					return "findIdPwd";
 				} else {
-					writer.println("<script>alert('" + "회원님의 비밀번호는 " + dao.accountsPwd(map) + " 입니다." + "');");
-					writer.println("location.href='loginForm'" + "</script>");
+					writer.println("<script>alert('비밀번호 찾기에 성공하였습니다 비밀번호를 변경해주세요');</script>");
 					writer.flush();
-					return "redirect:loginForm";
+					request.setAttribute("id", id);
+					return "memPasswordSuccess";
 				}
 		}
 		// 회원 탈퇴 폼
@@ -327,5 +327,17 @@ public class MemController {
 				session.invalidate(); 
 			}
 			return "memPasswordCheck";
+		}
+		
+		//비밀번호 업데이트
+		@RequestMapping("updatePasswordOk")
+		public String updatePasswordOk(MemberVO member, @RequestParam String id, @RequestParam String password)
+		{
+			member.setId(id);
+			member.setPassword(password);
+			dao.updatePassword(member);
+
+			return "redirect:loginForm";
+			
 		}
 	}

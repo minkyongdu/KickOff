@@ -67,4 +67,10 @@ public class MemberDAOImpl implements MemberDAO {
 		if(result > 0) return true;
 		return false;
 	}
+	@Override
+	public boolean updatePassword(MemberVO member) {
+		int result = sqlSession.update("member.updatePwd", member);
+		if(result > 0) return true;
+		return false;
+	}
 }
