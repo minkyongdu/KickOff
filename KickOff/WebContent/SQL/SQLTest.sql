@@ -26,12 +26,12 @@ drop sequence buyepliNum_seq;
 
 select * from buy;
 // 관리자 계정
-insert into member values ( 'master', 'master', '관리자', 
+insert into member values ( 'master', '1234', '관리자', 
   '1993-01-01', '113-234', '서울시 강남구','010-0000-0000', 'master@naver.com', 
 6, SYSDATE, '사는 곳이 어디입니까?', '서울');
 
 // 회사 계정
-insert into company values (companyNum_seq.nextval, 'company', 'company', '홍길동',
+insert into company values (companyNum_seq.nextval, 'company', '1234', '홍길동',
 '길동네', 'company@naver.com', '134-865', '서울시 강동구', '123-45-56789', '010-1234-5678', 5);
  
 // 회원 계정

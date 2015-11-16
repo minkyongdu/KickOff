@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="order">
+<!-- 주문 테이블에 넣기 -->
+<insert id="insertOrder">
+   insert into buy values (buyNum_seq.nextval, #{id},  #{subname}, #{subaddr1}, #{subaddr2}, #{subphonenum}, #{price}, #{Aname}, #{buyamount}, #{Asize}, 
+   #{articleNum}, SYSDATE, '주문완료', #{sendContent}, null, #{companyNum})
+</insert> 
+<!-- 주문시 수량 마이너스 시키기 -->
+<update id="updateOrder" parameterType="kickoff.model.beans.ArticleSizeAmountVO">
+	update articleSizeAmount set amount =amount-#{amount} where articleNum=#{articleNum} and asize = #{asize}
+</update>
+
+ <select id="selectSizeSelect" resultType="int" parameterType="Map">
+	select amount from articleSizeAmount where articleNum=#{articleNum} and Asize= #{Asize}
+</select> 
+
+<!-- 주문한 리스트 페이징기능 -->
+<select id="selectOrderList" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.OrderVO">
+	select * from (select buyNum, subname, subaddr1, subaddr2, subphonenum, buyamount, 
+	price, aname, asize, buydate, buyStatus , sendContent,sendpackage, rownum r 
+	from (select * from buy order by buyNum desc ) ) 
+	where r between #{startRow} and #{endRow}
+</select>
+<!-- 주문 리스트 카운트 -->
+<select id="OrderCount" resultType="int"> 
+	select count(*) from buy 
+</select>
+
+<!-- 주문 개인 리스트 카운트 -->
+<select id = "OrderMemberCount" resultType="int">
+	select count(*) from buy where id = #{id}
+</select>
+<!-- 주문 개인확인 리스트 + 페이징 -->
+<select id="selectOrderMemberPage" parameterType="map" resultType="kickoff.model.beans.OrderVO">
+	select * from (select  a.imgFile1, a.articleNum, b.id, b.buyNum, b.aname, b.price, b.buyamount, b.asize, 
+	b.buydate, b.buyStatus, b.sendpackage, rownum r from articleFile a, buy b 
+	where a.articleNum = b.articleNum and b.id = #{id} order by b.buydate desc)
+	where r between #{startRow} and #{endRow}
+</select>
+
+<!--  주문한 리스트(회사용)(추가) -->
+<select id="selectOrderCompany" parameterType="int" resultType="kickoff.model.beans.OrderVO">
+   select * from (select buyNum, id, subname, subaddr1, subaddr2, subphonenum, buyamount, price, aname, asize, buydate, buyStatus, sendContent, sendpackage, companyNum, rownum r 
+   from (select * from buy where companyNum = #{companyNum} order by buyNum desc ) ) 
+   where r between #{startRow} and #{endRow}
+</select>
+<select id = "selectbuyID" parameterType="int" resultType="kickoff.model.beans.OrderVO">
+	select id, subname, subaddr1, subaddr2, subphonenum from buy where buyNum = #{buyNum} 
+</select>
+<!--  관리자 주문상태 업데이트 (추가) -->
+<update id="StatusOrderUpdate" parameterType="kickoff.model.beans.OrderVO">
+update buy set buyStatus = #{buyStatus} where buyNum = #{buyNum}
+</update>
+<!-- 배송번호 업데이트 -->
+<update id="SendpackageUpdate" parameterType="kickoff.model.beans.OrderVO">
+update buy set sendpackage = #{sendpackage} where buyNum = #{buyNum}
+</update>
+
+</mapper> 

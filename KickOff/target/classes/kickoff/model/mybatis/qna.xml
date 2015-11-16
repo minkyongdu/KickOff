@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "qna">
+	<insert id="qnainsert">
+	insert into QnAboard values (QnAboard_seq.nextval,#{title},#{contents},
+	#{fileName, jdbcType=VARCHAR},#{fileName2, jdbcType=VARCHAR},
+	#{fileName3, jdbcType=VARCHAR},#{writer},0, SYSDATE, #{boardNum}) 
+	</insert>
+<update id="plusHit" parameterType="int">
+update QnAboard set hit = hit+1 where qnano = #{qnano}
+</update>
+<update id="minusHit" parameterType="int">
+update QnAboard set hit = hit-1 where qnano = #{qnano}
+</update>
+<select id="qnaselectAll" parameterType="kickoff.model.beans.RowNumVO" resultType="kickoff.model.beans.QnAVO">
+select * from (select qnano,title,writer,hit,qnadate, rownum r from (select * from QnAboard order by qnano desc ) ) where r between #{startRow} and #{endRow}
+</select>
+<select id="qnaCount" resultType="int">select count(*) from QnAboard</select>
+<select id="qnaDetail" parameterType="int" resultType="kickoff.model.beans.QnAVO">
+select * from QnAboard where qnano = #{qnano}
+</select>
+
+<update id="qnaUpdate">
+update QnAboard set title = #{title}, contents = #{contents}, fileName = #{fileName, jdbcType=VARCHAR}, 
+fileName2 = #{fileName2, jdbcType=VARCHAR},fileName3 = #{fileName3, jdbcType=VARCHAR} 
+where qnano = #{qnano}
+</update>
+
+<delete id="qnaDelete" parameterType="kickoff.model.beans.QnAVO">
+delete from QnAboard where qnano = #{qnano}
+</delete>
+
+<select id="ReplySelect" resultType="kickoff.model.beans.ReplyQnAVO" parameterType="map">
+select * from (select replynum,replyid,replycontent,writenum, boardnum, rownum r from 
+(select * from replyQnA where boardNum = 3 and writeNum=#{writeNum} order by replynum desc ) ) 
+where r between #{startRow} and #{endRow}
+</select>
+
+<select id="ReplyCount" resultType="int">
+select count(*) from replyQnA where writeNum=#{writeNum}
+</select>
+<!--  QnA 댓글 입력  -->
+<insert id="ReplyInsert">
+insert into replyQnA values (replyQnANum_seq.nextval, #{replyid}, #{replycontent}, #{writeNum}, 3)
+</insert>
+<!--  QnA댓글 삭제  -->
+<delete id="ReplyDelete" parameterType="kickoff.model.beans.ReplyQnAVO">
+delete from replyQnA where replyNum = #{replyNum}
+</delete>
+<!--  QnA 댓글 삭제(1번 글 삭제시 1번에 해당하는 댓글 삭제)  -->
+<delete id="ReplyQnADelete" parameterType="int">
+delete from replyQnA where writeNum = #{writeNum}
+</delete>
+<!-- QnA 댓글 회원 탈퇴 -->
+<delete id="ReplyQnADeleteID" parameterType="String">
+delete from replyQnA where replyid = #{replyid}
+</delete>
+<!-- QnA 회원 탈퇴 -->
+<delete id = "QnADeleteID" parameterType="String">
+delete from QnAboard where writer = #{writer}
+</delete>
+</mapper>

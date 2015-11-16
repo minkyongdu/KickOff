@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "epilogue">
+  <!-- 후기 리스트 -->
+<select id="epilogueSelect" resultType="kickoff.model.beans.EpilogueVO" parameterType="map">
+	select * from 
+	(select buyepliNum, id, content, articleNum, star, rownum r 
+ 	from (select * from epilogue 
+	where articleNum=#{articleNum} order by buyepliNum desc )) 
+	where r between #{startRow} and #{endRow} 
+</select>
+<!-- 후기 리스트 카운트 -->
+<select id="epilogueCount" resultType="int"> 
+	select count(*) from epilogue where articleNum=#{articleNum} 
+</select>
+<!-- 후기 작성 -->
+<insert id="epilogueInsert"> 
+	insert into epilogue values (buyepliNum_seq.nextval, #{id}, #{content}, #{articleNum}, #{star}) 
+</insert>
+<!-- 후기 댓글 삭제 -->
+<delete id="epilogueDelete" parameterType="kickoff.model.beans.EpilogueVO"> 
+	delete from epilogue where buyepliNum = #{buyepliNum} 
+</delete>
+<delete id="ArticleEpilogueDelete" parameterType="kickoff.model.beans.ArticleVO">
+	delete from epilogue where articleNum = #{articleNum}
+</delete>
+</mapper>

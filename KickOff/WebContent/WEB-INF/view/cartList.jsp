@@ -36,51 +36,47 @@
 
       });
    });
-   var sell_price;
    var amount;
-   function tests()
-   {
-	   var obj = document.getElementsByName("buyamount");
-	   for(var i = 0; i < obj.length; i++)
-		   {
-		   		if(obj[i].value != null)
-		   			{
-		   				alert(obj[i].value);
-		   			}
-		   }
+   var obj = document.getElementsByName("buyamount");
+   var sell_price = document.getElementsByName("sell_price");
+   var pax1 = document.getElementsByName("pax");
+   var sum1 = document.getElementsByName("sum");
+   var index = document.getElementsByName("index");
+   
+   function init(index) {
+      	 sell_price = sell_price[index].value;
+      	 amount = obj[index].value;
+      	 sum1[index].value = sum1[index].value;
+     	 change();
    }
-   function init() {
-      sell_price = document.articleOrderForm.sell_price.value;
-      amount = document.articleOrderForm.buyamount.value;
-      document.articleOrderForm.price.value = sell_price;
-      change();
-   }
-   function add() {
-      hm = document.articleOrderForm.buyamount;
-      sum = document.articleOrderForm.price;
-      pax = document.articleOrderForm.pax.value;
-      hm.value++;
-      sum.value = parseInt(hm.value) * sell_price;
+
+   function add(index) {
+     		 hm = obj[index];
+     		 sum = sum1[index];
+     		 pax= pax1[index].value;
+     		 hm.value++;
+     		 sum.value = parseInt(hm.value) * sell_price[index].value;
       /* sum.value = parseInt(hm.value) * sell_price + parseInt(pax); */
    }
-   function del() {
-      hm = document.articleOrderForm.buyamount;
-      sum = document.articleOrderForm.price;
-      pax = document.articleOrderForm.pax.value;
+   
+   function del(index){ 
+	  	 hm = obj[index];
+		 sum = sum1[index];
+		 pax= pax1[index].value;
       if (hm.value > 1) {
          hm.value--;
-         sum.value = parseInt(hm.value) * sell_price;
+         sum.value = parseInt(hm.value) * sell_price[index].value;
          /* sum.value = parseInt(hm.value) * sell_price + parseInt(pax); */
       }
    }
-   function change() {
-      hm = document.articleOrderForm.buyamount;
-      sum = document.articleOrderForm.price;
-      pax = document.articleOrderForm.pax.value;
+   function change(index) {
+	   hm = obj[index];
+	   sum = sum1[index];
+	   pax= pax1[index].value;
       if (hm.value < 0) {
          hm.value = 0;
       }
-      sum.value = parseInt(hm.value) * sell_price + parseInt(pax);
+      sum.value = parseInt(hm.value) * sell_price[index].value + parseInt(pax);
    }
 
    function test() {
@@ -107,8 +103,9 @@
                      $("img[id='post']").show();
                   })
          })
+
 </script> 
-<body onload="tests();">
+<body onload="init();">
    <div class="wrap">
       <div class="header" align="center">
          <div class="toparea" align="right">
@@ -138,7 +135,7 @@
    <div class="contents" align="center">
       <img src="img/cartlist.png" width="940px" height="100px">
       <div class="indiv">
-         <form name=frmCart method=post>
+         <form method=post>
             <input type=hidden name=mode value=modItem> <br>
             <table cellpadding="0" cellspacing="0" border="1">
                <col width=30>
@@ -159,7 +156,9 @@
                      <td style="width: 100px;">비고</td>
                   </tr>
                  <c:forEach var="list" items="${list}" varStatus="status">
-                  <form method="post" action="cartSelectDelete">
+                  <form method="post" action="cartSelectDelete" name="frmCart">
+                  	<input type="text" name="sell_price" value="${list.price}">
+                  	<input type="hidden" name="index" value="${status.index}">
                      <tr>
                         <td style="width: 20px;"><a href=""><label> <input
                                  type="checkbox" class="checkbox" value="${status.index}">
@@ -172,10 +171,10 @@
                         </td>
                         <td style="width: 100px;"><input type="text"
                            name="buyamount" value="${list.amount}" size="1"
-                           onchange="change();">개 <br><input type="button" value=" + " 
-                           onclick="tests();"><input type="button" value=" - "
-                           onclick="del();"><br></td>
-                        <td style="width: 50px;"><input type = "text" value = "${list.price}" size = "3">원
+                           onchange="change(${status.index});">개 <br><input type="button" value=" + " 
+                           onclick="add(${status.index});"><input type="button" value=" - "
+                           onclick="del(${status.index});"><br></td>
+                        <td style="width: 50px;"><input type = "text" name="sum" value = "${list.price * list.amount}" size = "3">원
                         <br> + 배송비 : <input
                            type="text" name="pax" value="2500" size="2" readonly>원
                         </td>
@@ -200,12 +199,14 @@
          <br> 
          <br>
          <center>
+         	<form name="cartSum">
          	<input type = "text" name = "sum">
             <br> <br> <img src="img/sbuybtn.png" id="order">&nbsp;
             <a href=""><img src="img/sback.png"></a> <br> <br> <br>
             <br> <br> <br> <br> <br> <br> <br>
             <br> <br> <br> <br> <br> <br> <br>
             <br> <br> <br> <br> <br> <br> <br>
+        	 </form>
          </center>
       </div>
    </div>

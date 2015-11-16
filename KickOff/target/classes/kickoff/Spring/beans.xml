@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="kickoff.model.DAO.MemberDAOImpl"/>
+	<bean class="kickoff.model.DAO.LoginDAOImpl" id="LoginDAO"/>
+	<bean class="kickoff.model.DAO.PostDAOImpl"/>
+	<bean class="kickoff.model.DAO.CompanyDAOImpl"/>
+	<bean class="kickoff.model.DAO.ArticleDAOImpl"/>
+	<bean class="kickoff.model.DAO.ArticlefileDAOImpl"/>  
+	<bean class="kickoff.model.DAO.ArticleSizeAmountDAOImpl"/> 
+	<bean class="kickoff.model.DAO.ArticlegroupDAOImpl"/>
+	<bean class="kickoff.model.DAO.NoticeDAOImpl"/>
+	<bean class="kickoff.model.DAO.ReplyDAOImpl"/>
+	<bean class="kickoff.model.DAO.EventBoardDAOImpl" />
+	<bean class="kickoff.model.DAO.QnADAOImpl" />
+	<bean class="kickoff.model.DAO.ReplyQnADAOImpl" />
+	<bean class="kickoff.model.DAO.EpilogueDAOImpl"/>
+	<bean class="kickoff.model.DAO.OrderDAOImpl"/>
+</beans>
